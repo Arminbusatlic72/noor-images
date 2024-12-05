@@ -8,6 +8,7 @@ function astra_child_enqueue_styles() {
     wp_enqueue_script('theme.js', get_stylesheet_directory_uri() . '/theme.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'astra_child_enqueue_styles');
+
 function register_custom_post_type($singular, $plural, $slug, $menu_position = 5) {
     $labels = array(
         'name'                  => _x($plural, 'Post Type General Name', 'text_domain'),
@@ -57,14 +58,16 @@ function register_custom_post_type($singular, $plural, $slug, $menu_position = 5
         'publicly_queryable'    => true,
         'capability_type'       => 'post',
         'rewrite'               => array('slug' => $slug),
+        'taxonomies'         => array( 'category', 'post_tag' ),
+        'show_in_rest'          => true,
     );
 
     register_post_type($slug, $args);
 }
 add_action('init', function() {
-    register_custom_post_type('article', 'Article', 'Articles', 'articles', 5);
-    register_custom_post_type('story', 'Story', 'Stories', 'stories', 6);
-    register_custom_post_type('announcement', 'Announcement', 'Announcements', 'announcements', 7);
+    register_custom_post_type('Article', 'Articles', 'articles', 5);
+    register_custom_post_type('Story', 'Stories', 'stories', 6);
+    register_custom_post_type('Announcement', 'Announcements', 'announcements', 7);
 });
 // Register Custom Post Type for Movies
 function create_movies_post_type() {
