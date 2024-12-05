@@ -149,7 +149,7 @@ body {
 .social-share-buttons {
   display: flex;
   gap: 15px;
-  justify-content: center;
+  /* justify-content: center; */
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -160,14 +160,14 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #f1f1f1;
-  color: #333;
-  padding: 10px 20px;
-  border-radius: 5px;
+  color: #000;
+  padding: 10px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
   transition: background-color 0.3s ease, color 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #000;
 }
 
 .social-share-buttons .social-share-button:hover {
@@ -185,7 +185,7 @@ body {
 }
 
 /* Specific styles for each social network */
-.social-share-buttons .social-share-facebook {
+/* .social-share-buttons .social-share-facebook {
   background-color: #3b5998;
   color: white;
 }
@@ -197,9 +197,9 @@ body {
 .social-share-buttons .social-share-twitter {
   background-color: #1da1f2;
   color: white;
-}
+} */
 
-.social-share-buttons .social-share-twitter:hover {
+/* .social-share-buttons .social-share-twitter:hover {
   background-color: #1a91da;
 }
 
@@ -215,11 +215,11 @@ body {
 .social-share-buttons .social-share-pinterest {
   background-color: #e60023;
   color: white;
-}
+} */
 
-.social-share-buttons .social-share-pinterest:hover {
+/* .social-share-buttons .social-share-pinterest:hover {
   background-color: #9b0026;
-}
+} */
 
 /* Optional: Add responsiveness for smaller screens */
 @media (max-width: 768px) {
@@ -352,16 +352,18 @@ body {
   margin-top: 20px;
   font-size: 16px;
 }
-
+.next-story {
+  text-align: right;
+}
 .prev-story a,
 .next-story a {
   text-decoration: none;
-  color: #0073e6;
+  color: gray;
 }
 
 .prev-story a:hover,
 .next-story a:hover {
-  text-decoration: underline;
+  opacity: 0.9;
 }
 
 .prev-story,
@@ -375,13 +377,16 @@ body {
 }
 .story-navigation-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 5px;
 }
-/* .story-title {
+.story-heading {
   font-size: 36px;
   font-weight: bold;
   margin-top: 20px;
-} */
+}
 
 .story-subtitle {
   font-size: 18px;
@@ -398,7 +403,7 @@ body {
 .story-image-caption {
   font-size: 14px;
   color: #999;
-  text-align: center;
+  /* text-align: center; */
   margin-top: 5px;
 }
 

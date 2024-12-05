@@ -8,7 +8,7 @@ if ( have_posts() ) :
 ?>
 
 <div class="story-container">
-
+  
     <!-- Display Tags -->
     <div class="story-tags">
         <?php 
@@ -18,23 +18,30 @@ if ( have_posts() ) :
     </div>
 
     <!-- Display Title and Subtitle -->
-    <h1 class="story-title"><?php the_title(); ?></h1>
+    <h1 class="story-heading"><?php the_title(); ?></h1>
     <p class="story-subtitle"><?php the_field('subtitle'); ?></p>
 
     <!-- Display Featured Image with Caption -->
-    <div class="story-featured-image">
-        <?php 
-        if ( has_post_thumbnail() ) : 
-            the_post_thumbnail('large'); 
-            $caption = get_the_post_thumbnail_caption(); // Get the caption for the image
-            if ( $caption ) : 
-        ?>
-            <figcaption class="story-image-caption"><?php echo esc_html( $caption ); ?></figcaption>
-        <?php 
-            endif;
+<div class="story-featured-image">
+    <?php 
+    if ( has_post_thumbnail() ) : 
+        $thumbnail_id = get_post_thumbnail_id(); // Get the ID of the featured image
+        echo wp_get_attachment_image( $thumbnail_id, 'large' ); // Output the image only
+
+        $caption = wp_get_attachment_caption( $thumbnail_id ); // Get the caption for the image
+        if ( $caption ) : 
+    ?>
+        <figcaption class="story-image-caption"><?php echo esc_html( $caption ); ?></figcaption>
+    <?php 
         endif;
-        ?>
+    endif;
+    ?>
+</div>
+<?php if (is_singular()) : ?>
+    <div class="social-share">
+        <?php echo add_social_share_buttons(''); ?>
     </div>
+<?php endif; ?>
 
     <!-- Display Content from the Classic Editor -->
     <div class="story-content">

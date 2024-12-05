@@ -265,7 +265,7 @@ add_action('acf/input/admin_head', 'custom_acf_admin_css');
 
 
 function add_social_share_buttons($content) {
-    if ((is_singular('post') || is_singular('artist')) && in_the_loop() && is_main_query()) {
+    if (is_singular() && in_the_loop() && is_main_query()) { // Apply to any singular post type
         $url = esc_url(get_permalink());
         $title = urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'));
 
@@ -302,4 +302,5 @@ function add_social_share_buttons($content) {
 
     return $content;
 }
-add_filter('the_content', 'add_social_share_buttons');
+// add_filter('the_content', 'add_social_share_buttons');
+
