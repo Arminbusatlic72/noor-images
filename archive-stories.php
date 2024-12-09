@@ -32,18 +32,27 @@ get_header(); ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 			<div class="story-post">
 				<div class="story-post__name-category-wrapper">
-				<span class="shared-story-title story-post__name"><?php echo esc_html( get_post_type_object( get_post_type() )->labels->name ); ?></span>/
-        <span class="shared-story-title story-post__category">
-            <?php 
-            $categories = get_the_category();
-            if ( ! empty( $categories ) ) {
-                echo esc_html( $categories[0]->name ); // Display the first category name
-            } else {
-                echo ' Uncategorized'; // Fallback text if no categories assigned
-            }
+    <span class="shared-story-title story-post__name">
+        <?php echo esc_html( get_post_type_object( get_post_type() )->labels->name ); ?>
+    </span>/
+    <span class="shared-story-title story-post__category">
+        <?php 
+        $categories = get_the_category();
+        if ( ! empty( $categories ) ) {
+            $category = $categories[0]; // Get the first category
+            $category_link = get_category_link( $category->term_id ); // Get the category URL
             ?>
-        </span>
-		</div>
+            <a href="<?php echo esc_url( $category_link ); ?>" class="category-link">
+                <?php echo esc_html( $category->name ); // Display the category name ?>
+            </a>
+        <?php 
+        } else {
+            echo 'Uncategorized'; // Fallback text if no categories assigned
+        }
+        ?>
+    </span>
+</div>
+
 				<a href="<?php the_permalink(); ?>" class="story-link">
 					<div class="story-image">
 						<?php if ( has_post_thumbnail() ) : ?>
