@@ -8,10 +8,26 @@ function astra_child_enqueue_styles() {
     if ( is_front_page() ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/front-page.css', array('astra-child-style'));
     }
+    if ( is_post_type_archive( 'stories' ) || is_tax( 'stories_category' ) ) {
+        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/stories-archive.css', array('astra-child-style'));
+    }
 	
     wp_enqueue_script('theme.js', get_stylesheet_directory_uri() . '/theme.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'astra_child_enqueue_styles');
+function enqueue_toggle_grid_script() {
+   
+    if ( is_post_type_archive( 'stories' ) ) {
+        wp_enqueue_script(
+            'toggle-grid-view',
+            get_stylesheet_directory_uri() . '/assets/js/toggle-grid.js', // Path to your JS file
+            array(),
+            '1.0',
+            true // Load in the footer
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_toggle_grid_script' );
 
 function register_custom_post_type($singular, $plural, $slug, $menu_position = 5) {
     $labels = array(

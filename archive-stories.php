@@ -22,15 +22,21 @@ get_header(); ?>
 
 <div id="primary" <?php astra_primary_class(); ?>>
 
-	<?php astra_primary_content_top(); ?>
+<section class="stories-archive__section">
+	 <div class="stories-archive__header-block">
+            <h2 class="stories-archive__title">See Stories</h2>
+            <a id="toggle-large" class="toggle-view">Large</a>
+    		<a id="toggle-small" class="toggle-view active">Small</a>
 
-	<?php astra_archive_header(); ?>
+     </div>
+
+
 
 	
-<div class="story-archive-grid">
+<div id="stories-archive-grid" class="stories-archive-grid">
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : the_post(); ?>
-			<div class="story-post">
+			<div class="stories-archive-item">
 				<div class="story-post__name-category-wrapper">
     <span class="shared-story-title story-post__name">
         <?php echo esc_html( get_post_type_object( get_post_type() )->labels->name ); ?>
@@ -76,7 +82,7 @@ get_header(); ?>
 </div>
 
 	<?php astra_primary_content_bottom(); ?>
-
+</section>	
 </div><!-- #primary -->
 
 <?php if ( astra_page_layout() == 'right-sidebar' ) : ?>

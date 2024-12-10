@@ -1,4 +1,4 @@
-<?php
+a<?php
 /**
  * Template Name: Latest Content
  * Description: A custom template to display the latest Stories, Articles, and Announcements.
@@ -9,7 +9,7 @@ get_header();
     <main id="main" class="site-main">
 
         <!-- Latest Stories Section -->
-        <section class="latest-stories">
+        <section class="latest-stories__section">
             <div class="front-page__header-block">
             <h2 class="front-page__title">Latest Stories</h2>
             <a href="<?php echo get_post_type_archive_link('stories'); ?>" class="front-page__view-all-link">View All Stories</a>
@@ -32,7 +32,7 @@ get_header();
                         <?php 
                         echo get_the_post_thumbnail(
                             get_the_ID(), 
-                            'full', 
+                            'medium', 
                             array( 'class' => 'custom-thumbnail' ) // Add your custom class here
                         ); 
                         ?>
@@ -52,7 +52,7 @@ get_header();
         </section>
 
         <!-- Latest Articles Section -->
-        <section class="latest-articles">
+        <section class="latest-articles__section">
              <div class="front-page__header-block">
             <h2 class="front-page__title">Latest Articles</h2>
              <a href="<?php echo get_post_type_archive_link('articles'); ?>" class="front-page__view-all-link">View All Articles</a>
@@ -71,7 +71,7 @@ get_header();
                                <?php 
                         echo get_the_post_thumbnail(
                             get_the_ID(), 
-                            'full', 
+                            'medium', 
                             array( 'class' => 'custom-thumbnail' ) // Add your custom class here
                         ); 
                         ?>
@@ -84,36 +84,80 @@ get_header();
                     wp_reset_postdata();
                 else : ?>
                     <p>No articles found.</p>
-                <?php endif; ?>
+                <?php endif; ?> 
             </div>
         </section>
 
         <!-- Latest Announcements Section -->
-        <section class="latest-announcements">
-            <h2>Latest Announcements</h2>
-            <div class="announcement-grid">
+         <div class="latest-announcements-section-wrapper">
+        <section class="latest-announcements__section">
+            <div class="front-page__header-block">
+            <h2 class="front-page__title">Latest Announcements</h2>
+             
+    </div>
+            <div class="latest-announcement-grid">
+                <div class="latest-announcements-heading-wrapper">
+                    <h6 class="latest-announcements__heading">Check our announcements</h6>
+                    <a href="<?php echo get_post_type_archive_link('announcements'); ?>" class="latest-announcements__button">See all announcements</a>
+                </div>
+                <div class="latest-announcements-articles-wrapper">
                 <?php
                 $announcements_query = new WP_Query( array(
                     'post_type'      => 'announcements', // Replace with your custom post type slug
-                    'posts_per_page' => 3,               // Number of announcements to display
+                    'posts_per_page' => 2,               // Number of announcements to display
                 ) );
 
                 if ( $announcements_query->have_posts() ) :
                     while ( $announcements_query->have_posts() ) : $announcements_query->the_post(); ?>
-                        <article class="announcement-item">
-                            <a href="<?php the_permalink(); ?>">
-                                <?php the_post_thumbnail('medium'); ?>
+                        <article class="latest-announcements-article">
+                            <div class="latest-announcements-article__content-wrapper">
+                                <div class="latest-announcements-article__header-container">
+                                
+                                <!-- Display Announcement Time -->
+                        <?php if ( have_rows('announcement_time') ) : ?>
+                            <div class="latest-announcement-time-wrapper">
+                                <?php while ( have_rows('announcement_time') ) : the_row(); 
+                                    $start_date = get_sub_field('date_start');
+                                    $start_time = get_sub_field('time_start');
+                                    $end_date = get_sub_field('date_end');
+                                    $end_time = get_sub_field('time_end');
+                                ?>
+                                    
+                                        
+                                        <span class="start-date"><?php echo esc_html($start_date); ?></span> - 
+                                        <span class="start-time"><?php echo esc_html($start_time); ?></span>
+                                
+                                    <span class="separator"> - </span>
+                                    
+                                       
+                                        <span class="end-date"><?php echo esc_html($end_date); ?></span> - 
+                                        <span class="end-time"><?php echo esc_html($end_time); ?></span>
+                                    
+                                <?php endwhile; ?>
+                            </div>
+                        <?php else : ?>
+                            <p>No announcement times found.</p>
+                        <?php endif; ?>
                                 <h3><?php the_title(); ?></h3>
+                                 <p class="story-subtitle"><?php the_field('subtitle'); ?></p>
+                                </div>
+                            </div>
+                            <div class="latest-announcements-article__button-wrapper">
+                            <a class="latest-announcements-article__button"href="<?php the_permalink(); ?>">
+                              Details
+                                
                             </a>
+                </div>
                         </article>
                     <?php endwhile;
                     wp_reset_postdata();
                 else : ?>
                     <p>No announcements found.</p>
                 <?php endif; ?>
+                </div>
             </div>
         </section>
-
+</div>
     </main><!-- #main -->
 </div><!-- #primary -->
 <?php get_footer(); ?>

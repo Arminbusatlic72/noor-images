@@ -11,9 +11,6 @@ Version: 1.0.0
 /* Import the parent theme styles */
 @import url("../astra/style.css");
 
-body {
-  background: red;
-}
 .artist-page-wrapper {
   display: flex;
   max-width: 1200px;
@@ -233,107 +230,10 @@ body {
     text-align: center;
   }
 }
-/* Parent container Stories */
-.story-archive-grid {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr; /* Default to 1 column on small screens */
-  /* margin: 20px; */
-}
 
-/* Adjust grid for tablet screens */
-@media (min-width: 600px) {
-  .story-archive-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
-  }
-}
-
-/* Adjust grid for desktop screens */
-@media (min-width: 1024px) {
-  .story-archive-grid {
-    grid-template-columns: repeat(4, 1fr); /* 3 columns on desktop */
-  }
-}
-
-.story-post {
-  position: relative;
-  width: 100%;
-}
-
-.story-image {
-  position: relative;
-  overflow: hidden;
-}
-
-.story-image img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-.story-label {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.story-title {
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: bold;
-}
-/* Style the tags below the title */
-.story-tags {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #000;
-  font-weight: 400;
-}
-
-/* Style each individual tag */
-.story-tags .tag {
-  display: inline-block;
-  background-color: whitesmoke;
-  padding: 3px 8px;
-  border-radius: 3px;
-  margin-right: 5px;
-  margin-top: 5px;
-}
-
-/* Optional: hover effect for tags */
-.story-tags .tag:hover {
-  opacity: 0.8;
-}
-.story-post__name-category-wrapper {
-  display: flex;
-  margin-bottom: 10px;
-}
-.shared-story-title {
-  font-weight: 300;
-  margin-right: 5px;
-  text-transform: uppercase; /* Capitalize all letters */
-  letter-spacing: 0.015rem;
-  font-size: 0.75;
-}
-
-.story-post__name {
-  color: black;
-}
-
-.story-post__category {
-  color: gray;
-  margin-left: 5px; /* Add space after / */
-}
 .story-container {
   max-width: 800px;
-  margin: 40px auto 0;
+  margin: 80px auto 0;
   padding: 20px;
 }
 
@@ -342,9 +242,17 @@ body {
 }
 
 .tag {
-  background-color: #eee;
+  /* background-color: #eee; */
   padding: 5px 10px;
   margin-right: 5px;
+  border: 1px solid #969696;
+  color: #969696;
+  text-transform: uppercase;
+  padding: 0.25rem;
+  font-size: 0.6rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: opacity 0.15s ease-in-out;
 }
 .story-navigation {
   display: flex;
@@ -534,4 +442,84 @@ body {
   margin-top: 15px;
   font-size: 18px;
   font-weight: bold;
+}
+.announcement-container {
+  margin-block: 7.5rem;
+  margin-inline: 2rem;
+  display: flex;
+  width: 100%;
+  min-height: 150vh;
+}
+.half-width {
+  flex: 0 0 50%; /* Each item takes 50% of the container's width */
+  align-items: flex-start;
+  padding: 10px; /* Optional padding for spacing */
+}
+.announcement-time-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 3rem;
+  border-bottom: 1px dotted black;
+}
+.announcement-featured-image-wrapper {
+  top: 10px;
+  position: sticky;
+  position: -webkit-sticky;
+  align-self: flex-start;
+}
+.separator {
+  margin: 0 0.5rem; /* Space before and after the dash */
+  color: #555; /* Optional styling for the dash */
+}
+.announcement-heading {
+  margin-bottom: 3rem;
+}
+.announcement-subtitle {
+  margin-bottom: 3rem;
+}
+.front-page__title {
+  text-transform: uppercase;
+  letter-spacing: 0.0175rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.225rem;
+}
+.announcement-related-items-list {
+  list-style: none;
+  border-top: 1px dotted #000;
+  margin: 0;
+  margin-bottom: 3rem;
+  padding: 0;
+}
+.announcement-related-item {
+  margin-top: 1rem;
+  border-bottom: 0.5px solid black;
+  padding-block: 0.5rem;
+}
+.movie-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333; /* Adjust text color */
+}
+
+.movie-thumbnail {
+  flex-shrink: 0; /* Prevent image from shrinking */
+  margin-right: 1rem; /* Space between image and title */
+}
+
+.movie-thumbnail img.custom-thumbnail {
+  display: block; /* Ensure image does not inherit unwanted inline styles */
+  max-width: 100px; /* Adjust size as needed */
+
+  object-fit: cover; /* Ensure image fits nicely */
+}
+
+.movie-title {
+  font-size: 1rem;
+  font-weight: 600; /* Make the title stand out */
+  line-height: 1.5;
+  text-decoration: none;
+  color: #000;
 }
