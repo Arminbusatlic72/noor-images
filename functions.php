@@ -11,6 +11,9 @@ function astra_child_enqueue_styles() {
     if ( is_post_type_archive( 'stories' ) || is_tax( 'stories_category' ) ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/stories-archive.css', array('astra-child-style'));
     }
+     if ( is_post_type_archive( 'announcements' ) || is_tax( 'announcements_category' ) ) {
+        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/announcements-archive.css', array('astra-child-style'));
+    }
 	
     wp_enqueue_script('theme.js', get_stylesheet_directory_uri() . '/theme.js', array('jquery'), null, true);
 }
@@ -88,6 +91,8 @@ add_action('init', function() {
     register_custom_post_type('Article', 'Articles', 'articles', 5);
     register_custom_post_type('Story', 'Stories', 'stories', 6);
     register_custom_post_type('Announcement', 'Announcements', 'announcements', 7);
+    register_custom_post_type('Bio', 'Bios', 'bios', 8);
+
 });
 // Register Custom Post Type for Movies
 function create_movies_post_type() {

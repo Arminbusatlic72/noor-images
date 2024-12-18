@@ -7,12 +7,12 @@ if ( have_posts() ) :
     while ( have_posts() ) : the_post(); 
 ?>
 
-<div class="announcement-container">
-  <div class="announcement-content-wrapper half-width">
+<div class="bio-container">
+  <div class="bio-content-wrapper half-width">
 
   <!-- Display Title and Subtitle -->
-    <h2 class="announcement-heading"><?php the_title(); ?></h2>
-    <h4 class="announcement-subtitle"><?php the_field('subtitle'); ?></h4>
+    <h2 class="bio-heading"><?php the_title(); ?></h2>
+    <h4 class="bio-subtitle"><?php the_field('subtitle'); ?></h4>
    
     <!-- Display Tags -->
     <div class="story-tags">
@@ -24,15 +24,15 @@ if ( have_posts() ) :
 
    <?php
 // Check if the ACF group and fields exist
-if ( have_rows('announcement_time') ) :
-    while ( have_rows('announcement_time') ) : the_row();
+if ( have_rows('bio_time') ) :
+    while ( have_rows('bio_time') ) : the_row();
         // Get the field values
         $start_date = get_sub_field('date_start'); // Replace 'start_time' with your actual field name
         $start_time = get_sub_field('time_start');
          $end_date = get_sub_field('date_end'); // Replace 'start_time' with your actual field name
         $end_time = get_sub_field('time_end');     // Replace 'end_time' with your actual field name
         ?>
-        <div class="announcement-time-wrapper">
+        <div class="bio-time-wrapper">
            
             <span class="start-date"><?php echo esc_html($start_date); ?></span> - 
             <span class="start-time"><?php echo esc_html($start_time); ?></span>
@@ -45,27 +45,27 @@ if ( have_rows('announcement_time') ) :
         <?php
     endwhile;
 else :
-    echo '<p>No announcement times found.</p>';
+    echo '<p>No bio times found.</p>';
 endif;
 ?>
  
 </div>
-<div class="announcement-relation">
+<div class="bio-relation">
         <!-- Related Movies Section -->
         <?php 
-        $related_movies = get_field('related_movies'); 
-        if( $related_movies && !empty($related_movies) ): ?>
-            <div class="announcement-related-movies">
-                <h4 class="front-page__title">Movies to be announced</h4>
-                <ul class="announcement-related-items-list">
-    <?php foreach( $related_movies as $movie ): ?>
-        <li class="announcement-related-item">
-            <a href="<?php echo get_permalink( $movie->ID ); ?>" class="movie-link">
+        $related_posts_type = get_field('related_post_types'); 
+        if( $related_posts_type && !empty($related_posts_type) ): ?>
+            <div class="bio-related-movies">
+                <h4 class="front-page__title">Stories & more</h4>
+                <ul class="bio-related-items-list">
+    <?php foreach( $related_posts_type as $post_type ): ?>
+        <li class="bio-related-item">
+            <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="movie-link">
                 <div class="movie-thumbnail">
-                    <?php echo get_the_post_thumbnail( $movie->ID, 'medium', array( 'class' => 'custom-thumbnail' ) ); ?>
+                    <?php echo get_the_post_thumbnail( $post_type->ID, 'medium', array( 'class' => 'custom-thumbnail' ) ); ?>
                 </div>
                 <div class="movie-title">
-                    <?php echo esc_html( get_the_title( $movie->ID ) ); ?>
+                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
                 </div>
             </a>
         </li>
@@ -75,30 +75,14 @@ endif;
             </div>
         <?php endif; ?>
 
-        <!-- Related Exhibitions Section -->
-        <?php 
-        $related_exhibitions = get_field('related_exhibitions'); 
-        if( $related_exhibitions && !empty($related_exhibitions) ): ?>
-            <div class="announcement-related-exhibitions">
-                <h4 class="front-page__title">Exhibitions to be announced</h4>
-                <ul class="announcement-related-items-list">
-                    <?php foreach( $related_exhibitions as $exhibition ): ?>
-                        <li class="announcement-related-item">
-                            <a href="<?php echo get_permalink( $exhibition->ID ); ?>" class="exhibition-link">
-                                <?php echo get_the_title( $exhibition->ID ); ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
+        
     </div>
-                    <a href="<?php echo get_post_type_archive_link('announcements'); ?>" class="announcements__button">See all announcements</a>
+                    <a href="<?php echo get_post_type_archive_link('bios'); ?>" class="bios__button">See all bios</a>
 
 </div>
 
     <!-- Display Featured Image with Caption -->
-<div class="announcement-featured-image-wrapper half-width">
+<div class="bio-featured-image-wrapper half-width">
     <?php 
     if ( has_post_thumbnail() ) : 
         $thumbnail_id = get_post_thumbnail_id(); // Get the ID of the featured image
