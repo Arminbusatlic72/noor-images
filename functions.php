@@ -14,6 +14,10 @@ function astra_child_enqueue_styles() {
      if ( is_post_type_archive( 'announcements' ) || is_tax( 'announcements_category' ) ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/announcements-archive.css', array('astra-child-style'));
     }
+    if ( is_singular( 'bios' ) ) {
+    wp_enqueue_style('single-bios-style', get_stylesheet_directory_uri() . '/assets/css/single-bios.css', array('astra-child-style'));
+}
+
 	
     wp_enqueue_script('theme.js', get_stylesheet_directory_uri() . '/theme.js', array('jquery'), null, true);
 }
@@ -336,4 +340,71 @@ function add_slider_before_header() {
     }
 }
 add_action('astra_header_after', 'add_slider_before_header');
+// adding tags for bios
+function register_custom_taxonomy($taxonomy_slug, $post_types, $taxonomy_name, $singular_name, $rewrite_slug, $is_hierarchical = false) {
+    register_taxonomy(
+        $taxonomy_slug, // Taxonomy slug
+        $post_types, // Post types the taxonomy applies to
+        [
+            'labels' => [
+                'name' => $taxonomy_name,
+                'singular_name' => $singular_name,
+                'search_items' => 'Search ' . $taxonomy_name,
+                'all_items' => 'All ' . $taxonomy_name,
+                'edit_item' => 'Edit ' . $singular_name,
+                'update_item' => 'Update ' . $singular_name,
+                'add_new_item' => 'Add New ' . $singular_name,
+                'new_item_name' => 'New ' . $singular_name . ' Name',
+                'menu_name' => $taxonomy_name,
+            ],
+            'hierarchical' => $is_hierarchical, // false for tags, true for categories
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'query_var' => true,
+            'rewrite' => ['slug' => $rewrite_slug],
+        ]
+    );
+}
+
+// Hook into init
+add_action('init', function() {
+    // Register Community Labels
+    register_custom_taxonomy(
+        'community_label',      // Taxonomy slug
+        ['bios'],               // Associated post types
+        'Community Labels',     // Taxonomy name
+        'Community Label',      // Singular name
+        'community-label',      // Rewrite slug
+        false                   // Is hierarchical
+    );
+
+    // Register Countries
+    register_custom_taxonomy(
+        'country',              // Taxonomy slug
+        ['bios'],               // Associated post types
+        'Countries',            // Taxonomy name
+        'Country',              // Singular name
+        'country',              // Rewrite slug
+        false                   // Is hierarchical
+    );
+
+    // Register Continents
+    register_custom_taxonomy(
+        'continent',            // Taxonomy slug
+        ['bios'],               // Associated post types
+        'Continents',           // Taxonomy name
+        'Continent',            // Singular name
+        'continent',            // Rewrite slug
+        false                   // Is hierarchical
+    );
+    // Register Continents
+    register_custom_taxonomy(
+        'issues_of_focus',            // Taxonomy slug
+        ['bios'],               // Associated post types
+        'Issues of focus',           // Taxonomy name
+        'Issue of focus',            // Singular name
+        'issue of focus',            // Rewrite slug
+        false                   // Is hierarchical
+    );
+});
 
