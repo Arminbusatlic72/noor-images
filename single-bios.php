@@ -11,7 +11,7 @@ if ( have_posts() ) :
     <section class="bio-header-section">
     <div class="bio-content-wrapper">
         <!-- Display Featured Image with Caption -->
-        <div class="bio-featured-image-wrapper half-width">
+        <div class="bio-featured-image-wrapper">
             <?php 
             if ( has_post_thumbnail() ) : 
                 $thumbnail_id = get_post_thumbnail_id(); // Get the ID of the featured image
@@ -26,7 +26,7 @@ if ( have_posts() ) :
             endif;
             ?>
         </div>
-<div class="bio-text-wrapper half-width">
+<div class="bio-text-wrapper">
         <!-- Display Title and Subtitle -->
         <h2 class="bio-heading"><?php the_field('name_and_surname'); ?></h2>
         <h4 class="bio-subtitle"><?php the_field('subtitle'); ?></h4>
@@ -35,7 +35,7 @@ if ( have_posts() ) :
        <?php
         $community_labels = get_the_terms(get_the_ID(), 'community_label');
         if ($community_labels && !is_wp_error($community_labels)) {
-        echo '<div class="bio-community-labels"><h4>Community Label tags</h4><ul>';
+        echo '<div class="bio-community-labels"><h6>Community Label tags</h6><ul>';
     
         $label_links = array(); 
         foreach ($community_labels as $label) {
@@ -55,7 +55,7 @@ if ( have_posts() ) :
     $continent_labels = get_the_terms(get_the_ID(), 'continent');
 
     if ((!empty($country_labels) && !is_wp_error($country_labels)) || (!empty($continent_labels) && !is_wp_error($continent_labels))) {
-        echo '<div class="community-labels"><span>';
+        echo '<div class="bio-country-labels"><span>';
 
         // Handle country labels
         if (!empty($country_labels) && !is_wp_error($country_labels)) {

@@ -387,9 +387,6 @@ Version: 1.0.0
   overflow: hidden; /* to affect the inner elements with the radius */
 }
 
-.articles-item:hover {
-  transform: scale(1.02);
-}
 .articles-image {
   position: relative;
 }

@@ -1,5 +1,5 @@
 .bio-container {
-  margin-top: 8rem;
+  margin-top: 10rem;
 }
 .bio-header-section,
 .bio-short-biography-section,
@@ -9,17 +9,19 @@
 }
 
 .bio-content-wrapper {
-  display: flex;
+  display: grid;
   width: 100%;
-  flex-direction: column;
+  grid-template-columns: 1fr;
 }
 @media (min-width: 769px) {
   .bio-short-biography {
-    padding-inline: 3rem;
-    margin: 2rem 0;
+    max-width: 800px;
+    width: 100%;
+    margin: 2rem auto 0;
   }
   .bio-content-wrapper {
-    flex-direction: row;
+    grid-template-columns: 50% 50%;
+    gap: 50px;
   }
 }
 .bio-featured-image-wrapper {
@@ -27,7 +29,40 @@
   height: auto;
   margin-bottom: 2rem;
 }
-.bio-community-labels h4 {
+.bio-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between;   */
+}
+@media (min-width: 769px) {
+  .bio-heading {
+    font-size: 4rem;
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+    transform: translateY(20px); /* Start slightly below its final position */
+    animation: fadeInUp 1.5s ease-out forwards;
+    margin-bottom: 3rem;
+  }
+  .bio-subtitle {
+    margin-bottom: 2rem;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Starting offset */
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px); /* Subtle bounce effect */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Final position */
+  }
+}
+.bio-community-labels {
   font-weight: bold;
 }
 .bio-community-labels ul {
@@ -36,17 +71,20 @@
   padding: 0;
   display: flex;
 }
+.bio-country-labels {
+  margin-bottom: 1rem;
+}
 .bio-social-media {
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .social-icon svg {
   width: 24px;
   height: 24px;
   vertical-align: middle;
-  margin-right: 8px;
 }
 .social-icon {
+  margin-right: 10px;
   vertical-align: middle;
 }
 .bio-social-media a {
@@ -95,20 +133,25 @@
     grid-template-columns: 70% 30%; /* Left: 70%, Right: 30% */
     gap: 20px; /* Optional: Add spacing between columns */
     width: 100%;
-    margin-bottom: 2rem;
+    margin-block: 4rem;
+  }
+  .bio-slider-section-text-wrapper {
+    padding-left: 1rem;
+    padding-right: 3rem;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    min-height: 31rem;
   }
 }
-.bio-slider-section-text-wrapper {
-  padding: 1rem;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  width: 100%;
-  height: 100%;
-  min-height: 31rem;
+.bio-slider-section-slider-wrapper {
+  /* padding-top: 2rem; */
 }
+
 .bio-header-block {
   display: flex;
   justify-content: space-between;
