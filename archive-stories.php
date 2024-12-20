@@ -33,7 +33,7 @@ get_header(); ?>
 
 
 	
-<div id="stories-archive-grid" class="stories-archive-grid">
+<div id="stories-archive-grid" class="stories-archive-grid large-view">
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 			<div class="stories-archive-item">

@@ -97,7 +97,7 @@ get_header();
     </div>
             <div class="latest-announcement-grid">
                 <div class="latest-announcements-heading-wrapper">
-                    <h6 class="latest-announcements__heading">Check our announcements</h6>
+                    <h4 class="latest-announcements__heading">Check our announcements</h4>
                     <a href="<?php echo get_post_type_archive_link('announcements'); ?>" class="latest-announcements__button">See all announcements</a>
                 </div>
                 <div class="latest-announcements-articles-wrapper">

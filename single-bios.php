@@ -161,9 +161,9 @@ if ( have_posts() ) :
         ?>
     </div>
     <div class="bio-slider-section-text-wrapper">
-    <h3 class=""><?php the_field('headline'); ?></h3>
+    <h3 class="bio-headline"><?php the_field('headline'); ?></h3>
     
-    <p class=""><?php the_field('content'); ?></p>
+    <p class="bio-content"><?php the_field('content'); ?></p>
     
     <a class="bio-button" href="<?php echo get_post_type_archive_link('bios'); ?>" class="bios-button">See all bios</a>
     </div>
