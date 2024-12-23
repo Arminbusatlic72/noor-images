@@ -3,7 +3,7 @@
 <main class="archive-announcements-container">
     <header class="archive-header">
        <div class="stories-archive__header-block">
-            <h2 class="stories-archive__title">See upcoming announcements</h2>            
+            <h2 class="announcements-archive__title">See upcoming announcements</h2>            
      </div>
        
     </header>

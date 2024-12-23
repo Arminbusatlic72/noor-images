@@ -1,5 +1,12 @@
+.announcements-archive__title {
+  font-size: 2rem;
+}
+.announcements-filter__title {
+  font-size: 3rem;
+  letter-spacing: -3px;
+}
 .archive-announcements-container {
-  margin-block: 8rem;
+  margin-block: 10rem;
   margin-inline: 1rem;
   width: 100%;
 }

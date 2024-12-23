@@ -4,13 +4,16 @@
 .home .site-header .sub-menu a {
   color: #000 !important;
 }
-.home .site-main {
-}
 .home .site-content {
   background-color: #fff;
   z-index: 10;
   position: relative; /* Ensure the content stacks normally */
-  margin-top: 650px;
+  margin-top: 250px;
+}
+@media (min-width: 768px) {
+  .home .site-content {
+    margin-top: 650px;
+  }
 }
 .home .n2-section-smartslider {
   position: fixed;
@@ -60,7 +63,8 @@
 }
 .latest-stories__section,
 .latest-articles__section,
-.latest-announcements__section {
+.latest-announcements__section,
+.bios-section {
   padding-inline: 1rem;
   padding-block: 4.5rem;
 }
@@ -229,6 +233,7 @@
   min-height: 20rem;
   max-height: 20rem;
   display: grid;
+  background-color: #fff;
 }
 .latest-announcements-article__content-wrapper {
   flex-flow: column;
@@ -265,4 +270,53 @@
   align-items: center;
   margin-bottom: 3rem;
   border-bottom: 1px dotted black;
+}
+
+.bios-section-wrapper {
+  background-color: #000;
+}
+.bios-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* 2 columns on mobile */
+}
+@media (min-width: 768px) {
+  /* Mobile breakpoint */
+
+  .bios-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+.text-white {
+  color: #fff;
+}
+.border-white {
+  border-color: #fff;
+}
+.bios-details-wrapper {
+  margin-block: 1rem;
+}
+
+.bios-social-media-archive {
+  display: flex;
+  justify-content: flex-start;
+  /* align-items: center; */
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.social-icon svg {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  fill: #fff;
+}
+.social-icon {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.bio-social-media a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 8px;
 }
