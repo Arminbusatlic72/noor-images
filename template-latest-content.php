@@ -229,6 +229,65 @@ get_header();
             </div>
         </section>
 </div>
+
+<?php
+// Get the menu assigned to the "primary" menu location
+$menu_name = 'primary'; // Update this to match your menu location
+$menu_locations = get_nav_menu_locations();
+$menu_id = isset($menu_locations[$menu_name]) ? $menu_locations[$menu_name] : false;
+
+if ($menu_id) {
+    // Fetch all menu items for the assigned menu
+    $menu_items = wp_get_nav_menu_items($menu_id);
+
+    // Debug output to check the structure of menu items
+    // echo '<pre>';
+    // print_r($menu_items); // Uncomment to inspect menu items
+    // echo '</pre>';
+
+    // Get the current page ID
+    $current_page_id = get_the_ID();
+    // echo '<p>Current Page ID: ' . $current_page_id . '</p>'; // Display current page ID for debugging
+
+    // Find the menu item corresponding to the current page (Home page in this case)
+    $current_page_menu_id = null;
+    foreach ($menu_items as $item) {
+        // If the item corresponds to the current page, save its menu item ID
+        if ((int)$item->object_id === $current_page_id) {
+            $current_page_menu_id = $item->ID;
+            break;
+        }
+    }
+
+    // Debugging the menu item ID for current page
+    echo '<p>Current Page Menu Item ID: ' . $current_page_menu_id . '</p>';
+
+    if ($current_page_menu_id) {
+        // Filter menu items to find children (submenu items) of the current page menu item
+        $submenu_items = array_filter($menu_items, function ($item) use ($current_page_menu_id) {
+            return (int)$item->menu_item_parent === $current_page_menu_id;
+        });
+
+        if (!empty($submenu_items)) {
+            echo '<ul class="submenu-items">';
+            foreach ($submenu_items as $submenu_item) {
+                echo '<li>';
+                echo '<a href="' . esc_url($submenu_item->url) . '">' . esc_html($submenu_item->title) . '</a>';
+                echo '</li>';
+            }
+            echo '</ul>';
+        } else {
+            echo '<p>No submenu items found for this page.</p>';
+        }
+    } else {
+        echo '<p>No menu item found for the current page.</p>';
+    }
+} else {
+    echo '<p>Menu not found or no menu assigned to this location.</p>';
+}
+?>
+
+
     </main><!-- #main -->
 </div><!-- #primary -->
 <?php get_footer(); ?>

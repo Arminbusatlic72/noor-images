@@ -14,6 +14,9 @@ function astra_child_enqueue_styles() {
      if ( is_post_type_archive( 'announcements' ) || is_tax( 'announcements_category' ) ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/announcements-archive.css', array('astra-child-style'));
     }
+    if ( is_post_type_archive( 'bios' ) || is_tax( 'bios_category' ) ) {
+        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/bios-archive.css', array('astra-child-style'));
+    }
     if ( is_singular( 'bios' ) ) {
     wp_enqueue_style('single-bios-style', get_stylesheet_directory_uri() . '/assets/css/single-bios.css', array('astra-child-style'));
 }

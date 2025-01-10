@@ -209,6 +209,35 @@ if ( have_posts() ) :
         <?php endif; ?>
     </section>
 </div>
+<div class="press-links-section-wrapper">
+    <section>
+        <?php
+// Get the Text Area field value
+$links = get_field('press_links');
+
+if ($links) : 
+    // Split the text area content into an array of links
+    $links_array = explode("\n", $links);
+
+    echo '<ul>';
+    foreach ($links_array as $link) :
+        $link = trim($link); // Trim whitespace
+        if (!empty($link)) :
+?>
+            <li>
+                <a href="<?php echo esc_url($link); ?>" target="_blank"><?php echo esc_html($link); ?></a>
+            </li>
+<?php
+        endif;
+    endforeach;
+    echo '</ul>';
+else :
+    echo '<p>No publication links available.</p>';
+endif;
+?>
+
+    </section>
+</div>
 </div>
                     
 <?php 
