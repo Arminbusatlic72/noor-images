@@ -403,7 +403,7 @@ add_action('init', function() {
     // Register Continents
     register_custom_taxonomy(
         'issues_of_focus',            // Taxonomy slug
-        ['bios'],               // Associated post types
+        ['bios','exhibitions'],               // Associated post types
         'Issues of focus',           // Taxonomy name
         'Issue of focus',            // Singular name
         'issue of focus',            // Rewrite slug
