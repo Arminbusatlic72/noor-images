@@ -210,7 +210,10 @@ if ( have_posts() ) :
     </section>
 </div>
 <div class="press-links-section-wrapper">
-    <section>
+    <section class="press-links-section">
+       <div class="bio-header-block">
+                <h4 class="bio-header-title">On the Press:</h4>
+                </div>
         <?php
 // Get the Text Area field value
 $links = get_field('press_links');
@@ -219,7 +222,7 @@ if ($links) :
     // Split the text area content into an array of links
     $links_array = explode("\n", $links);
 
-    echo '<ul>';
+    echo '<ul class="press-links-list">';
     foreach ($links_array as $link) :
         $link = trim($link); // Trim whitespace
         if (!empty($link)) :
