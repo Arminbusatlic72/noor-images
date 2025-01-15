@@ -6,68 +6,190 @@ get_header();
 if ( have_posts() ) : 
     while ( have_posts() ) : the_post(); 
 ?>
-
-<div class="story-container">
-  
-    <!-- Display Tags -->
-    <div class="story-tags">
-        <?php 
-        // Display tags
-        the_tags( '<span class="tag">', '</span><span class="tag">', '</span>' );
+<div class="exhibition-container">
+<div class="full-with-slider-container">
+     <!-- Slider -->
+    <div class="bio-slider-section-slider-wrapper">
+        <?php
+        $slider_shortcode = get_field('top_slider_short_code');
+        if( $slider_shortcode ):
+            echo do_shortcode( $slider_shortcode );
+        endif;
         ?>
     </div>
+</div>
+<section class="exhibition-header-section">
+    <div class="exhibition-header-wrapper">
+    <h2 class="bio-heading"><?php the_field('headline'); ?></h2>
+    <h3><?php the_field('subtitle'); ?></h3>
+    <div class="exhibition-description-wrapper">
+    <p ><?php the_field('story_description'); ?></p>
+</div>
 
-    <!-- Display Title and Subtitle -->
-    <h1 class="story-heading"><?php the_title(); ?></h1>
-    <p class="story-subtitle"><?php the_field('subtitle'); ?></p>
+ <div class="bio-issues-of-focus">
+        <p>Issue areas :</p>
+         <!-- Country Labels -->
+    <div>
+        <?php
+        $issues_of_focus = get_the_terms(get_the_ID(), 'issues_of_focus');
+        if ($issues_of_focus && !is_wp_error($issues_of_focus)) {
+            echo '<ul>';
+            foreach ($issues_of_focus as $label) {
+                echo '<li class="bio-tag"><a href="' . esc_url(get_term_link($label)) . '">' . esc_html($label->name) . '</a></li>';
+            }
+            echo '</ul>';
+        }
+        ?>
+    </div>
+    </div>
+</div>
+</section>
 
-    <!-- Display Featured Image with Caption -->
-<div class="story-featured-image">
-    <?php 
-    if ( has_post_thumbnail() ) : 
-        $thumbnail_id = get_post_thumbnail_id(); // Get the ID of the featured image
-        echo wp_get_attachment_image( $thumbnail_id, 'large' ); // Output the image only
-
-        $caption = wp_get_attachment_caption( $thumbnail_id ); // Get the caption for the image
-        if ( $caption ) : 
-    ?>
-        <figcaption class="story-image-caption"><?php echo esc_html( $caption ); ?></figcaption>
-    <?php 
+<section class="bio-slider-section">
+    <div class="bio-slider-section-wrapper">
+    <!-- Slider -->
+    <div class="bio-slider-section-slider-wrapper">
+        <?php
+        $slider_shortcode = get_field('slider_short_code');
+        if( $slider_shortcode ):
+            echo do_shortcode( $slider_shortcode );
         endif;
-    endif;
-    ?>
-</div>
-<?php if (is_singular()) : ?>
-    <div class="social-share">
-        <?php echo add_social_share_buttons(''); ?>
+        ?>
     </div>
-<?php endif; ?>
-
-    <!-- Display Content from the Classic Editor -->
-    <div class="story-content">
-        <?php the_content(); ?>
+    <div class="bio-slider-section-text-wrapper">
+    <h3 class="bio-heading"><?php the_field('title'); ?></h3>
+    
+    <p class="bio-content"><?php the_field('content'); ?></p>
+    
+   
     </div>
-<div class="story-navigation-wrapper"> 
-            <div class="prev-story">
-                <?php
-                $prev_post = get_previous_post();
-                if ($prev_post) :
-                    ?>
-                    <a href="<?php echo get_permalink($prev_post->ID); ?>">&laquo; Previous Story: <?php echo esc_html($prev_post->post_title); ?></a>
-                <?php endif; ?>
-            </div>
-            <div class="next-story">
-                <?php
-                $next_post = get_next_post();
-                if ($next_post) :
-                    ?>
-                    <a href="<?php echo get_permalink($next_post->ID); ?>">Next Story: <?php echo esc_html($next_post->post_title); ?> &raquo;</a>
-                <?php endif; ?>
-            </div>
-        </div>
-</div>
-				
+    </div>
+     </section>
 
+<!-- Related Post Types -->
+    <div class="bio-related-section-wrapper">
+    <section class="bio-related-section">
+        <?php 
+        $related_posts_type = get_field('related_post_types'); 
+        if( $related_posts_type && !empty($related_posts_type) ): ?>
+            <div class="bio-relation-wrapper">
+                <div class="bio-header-block">
+                <h4 class="bio-header-title">Stories & more</h4>
+                </div>
+                <ul class="bio-related-items-list">
+                    <?php foreach( $related_posts_type as $post_type ): ?>
+                        <li class="bio-related-item">
+                            <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
+                                <div class="bio-related-item-thumbnail">
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                   <span class="bio-related-items-label">
+                                    <?php 
+                                    // Get the post type of the current related item
+                                    $current_post_type = get_post_type( $post_type->ID );
+                                    // Get the singular name of the post type
+                                    $post_type_object = get_post_type_object( $current_post_type );
+                                    if ( $post_type_object ) {
+                                        echo esc_html( $post_type_object->labels->singular_name );
+                                    }
+                                    ?>
+                                </span>
+                                </div>
+                                <div class="movie-title">
+                                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
+                                </div>
+                            </a>
+                        </li>
+                       
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+    </section>
+</div>
+
+
+<!-- Related Post Types -->
+    <div class="bio-related-section-wrapper">
+    <section class="bio-related-section">
+        <?php 
+        $related_posts_type = get_field('related_bios'); 
+        if( $related_posts_type && !empty($related_posts_type) ): ?>
+            <div class="bio-relation-wrapper">
+                <div class="bio-header-block">
+                <h4 class="bio-header-title">Visual Storytellers behind the Project</h4>
+                </div>
+                <div class="">
+                    <p><?php the_field('related_bios_description'); ?></p>
+                </div>
+                <ul class="bio-related-items-list">
+                    <?php foreach( $related_posts_type as $post_type ): ?>
+                        <li class="bio-related-item">
+                            <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
+                                <div class="bio-related-item-thumbnail">
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                   <span class="bio-related-items-label">
+                                    <?php 
+                                    // Get the post type of the current related item
+                                    $current_post_type = get_post_type( $post_type->ID );
+                                    // Get the singular name of the post type
+                                    $post_type_object = get_post_type_object( $current_post_type );
+                                    if ( $post_type_object ) {
+                                        echo esc_html( $post_type_object->labels->singular_name );
+                                    }
+                                    ?>
+                                </span>
+                                </div>
+                                <div class="movie-title">
+                                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
+                                </div>
+                            </a>
+                        </li>
+                       
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+    </section>
+</div>
+
+
+    <div class="press-links-section-wrapper">
+    <section class="press-links-section">
+        <h4 class="bio-header-title">On the press:</h4>
+
+        <?php
+// Get the Text Area field value
+$links = get_field('press_links');
+
+if ($links) : 
+    // Split the text area content into an array of links
+    $links_array = explode("\n", $links);
+
+    echo '<ul>';
+    foreach ($links_array as $link) :
+        $link = trim($link); // Trim whitespace
+        if (!empty($link)) :
+            // Split the line into title and URL
+            list($title, $url) = explode('|', $link, 2);
+            $title = trim($title); // Clean up title
+            $url = trim($url); // Clean up URL
+?>
+            <li>
+                <a href="<?php echo esc_url($url); ?>" target="_blank"><?php echo esc_html($title); ?></a>
+            </li>
+<?php
+        endif;
+    endforeach;
+    echo '</ul>';
+else :
+    echo '<p>No publication links available.</p>';
+endif;
+?>
+
+    </section>
+</div>
+
+</div>
 <?php 
     endwhile; 
 endif;

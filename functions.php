@@ -19,10 +19,13 @@ function astra_child_enqueue_styles() {
     }
     if ( is_singular( 'bios' ) ) {
     wp_enqueue_style('single-bios-style', get_stylesheet_directory_uri() . '/assets/css/single-bios.css', array('astra-child-style'));
-}
-if ( is_singular( 'exhibition' ) ) {
+    }
+    if ( is_singular( 'exhibition' ) ) {
     wp_enqueue_style('single-exhibition-style', get_stylesheet_directory_uri() . '/assets/css/single-exhibition.css', array('astra-child-style'));
-}
+    }
+     if ( is_singular( 'stories' ) ) {
+    wp_enqueue_style('single-stories-style', get_stylesheet_directory_uri() . '/assets/css/single-story.css', array('astra-child-style'));
+    }
 
 
 	
@@ -407,7 +410,7 @@ add_action('init', function() {
     // Register Continents
     register_custom_taxonomy(
         'issues_of_focus',            // Taxonomy slug
-        ['bios','exhibition'],               // Associated post types
+        ['bios','exhibition','stories'],               // Associated post types
         'Issues of focus',           // Taxonomy name
         'Issue of focus',            // Singular name
         'issue of focus',            // Rewrite slug
