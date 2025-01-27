@@ -120,51 +120,6 @@ endif;
 </div>
 
 
-<!-- Related Post Types -->
-    <div class="bio-related-section-wrapper">
-    <section class="bio-related-section">
-        <?php 
-        $related_posts_type = get_field('related_bios'); 
-        if( $related_posts_type && !empty($related_posts_type) ): ?>
-            <div class="bio-relation-wrapper">
-                <div class="bio-header-block">
-                <h4 class="bio-header-title">Visual Storytellers behind the Project</h4>
-                </div>
-                <div class="">
-                    <p><?php the_field('related_bios_description'); ?></p>
-                </div>
-                <ul class="bio-related-items-list">
-                    <?php foreach( $related_posts_type as $post_type ): ?>
-                        <li class="bio-related-item">
-                            <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail">
-                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
-                                   <span class="bio-related-items-label">
-                                    <?php 
-                                    // Get the post type of the current related item
-                                    $current_post_type = get_post_type( $post_type->ID );
-                                    // Get the singular name of the post type
-                                    $post_type_object = get_post_type_object( $current_post_type );
-                                    if ( $post_type_object ) {
-                                        echo esc_html( $post_type_object->labels->singular_name );
-                                    }
-                                    ?>
-                                </span>
-                                </div>
-                                <div class="movie-title">
-                                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
-                                </div>
-                            </a>
-                        </li>
-                       
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
-    </section>
-</div>
-
-
     <div class="press-links-section-wrapper">
     <section class="press-links-section">
         <h4 class="bio-header-title">On the press:</h4>

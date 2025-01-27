@@ -1,51 +1,30 @@
-.home .site-header a {
+/* .home .site-header a {
   color: #fff !important;
 }
 .home .site-header .sub-menu a {
   color: #000 !important;
-}
+} */
 .home .site-content {
   background-color: #fff;
   z-index: 10;
-  position: relative; /* Ensure the content stacks normally */
+  position: relative;
   margin-top: 250px;
 }
+
 @media (min-width: 768px) {
   .home .site-content {
     margin-top: 650px;
   }
 }
-.home .n2-section-smartslider {
+.home .hero-slider {
   position: fixed;
-  top: 0;
+  top: 30px;
 }
+
 .home .site-footer {
   position: relative;
   z-index: 1;
 }
-/* .story-grid,
-.article-grid,
-.announcement-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.story-item,
-.article-item,
-.announcement-item {
-  border: 1px solid #ddd;
-  padding: 15px;
-  text-align: center;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.story-item:hover,
-.article-item:hover,
-.announcement-item:hover {
-  transform: scale(1.05);
-} */
 
 .front-page__header-block {
   display: flex;
@@ -319,4 +298,20 @@
   align-items: center;
   text-decoration: none;
   margin-bottom: 8px;
+}
+/* New Template css */
+.home-page-about-section,
+.home-page-featured-posts-section,
+.home-page-related-posts-section,
+.home-page-education-section,
+.home-page-production-section,
+.home-page-education-section,
+.home-page-community-section,
+.home-page-shop-section,
+.home-page-support-section {
+  padding-inline: 1rem;
+  padding-block: 4rem;
+}
+.home-page-about-section-container {
+  text-align: center;
 }

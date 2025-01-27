@@ -47,65 +47,86 @@ if ( have_posts() ) :
 
 <section class="bio-slider-section">
     <div class="bio-slider-section-wrapper">
-    <!-- Slider -->
-    <div class="bio-slider-section-slider-wrapper">
-        <?php
-        $slider_shortcode = get_field('slider_short_code');
-        if( $slider_shortcode ):
-            echo do_shortcode( $slider_shortcode );
-        endif;
-        ?>
+        <!-- Slider or Featured Image -->
+        <div class="bio-slider-section-slider-wrapper">
+            <?php 
+            // Get the related post types
+            $related_posts_type = get_field('related_post_types'); 
+            
+            // Check if related posts exist
+            if( $related_posts_type && !empty($related_posts_type) ):
+                // Get the latest related post (first item in the array)
+                $latest_post = $related_posts_type[0];
+                
+                // Display the featured image of the latest post with a link
+                $latest_post_permalink = get_permalink( $latest_post->ID );
+                $latest_post_thumbnail = get_the_post_thumbnail( $latest_post->ID, 'full', array( 'class' => 'custom-thumbnail' ) );
+                
+                echo '<a href="' . esc_url( $latest_post_permalink ) . '" class="bio-latest-post-link">';
+                echo $latest_post_thumbnail;
+                echo '</a>';
+            endif;
+            ?>
+        </div>
+        <div class="bio-slider-section-text-wrapper">
+            <?php 
+            if ( isset($latest_post) ):
+                // Display the title of the latest post
+                echo '<h3 class="bio-latest-title">' . esc_html( get_the_title( $latest_post->ID ) ) . '</h3>';
+            endif;
+            ?>
+        </div>
     </div>
-    <div class="bio-slider-section-text-wrapper">
-    <h3 class="bio-heading"><?php the_field('title'); ?></h3>
-    
-    <p class="bio-content"><?php the_field('content'); ?></p>
-    
-   
-    </div>
-    </div>
-     </section>
+</section>
+
 
 <!-- Related Post Types -->
-    <div class="bio-related-section-wrapper">
+<div class="bio-related-section-wrapper">
     <section class="bio-related-section">
         <?php 
-        $related_posts_type = get_field('related_post_types'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
                 <div class="bio-header-block">
-                <h4 class="bio-header-title">Stories & more</h4>
+                    <h4 class="bio-header-title">Stories & more</h4>
                 </div>
                 <ul class="bio-related-items-list">
-                    <?php foreach( $related_posts_type as $post_type ): ?>
+                    <?php 
+                    foreach( $related_posts_type as $index => $post_type ): 
+                        // Skip the first post since it's already displayed in the slider section
+                        if ( $index === 0 ) {
+                            continue;
+                        }
+                    ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
                                 <div class="bio-related-item-thumbnail">
+                                    
                                     <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
-                                   <span class="bio-related-items-label">
-                                    <?php 
-                                    // Get the post type of the current related item
-                                    $current_post_type = get_post_type( $post_type->ID );
-                                    // Get the singular name of the post type
-                                    $post_type_object = get_post_type_object( $current_post_type );
-                                    if ( $post_type_object ) {
-                                        echo esc_html( $post_type_object->labels->singular_name );
-                                    }
-                                    ?>
-                                </span>
+                                    <span class="bio-related-items-label">
+                                        <?php 
+                                        // Get the post type of the current related item
+                                        $current_post_type = get_post_type( $post_type->ID );
+                                        // Get the singular name of the post type
+                                        $post_type_object = get_post_type_object( $current_post_type );
+                                        if ( $post_type_object ) {
+                                            echo esc_html( $post_type_object->labels->singular_name );
+                                        }
+                                        ?>
+                                    </span>
                                 </div>
                                 <div class="movie-title">
                                     <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
                                 </div>
                             </a>
                         </li>
-                       
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
     </section>
 </div>
+
+
 
 
 <!-- Related Post Types -->
@@ -151,7 +172,6 @@ if ( have_posts() ) :
         <?php endif; ?>
     </section>
 </div>
-
 
     <div class="press-links-section-wrapper">
     <section class="press-links-section">
