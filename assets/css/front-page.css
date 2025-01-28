@@ -13,15 +13,11 @@
 
 .home .hero-slider {
   position: fixed;
-  top: 140px;
+  top: 80px;
 }
 @media (min-width: 768px) {
   .home .site-content {
     margin-top: 650px;
-  }
-  .home .hero-slider {
-    position: fixed;
-    top: 126px;
   }
 }
 
@@ -331,18 +327,20 @@
   grid-template-columns: 1fr; /* Single column for mobile */
   gap: 20px;
 }
+.featured-post-image-wrapper {
+  position: relative;
+}
 @media (min-width: 769px) {
   .featured-post-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     align-items: center;
-    gap: 20px; /* Add space between the image and post-meta */
+    gap: 10px; /* Add space between the image and post-meta */
   }
 
   .featured-post-grid .post-image img {
     width: 100%; /* Make the image responsive */
     height: auto;
-    border-radius: 10px; /* Optional: Rounded corners for the image */
   }
 
   .featured-post-meta-wrapper h3 {
@@ -360,6 +358,12 @@
   grid-template-columns: 1fr 1fr; /* Single column for mobile */
   gap: 10px;
 }
+.related-posts-wrapper {
+  padding-block: 2rem;
+}
+.related-post {
+  position: relative;
+}
 .related-post-image {
   margin-bottom: 2rem;
 }
@@ -367,7 +371,7 @@
   .related-posts-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr; /* Single column for mobile */
-    gap: 10px;
+    gap: 11px;
   }
   .related-post-title {
     font-size: 1.3rem;
@@ -385,7 +389,7 @@
 }
 .production-section-menu {
   display: flex;
-  min-height: 50px;
+  min-height: 80px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -414,13 +418,21 @@
 .production-section-menu-link {
   color: white;
 }
+.production-description {
+  margin-bottom: 2rem;
+}
 .home-page-about-section-description,
 .community-description,
 .support-description,
 .archive-description {
   margin-block: 3rem;
 }
-
+.google-map-container {
+  max-width: 900px;
+  width: 100%;
+  margin: 3rem auto;
+  border: 1px solid black;
+}
 .shop-items-grid-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr; /* Single column for mobile */
@@ -437,7 +449,7 @@
 .shop-item {
   position: relative;
 }
-.shop-item-label {
+.front-page-label {
   position: absolute;
   top: 2px;
   right: 2px;

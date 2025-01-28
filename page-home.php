@@ -98,10 +98,7 @@ get_header(); // Include the header
     endif;
     ?>
     
-</section>
-
-
-<section class="home-page-related-posts-section">
+<div class="related-posts-wrapper">
     <?php
     // Get the relationship field
     $related_posts = get_field('related_post_types'); // Replace 'related_post_types' with your ACF field name
@@ -141,7 +138,7 @@ get_header(); // Include the header
         echo '<p>No related posts found.</p>';
     endif;
     ?>
-    
+    </div>
 </section>
 
 <section class="home-page-education-section">
@@ -200,8 +197,61 @@ get_header(); // Include the header
 
     // Display the description
     if ($production_description) {
-        echo '<div class="production-description">' . wp_kses_post($production_description) . '</div>';
+        echo '<div class="production-description"><p>' . wp_kses_post($production_description) . '</p></div>';
     }
+     // Display the shop items
+    $production_items = [
+        get_field('production_item'), 
+        get_field('production_item_second'), 
+        get_field('production_item_third')
+    ];
+
+    echo '<div class="shop-items-grid-wrapper">';
+    foreach ($production_items as $production_item) {
+        if ($production_item) {
+            // Extract fields from each production item group      
+            $production_item_title = $production_item['production_item_title'];
+            $production_item_description = $production_item['production_item_description'];
+            $production_item_image = $production_item['production_item_image'];
+            $production_item_link = $production_item['production_item_link'];
+
+            echo '<article class="shop-item">';            
+            // Extract image ID
+            $production_item_image_id = $production_item_image['ID']; // Ensure this is the correct key
+            // Display image wrapped in a link (if available)
+            if ($production_item_image_id && $production_item_link) {
+                $item_link_url = esc_url($production_item_link['url']);
+                $item_link_target = $production_item_link['target'] ? ' target="' . esc_attr($production_item_link['target']) . '"' : '';
+                echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-image-link">';
+                echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
+                echo '</a>';
+            } elseif ($production_item_image_id) {
+                echo '<div class="shop-item-image">';
+                echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
+                echo '</div>';
+            } else {
+                // Fallback for missing image
+                echo '<div class="shop-item-image">';
+                echo '<img src="' . esc_url(get_template_directory_uri() . '/path/to/placeholder-image.jpg') . '" alt="Placeholder Image">';
+                echo '</div>';
+            }
+            // Display title (if available)
+            if ($production_item_title) {
+                echo '<h3 class="shop-item-title">' . esc_html($production_item_title) . '</h3>';
+            }
+
+            // Display description (if available)
+            if ($production_item_description) {
+                echo '<p class="shop-item-description">' . esc_html($production_item_description) . '</p>';
+            }
+
+           
+
+            echo '</article>';
+        }
+    }
+    echo '</div>';
+
     ?>
 
    
@@ -368,7 +418,7 @@ get_header(); // Include the header
             
             // Display tag (if available)
             if ($shop_item_tag) {
-                echo '<span class="shop-item-label">' . esc_html($shop_item_tag) . '</span>';
+                echo '<span class="front-page-label">' . esc_html($shop_item_tag) . '</span>';
             }
 
             // Extract image ID
