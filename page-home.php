@@ -22,17 +22,17 @@ get_header(); // Include the header
 
                 // Display the heading
                 if ($heading) {
-                    echo '<h2>' . esc_html($heading) . '</h2>';
+                    echo '<h2 class="front-page-heading">' . esc_html($heading) . '</h2>';
                 }
 
                 // Display the subheading
                 if ($subheading) {
-                    echo '<h3>' . esc_html($subheading) . '</h3>';
+                    echo '<h3 class="front-page-subtitle">' . esc_html($subheading) . '</h3>';
                 }
 
                 // Display the content
                 if ($content) {
-                    echo '<div class="description">' . wp_kses_post($content) . '</div>';
+                    echo '<div class="home-page-about-section-description">' . wp_kses_post($content) . '</div>';
                 }
 
                 // Display the link
@@ -41,7 +41,7 @@ get_header(); // Include the header
                     $link_title = esc_html($link['title']); // Link text
                     $link_target = $link['target'] ? ' target="' . esc_attr($link['target']) . '"' : ''; // Link target (e.g., _blank)
 
-                    echo '<a href="' . $link_url . '"' . $link_target . ' class="find-out-more-link">' . $link_title . '</a>';
+                    echo '<a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a>';
                 }
             endwhile;
         endif;
@@ -50,7 +50,12 @@ get_header(); // Include the header
         </section>
 
 
-        <section class="home-page-featured-posts-section">
+        <section class="home-page-featured-post-section">
+            <div class="front-page__header-block">
+                <h2 class="front-page__title">What's new</h2>
+             </div>
+            
+
     <?php
     // Get the relationship field
     $featured_posts = get_field('featured_post_type');
@@ -68,19 +73,21 @@ get_header(); // Include the header
             $post_permalink = get_permalink($post); // Get post link
 
             // Display the post
-            echo '<div class="featured-post">';
+            echo '<article class="featured-post-grid">';
             if ($post_featured_image) {
                 echo '<a href="' . esc_url($post_permalink) . '">';
-                echo '<img src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
+                echo '<img class="post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
                 echo '</a>';
             }
+             echo '<div class="featured-post-meta-wrapper">';
             if ($post_title) {
-                echo '<h3><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h3>';
+                echo '<h2 class="front-page-heading"><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h2>';
             }
             if ($post_subtitle) {
                 echo '<p>' . esc_html($post_subtitle) . '</p>';
             }
-            echo '</div>'; // .featured-post
+            echo '</div>';
+            echo '</article>'; // .featured-post
         endforeach;
         echo '</div>'; // .featured-posts-grid
 
@@ -90,6 +97,7 @@ get_header(); // Include the header
         echo '<p>No featured posts found.</p>';
     endif;
     ?>
+    
 </section>
 
 
@@ -111,19 +119,19 @@ get_header(); // Include the header
             $post_permalink = get_permalink($post); // Get post link
 
             // Display the post
-            echo '<div class="related-post">';
+            echo '<article class="related-post">';
             if ($post_featured_image) {
                 echo '<a href="' . esc_url($post_permalink) . '">';
-                echo '<img src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
+                echo '<img class="related-post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
                 echo '</a>';
             }
             if ($post_title) {
-                echo '<h3><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h3>';
+                echo '<h3 class="related-post-title"><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h3>';
             }
             if ($post_subtitle) {
                 echo '<p>' . esc_html($post_subtitle) . '</p>';
             }
-            echo '</div>'; // .related-post
+            echo '</article>'; // .related-post
         endforeach;
         echo '</div>'; // .related-posts-grid
 
@@ -133,17 +141,28 @@ get_header(); // Include the header
         echo '<p>No related posts found.</p>';
     endif;
     ?>
+    
 </section>
 
 <section class="home-page-education-section">
+    <div class="front-page__header-block"></div>
     <?php
     // Get ACF fields
     $education_title = get_field('education_section_title');
     $education_description = get_field('education_section_description');
     $education_link = get_field('education_section_link');
     $education_slider_shortcode = get_field('education_section_slider');
-
+    
+     echo '<div class="featured-post-grid">';
+      // Display the slider using the shortcode
+    if ($education_slider_shortcode) {
+        echo '<div class="education-slider-wrapper">';
+        echo do_shortcode($education_slider_shortcode); // Render the shortcode
+        echo '</div>';
+    }
     // Display the title
+     echo '<div class="education-meta-wrapper">';
+
     if ($education_title) {
         echo '<h2 class="education-title">' . esc_html($education_title) . '</h2>';
     }
@@ -152,18 +171,7 @@ get_header(); // Include the header
     if ($education_description) {
         echo '<div class="education-description">' . wp_kses_post($education_description) . '</div>';
     }
-
-    // Display the slider using the shortcode
-    if ($education_slider_shortcode) {
-        echo '<div class="education-slider">';
-        echo do_shortcode($education_slider_shortcode); // Render the shortcode
-        echo '</div>';
-    }
-    
-       
-    
-
-    // Display the link as a button
+     // Display the link as a button
     if ($education_link) {
         $link_url = esc_url($education_link['url']);
         $link_title = esc_html($education_link['title']);
@@ -171,6 +179,11 @@ get_header(); // Include the header
 
         echo '<a href="' . $link_url . '"' . $link_target . ' class="education-link-button">' . $link_title . '</a>';
     }
+    echo '</div>'; // .featured-posts-grid
+    
+   
+    echo '</div>'; // .featured-posts-grid
+    
     ?>
 </section>
 
@@ -182,7 +195,7 @@ get_header(); // Include the header
 
     // Display the title
     if ($production_title) {
-        echo '<h2 class="production-title">' . esc_html($production_title) . '</h2>';
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($production_title) . '</h2></div>';
     }
 
     // Display the description
@@ -191,7 +204,10 @@ get_header(); // Include the header
     }
     ?>
 
-    <!-- Production Section Menu -->
+   
+</section>
+<div class="production-section-menu-wrapper">
+     <!-- Production Section Menu -->
     <div class="production-section-menu">
         <?php
         // Get the production section menu group field
@@ -204,7 +220,7 @@ get_header(); // Include the header
                 $join_community_title = esc_html($production_menu['join_community_link']['title']);
                 $join_community_target = $production_menu['join_community_link']['target'] ? ' target="' . esc_attr($production_menu['join_community_link']['target']) . '"' : '';
 
-                echo '<a href="' . $join_community_url . '"' . $join_community_target . ' class="join-community-link">' . $join_community_title . '</a>';
+                echo '<a href="' . $join_community_url . '"' . $join_community_target . ' class="production-section-menu-link">' . $join_community_title . '</a>';
             }
 
             // Subscribe Link
@@ -213,13 +229,14 @@ get_header(); // Include the header
                 $subscribe_title = esc_html($production_menu['subscribe_link']['title']);
                 $subscribe_target = $production_menu['subscribe_link']['target'] ? ' target="' . esc_attr($production_menu['subscribe_link']['target']) . '"' : '';
 
-                echo '<a href="' . $subscribe_url . '"' . $subscribe_target . ' class="subscribe-link">' . $subscribe_title . '</a>';
+                echo '<a href="' . $subscribe_url . '"' . $subscribe_target . ' class="production-section-menu-link">' . $subscribe_title . '</a>';
             }
         endif;
         ?>
-    </div>
+   
 
-    <div class="bio-social-media">
+    <div class="production-section-menu-social-media">
+        <span>Follow us</span>
     <?php
     $social_icons = array(
         'Facebook' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg>',
@@ -244,9 +261,41 @@ get_header(); // Include the header
     endif;
     ?>
 </div>
+</div>
+</div>
+<section class="home-page-community-section">
+    <?php
+    // Get the ACF field for the Google Map shortcode
+    $google_map_shortcode = get_field('google_map_short_code'); // ACF field for the Google Map shortcode
+    $community_title = get_field('community_section_title');
+    $community_description = get_field('community_section_description');
+    $community_link = get_field('community_section_link');
+    if ($community_title) {
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($community_title) . '</h2></div>';
+    }
+    if ($community_description) {
+        echo '<div class="community-description">' . wp_kses_post($community_description) . '</div>';
+    }
+    // Display the link as a button
+    if ($community_link) {
+        $link_url = esc_url($community_link['url']);
+        $link_title = esc_html($community_link['title']);
+        $link_target = $community_link['target'] ? ' target="' . esc_attr($community_link['target']) . '"' : '';
+
+        echo '<a href="' . $link_url . '"' . $link_target . ' class="community-link-button">' . $link_title . '</a>';
+    }
+    // Check if the Google Map shortcode is available
+    if ($google_map_shortcode) {
+        echo '<div class="google-map-container">';
+        echo do_shortcode($google_map_shortcode); // Render the Google Map shortcode
+        echo '</div>';
+    } else {
+        echo '<p class="no-map-message">Google Map is not available at the moment.</p>';
+    }
+    ?>
 </section>
 
-<section class="home-page-education-section">
+<section class="home-page-archive-section">
     <?php
     // Get ACF fields
     $archive_title = get_field('archive_section_title');
@@ -256,7 +305,7 @@ get_header(); // Include the header
 
     // Display the title
     if ($archive_title) {
-        echo '<h2 class="archive-title">' . esc_html($archive_title) . '</h2>';
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($archive_title) . '</h2></div>';
     }
 
     // Display the description
@@ -284,37 +333,7 @@ get_header(); // Include the header
     }
     ?>
 </section>
-<section class="home-page-community-section">
-    <?php
-    // Get the ACF field for the Google Map shortcode
-    $google_map_shortcode = get_field('google_map_short_code'); // ACF field for the Google Map shortcode
-    $community_title = get_field('community_section_title');
-    $community_description = get_field('community_section_description');
-    $community_link = get_field('community_section_link');
-    if ($community_title) {
-        echo '<h2 class="community-title">' . esc_html($community_title) . '</h2>';
-    }
-    if ($community_description) {
-        echo '<div class="community-description">' . wp_kses_post($community_description) . '</div>';
-    }
-    // Display the link as a button
-    if ($community_link) {
-        $link_url = esc_url($community_link['url']);
-        $link_title = esc_html($community_link['title']);
-        $link_target = $community_link['target'] ? ' target="' . esc_attr($community_link['target']) . '"' : '';
 
-        echo '<a href="' . $link_url . '"' . $link_target . ' class="community-link-button">' . $link_title . '</a>';
-    }
-    // Check if the Google Map shortcode is available
-    if ($google_map_shortcode) {
-        echo '<div class="google-map-container">';
-        echo do_shortcode($google_map_shortcode); // Render the Google Map shortcode
-        echo '</div>';
-    } else {
-        echo '<p class="no-map-message">Google Map is not available at the moment.</p>';
-    }
-    ?>
-</section>
 
 
 <section class="home-page-shop-section">
@@ -325,7 +344,7 @@ get_header(); // Include the header
 
     // Display the title
     if ($shop_title) {
-        echo '<h2 class="shop-title">' . esc_html($shop_title) . '</h2>';
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($shop_title) . '</h2></div>';
     }
 
     // Display the shop items
@@ -335,7 +354,7 @@ get_header(); // Include the header
         get_field('shop_item_third')
     ];
 
-    echo '<div class="shop-items-wrapper">';
+    echo '<div class="shop-items-grid-wrapper">';
     foreach ($shop_items as $shop_item) {
         if ($shop_item) {
             // Extract fields from each shop item group
@@ -345,18 +364,17 @@ get_header(); // Include the header
             $shop_item_image = $shop_item['shop_item_image'];
             $shop_item_link = $shop_item['shop_item_link'];
 
-            echo '<div class="shop-item">';
+            echo '<article class="shop-item">';
             
             // Display tag (if available)
             if ($shop_item_tag) {
-                echo '<span class="shop-item-tag">' . esc_html($shop_item_tag) . '</span>';
+                echo '<span class="shop-item-label">' . esc_html($shop_item_tag) . '</span>';
             }
 
             // Extract image ID
             $shop_item_image_id = $shop_item_image['ID']; // Ensure this is the correct key
 
-            // Debug: Check image data
-            var_dump($shop_item_image_id);
+            
 
             // Display image wrapped in a link (if available)
             if ($shop_item_image_id && $shop_item_link) {
@@ -364,11 +382,11 @@ get_header(); // Include the header
                 $item_link_target = $shop_item_link['target'] ? ' target="' . esc_attr($shop_item_link['target']) . '"' : '';
 
                 echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-image-link">';
-                echo wp_get_attachment_image($shop_item_image_id, 'medium', false, ['alt' => esc_attr($shop_item_title)]);
+                echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title)]);
                 echo '</a>';
             } elseif ($shop_item_image_id) {
                 echo '<div class="shop-item-image">';
-                echo wp_get_attachment_image($shop_item_image_id, 'medium', false, ['alt' => esc_attr($shop_item_title)]);
+                echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title)]);
                 echo '</div>';
             } else {
                 // Fallback for missing image
@@ -396,7 +414,7 @@ get_header(); // Include the header
                 echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-button">' . $item_link_title . '</a>';
             }
 
-            echo '</div>';
+            echo '</article>';
         }
     }
     echo '</div>';
@@ -423,7 +441,7 @@ get_header(); // Include the header
 
     // Display the title
     if ($support_title) {
-        echo '<h2 class="support-title">' . esc_html($support_title) . '</h2>';
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($support_title) . '</h2></div>';
     }
 
     // Display the description
