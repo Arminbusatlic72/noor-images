@@ -366,6 +366,7 @@
 }
 .related-post-image {
   margin-bottom: 2rem;
+  position: relative;
 }
 @media (min-width: 769px) {
   .related-posts-grid {

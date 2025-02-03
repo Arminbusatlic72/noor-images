@@ -53,51 +53,65 @@ get_header(); // Include the header
         <section class="home-page-featured-post-section">
             <div class="front-page__header-block">
                 <h2 class="front-page__title">What's new</h2>
+            <a href="<?php echo get_post_type_archive_link('news'); ?>" class="front-page__view-all-link">View Our New's</a>
+
              </div>
             
 
     <?php
-    // Get the relationship field
-    $featured_posts = get_field('featured_post_type');
+// Get the relationship field
+$featured_posts = get_field('featured_post_type');
 
-    if ($featured_posts) :
-        echo '<div class="featured-posts-grid">';
-        foreach ($featured_posts as $post) :
-            // Setup post data
-            setup_postdata($post);
+if ($featured_posts) :
+    echo '<div class="featured-posts-grid">';
+    foreach ($featured_posts as $post) :
+        // Setup post data
+        setup_postdata($post);
 
-            // Get post data
-            $post_title = get_the_title($post);
-            $post_subtitle = get_field('subtitle', $post->ID); // Assuming 'subtitle' is a custom field in the related post
-            $post_featured_image = get_the_post_thumbnail_url($post, 'large'); // Get featured image URL
-            $post_permalink = get_permalink($post); // Get post link
+        // Get post data
+        $post_title = get_the_title($post);
+        $post_subtitle = get_field('subtitle', $post->ID); // Assuming 'subtitle' is a custom field
+        $post_featured_image = get_the_post_thumbnail_url($post, 'large'); // Get featured image URL
+        $post_permalink = get_permalink($post); // Get post link
+        $post_type = get_field('post_type', $post->ID); // Assuming 'post_type' is a custom field
+        $community_label = get_field('community_label', $post->ID); // Assuming 'community_label' is a custom field for "bios"
 
-            // Display the post
-            echo '<article class="featured-post-grid">';
-            if ($post_featured_image) {
-                echo '<a href="' . esc_url($post_permalink) . '">';
-                echo '<img class="post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
-                echo '</a>';
+        // Display the post
+        echo '<article class="featured-post-grid">';
+        
+        if ($post_featured_image) {
+            echo '<a href="' . esc_url($post_permalink) . '" class="featured-post-image-wrapper">';
+            echo '<img class="post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
+
+            // Display the specific community label if the post type is "bios"
+            if ($post_type === 'bios' && $community_label) {
+                echo '<span class="community-label">' . esc_html($community_label,'hello') . '</span>';
             }
-             echo '<div class="featured-post-meta-wrapper">';
-            if ($post_title) {
-                echo '<h2 class="front-page-heading"><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h2>';
-            }
-            if ($post_subtitle) {
-                echo '<p>' . esc_html($post_subtitle) . '</p>';
-            }
-            echo '</div>';
-            echo '</article>'; // .featured-post
-        endforeach;
-        echo '</div>'; // .featured-posts-grid
 
-        // Reset post data
-        wp_reset_postdata();
-    else :
-        echo '<p>No featured posts found.</p>';
-    endif;
-    ?>
-    
+            echo '</a>';
+        }
+        
+        echo '<div class="featured-post-meta-wrapper">';
+        
+        if ($post_title) {
+            echo '<h2 class="front-page-heading"><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h2>';
+        }
+        if ($post_subtitle) {
+            echo '<p>' . esc_html($post_subtitle) . '</p>';
+        }
+        
+        echo '</div>'; // .featured-post-meta-wrapper
+        echo '</article>'; // .featured-post-grid
+    endforeach;
+    echo '</div>'; // .featured-posts-grid
+
+    // Reset post data
+    wp_reset_postdata();
+else :
+    echo '<p>No featured posts found.</p>';
+endif;
+?>
+
 <div class="related-posts-wrapper">
     <?php
     // Get the relationship field
@@ -115,11 +129,25 @@ get_header(); // Include the header
             $post_featured_image = get_the_post_thumbnail_url($post, 'large'); // Get featured image URL
             $post_permalink = get_permalink($post); // Get post link
 
+            // Get the 'front-label' terms for the post
+            $front_labels = get_the_terms($post->ID, 'front-label');
+
             // Display the post
             echo '<article class="related-post">';
             if ($post_featured_image) {
                 echo '<a href="' . esc_url($post_permalink) . '">';
                 echo '<img class="related-post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
+                
+                // Display the first 'front-label' term if it exists
+                if ($front_labels && !is_wp_error($front_labels)) {
+                    $first_label = $front_labels[0];
+                    $label_link = get_term_link($first_label, 'front-label'); // Get the term archive link
+                    if (!is_wp_error($label_link)) {
+                      
+                        echo '<a href="' . esc_url($label_link) . '"><span class="front-page-label">' . esc_html($first_label->name) . '</span></a>';
+                     
+                    }
+                }
                 echo '</a>';
             }
             if ($post_title) {
@@ -138,7 +166,7 @@ get_header(); // Include the header
         echo '<p>No related posts found.</p>';
     endif;
     ?>
-    </div>
+</div>
 </section>
 
 <section class="home-page-education-section">

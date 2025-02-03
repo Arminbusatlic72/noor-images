@@ -17,14 +17,20 @@ function astra_child_enqueue_styles() {
     if ( is_post_type_archive( 'bios' ) || is_tax( 'bios_category' ) ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/bios-archive.css', array('astra-child-style'));
     }
+    if ( is_post_type_archive( 'news' ) || is_tax( 'news_category' ) ) {
+        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/news-archive.css', array('astra-child-style'));
+    }
     if ( is_singular( 'bios' ) ) {
     wp_enqueue_style('single-bios-style', get_stylesheet_directory_uri() . '/assets/css/single-bios.css', array('astra-child-style'));
     }
-    if ( is_singular( 'exhibition' ) ) {
+    if ( is_singular( 'exhibitions' ) ) {
     wp_enqueue_style('single-exhibition-style', get_stylesheet_directory_uri() . '/assets/css/single-exhibition.css', array('astra-child-style'));
     }
      if ( is_singular( 'stories' ) ) {
     wp_enqueue_style('single-stories-style', get_stylesheet_directory_uri() . '/assets/css/single-story.css', array('astra-child-style'));
+    }
+    if ( is_singular( 'news' ) ) {
+    wp_enqueue_style('single-news-style', get_stylesheet_directory_uri() . '/assets/css/single-news.css', array('astra-child-style'));
     }
 
 
@@ -34,10 +40,10 @@ function astra_child_enqueue_styles() {
 add_action('wp_enqueue_scripts', 'astra_child_enqueue_styles');
 function enqueue_toggle_grid_script() {
    
-    if ( is_post_type_archive( 'stories' ) ) {
+    if ( is_post_type_archive( 'stories' ) || is_post_type_archive( 'news' ) ) {
         wp_enqueue_script(
             'toggle-grid-view',
-            get_stylesheet_directory_uri() . '/assets/js/toggle-grid.js', // Path to your JS file
+            get_stylesheet_directory_uri() . '/assets/js/toggle-grid.js',
             array(),
             '1.0',
             true // Load in the footer
@@ -102,205 +108,16 @@ function register_custom_post_type($singular, $plural, $slug, $menu_position = 5
     register_post_type($slug, $args);
 }
 add_action('init', function() {
-    register_custom_post_type('Article', 'Articles', 'articles', 5);
-    register_custom_post_type('Story', 'Stories', 'stories', 6);
-    register_custom_post_type('Announcement', 'Announcements', 'announcements', 7);
-    register_custom_post_type('Bio', 'Bios', 'bios', 8);
+    // register_custom_post_type('Article', 'Articles', 'articles', 5);
+    register_custom_post_type('Bio', 'Bios', 'bios', 5);
+    register_custom_post_type('Exhibition', 'Exhibitions', 'exhibitions', 6);
+    register_custom_post_type('News', 'News', 'news', 7);
+    // register_custom_post_type('Story', 'Stories', 'stories', 8);
+    // register_custom_post_type('Announcement', 'Announcements', 'announcements', 9);
+
 
 });
-// Register Custom Post Type for Movies
-function create_movies_post_type() {
-    $labels = array(
-        'name'                  => _x('Movies', 'Post Type General Name', 'text_domain'),
-        'singular_name'         => _x('Movie', 'Post Type Singular Name', 'text_domain'),
-        'menu_name'             => __('Movies', 'text_domain'),
-        'name_admin_bar'        => __('Movie', 'text_domain'),
-        'archives'              => __('Movie Archives', 'text_domain'),
-        'attributes'            => __('Movie Attributes', 'text_domain'),
-        'parent_item_colon'     => __('Parent Movie:', 'text_domain'),
-        'all_items'             => __('All Movies', 'text_domain'),
-        'add_new_item'          => __('Add New Movie', 'text_domain'),
-        'add_new'               => __('Add New', 'text_domain'),
-        'new_item'              => __('New Movie', 'text_domain'),
-        'edit_item'             => __('Edit Movie', 'text_domain'),
-        'update_item'           => __('Update Movie', 'text_domain'),
-        'view_item'             => __('View Movie', 'text_domain'),
-        'view_items'            => __('View Movies', 'text_domain'),
-        'search_items'          => __('Search Movies', 'text_domain'),
-        'not_found'             => __('Not found', 'text_domain'),
-        'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
-        'featured_image'        => __('Featured Image', 'text_domain'),
-        'set_featured_image'    => __('Set featured image', 'text_domain'),
-        'remove_featured_image'  => __('Remove featured image', 'text_domain'),
-        'use_featured_image'    => __('Use as featured image', 'text_domain'),
-        'insert_into_item'      => __('Insert into movie', 'text_domain'),
-        'uploaded_to_this_item' => __('Uploaded to this movie', 'text_domain'),
-        'items_list'            => __('Movies list', 'text_domain'),
-        'items_list_navigation'  => __('Movies list navigation', 'text_domain'),
-        'filter_items_list'     => __('Filter movies list', 'text_domain'),
-    );
 
-    $args = array(
-        'label'                 => __('Movie', 'text_domain'),
-        'description'           => __('A custom post type for movies', 'text_domain'),
-        'labels'                => $labels,
-        'supports'              => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'hierarchical'          => false,
-        'public'                => true,
-        'show_ui'              => true,
-        'show_in_menu'          => true,
-        'menu_position'         => 5,
-        'show_in_admin_bar'     => true,
-        'show_in_nav_menus'     => true,
-        'can_export'            => true,
-        'has_archive'           => true,
-        'exclude_from_search'   => false,
-        'publicly_queryable'    => true,
-        'capability_type'       => 'post',
-        'rewrite'               => array('slug' => 'movies'),
-    );
-
-    register_post_type('movies', $args);
-}
-add_action('init', 'create_movies_post_type');
-function convert_posts_to_movies($post_ids) {
-    foreach ($post_ids as $post_id) {
-        // Update post type to 'movies'
-        $post_data = array(
-            'ID' => $post_id,
-            'post_type' => 'movies',
-        );
-
-        // Update the post into the database
-        wp_update_post($post_data);
-    }
-}
-
-function create_exhibition_post_type() {
-    $labels = array(
-        'name'               => __( 'Exhibitions' ),
-        'singular_name'      => __( 'Exhibition' ),
-        'menu_name'          => __( 'Exhibitions' ),
-        'name_admin_bar'     => __( 'Exhibition' ),
-        'add_new'            => __( 'Add New' ),
-        'add_new_item'       => __( 'Add New Exhibition' ),
-        'new_item'           => __( 'New Exhibition' ),
-        'edit_item'          => __( 'Edit Exhibition' ),
-        'view_item'          => __( 'View Exhibition' ),
-        'all_items'          => __( 'All Exhibitions' ),
-        'search_items'       => __( 'Search Exhibitions' ),
-        'not_found'          => __( 'No exhibitions found.' ),
-        'not_found_in_trash' => __( 'No exhibitions found in Trash.' ),
-    );
-
-    $args = array(
-        'labels'             => $labels,
-        'public'             => true,
-        'publicly_queryable' => true,
-        'show_ui'            => true,
-        'show_in_menu'       => true,
-        'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'exhibitions' ),
-        'capability_type'    => 'post',
-        'has_archive'        => true,
-        'hierarchical'       => false,
-        'menu_position'      => 7,
-        'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
-    );
-
-    register_post_type( 'exhibition', $args );
-}
-add_action( 'init', 'create_exhibition_post_type' );
-
-// Register Custom Post Type for Artists
-function create_artist_post_type() {
-    $labels = array(
-        'name'                  => _x('Artists', 'Post Type General Name', 'text_domain'),
-        'singular_name'         => _x('Artist', 'Post Type Singular Name', 'text_domain'),
-        'menu_name'             => __('Artists', 'text_domain'),
-        'name_admin_bar'        => __('Artist', 'text_domain'),
-        'archives'              => __('Artist Archives', 'text_domain'),
-        'attributes'            => __('Artist Attributes', 'text_domain'),
-        'parent_item_colon'     => __('Parent Artist:', 'text_domain'),
-        'all_items'             => __('All Artists', 'text_domain'),
-        'add_new_item'          => __('Add New Artist', 'text_domain'),
-        'add_new'               => __('Add New', 'text_domain'),
-        'new_item'              => __('New Artist', 'text_domain'),
-        'edit_item'             => __('Edit Artist', 'text_domain'),
-        'update_item'           => __('Update Artist', 'text_domain'),
-        'view_item'             => __('View Artist', 'text_domain'),
-        'view_items'            => __('View Artists', 'text_domain'),
-        'search_items'          => __('Search Artists', 'text_domain'),
-        'not_found'             => __('Not found', 'text_domain'),
-        'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
-        'featured_image'        => __('Featured Image', 'text_domain'),
-        'set_featured_image'    => __('Set featured image', 'text_domain'),
-        'remove_featured_image' => __('Remove featured image', 'text_domain'),
-        'use_featured_image'    => __('Use as featured image', 'text_domain'),
-        'insert_into_item'      => __('Insert into artist', 'text_domain'),
-        'uploaded_to_this_item' => __('Uploaded to this artist', 'text_domain'),
-        'items_list'            => __('Artists list', 'text_domain'),
-        'items_list_navigation' => __('Artists list navigation', 'text_domain'),
-        'filter_items_list'     => __('Filter artists list', 'text_domain'),
-    );
-
-    $args = array(
-        'label'                 => __('Artist', 'text_domain'),
-        'description'           => __('A custom post type for artists', 'text_domain'),
-        'labels'                => $labels,
-        'supports'              => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'hierarchical'          => false,
-        'public'                => true,
-        'show_ui'               => true,
-        'show_in_menu'          => true,
-        'menu_position'         => 6,
-        'show_in_admin_bar'     => true,
-        'show_in_nav_menus'     => true,
-        'can_export'            => true,
-        'has_archive'           => true,
-        'exclude_from_search'   => false,
-        'publicly_queryable'    => true,
-        'capability_type'       => 'post',
-        'rewrite'               => array('slug' => 'artists'),
-		'taxonomies'         => array( 'category', 'post_tag' ),
-    );
-
-    register_post_type('artist', $args);
-}
-add_action('init', 'create_artist_post_type');
-
-function display_post_tags() {
-    if (is_single() && has_tag()) {
-        return get_the_tag_list('<div class="post-tags"><span>Tags:</span> ', ', ', '</div>');
-    }
-    return ''; // Return an empty string if there are no tags or if it's not a single post
-}
-add_shortcode('post_tags', 'display_post_tags');
-
-function custom_acf_admin_css() {
-    echo '<style>
-        /* Ensure the container takes up full width */
-        .post-type-artist .event-dates-inline {
-            
-            flex-wrap: wrap;
-            width: 100%; /* Ensures full width */
-        }
-
-        /* Target fields in the Event Dates group */
-        .event-dates-inline .acf-field {
-            display: inline-block;
-            width: 48%; /* Adjust width as needed */
-            margin-right: 1%; /* Space between fields */
-            vertical-align: top;
-        }
-        
-        /* Remove margin for the last field to prevent extra spacing */
-        .event-dates-inline .acf-field:last-child {
-            margin-right: 0;
-        }
-    </style>';
-}
-add_action('acf/input/admin_head', 'custom_acf_admin_css');
 
 
 function add_social_share_buttons($content) {
@@ -410,7 +227,7 @@ add_action('init', function() {
     // Register Continents
     register_custom_taxonomy(
         'issues_of_focus',            // Taxonomy slug
-        ['bios','exhibition','stories'],               // Associated post types
+        ['bios','exhibitions','stories'],               // Associated post types
         'Issues of focus',           // Taxonomy name
         'Issue of focus',            // Singular name
         'issue of focus',            // Rewrite slug
@@ -418,3 +235,18 @@ add_action('init', function() {
     );
 });
 
+function add_front_label_tag_to_news() {
+    // Register the taxonomy (tag) for the 'news' custom post type
+    register_taxonomy(
+        'front-label', // Taxonomy name
+        'news',        // Custom post type name
+        array(
+            'label' => __( 'Front Label' ), // Label for the taxonomy
+            'rewrite' => array( 'slug' => 'front-label' ), // Slug for the taxonomy
+            'hierarchical' => false, // Set to false for tag-like behavior
+            'show_admin_column' => true, // Show the taxonomy in the admin column
+            'show_in_rest' => true, // Enable in REST API
+        )
+    );
+}
+add_action( 'init', 'add_front_label_tag_to_news' );
