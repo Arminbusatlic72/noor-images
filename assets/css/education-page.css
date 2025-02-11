@@ -1,0 +1,36 @@
+.education-page-header-section,
+.education-page-thematic-workshops-section,
+.education-page-other-workshops-section,
+.education-page-fellowships-grants-section,
+.education-page-visual-media-literacy-section,
+.education-page-past-programmes-section,
+.education-page-support-section {
+  padding-inline: 1rem;
+  padding-block: 4rem;
+}
+.workshops-items-grid-wrapper,
+.other-workshops-items-grid-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Single column for mobile */
+  gap: 10px;
+}
+.fellowships-and-grants-grid-wrapper,
+.past-programmes-grid-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.visual-media-literacy-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 769px) {
+  .fellowships-and-grants-grid-wrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .visual-media-literacy-container {
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+  }
+}

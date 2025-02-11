@@ -8,6 +8,9 @@ function astra_child_enqueue_styles() {
     if ( is_front_page() ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/front-page.css', array('astra-child-style'));
     }
+    if (is_page('education')) {
+        wp_enqueue_style('education-page-style', get_stylesheet_directory_uri() . '/assets/css/education-page.css', array('astra-child-style'));
+    }
     if ( is_post_type_archive( 'stories' ) || is_tax( 'stories_category' ) ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/stories-archive.css', array('astra-child-style'));
     }
