@@ -1,0 +1,22 @@
+{
+	"settings": {
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFamily": "century-gothic",
+					"slug": "century-gothic",
+					"fontFace": [
+						{
+							"fontFamily": "century-gothic",
+							"fontStretch": "",
+							"fontStyle": "normal",
+							"fontWeight": "400",
+							"src": "http://localhost:8888/wp-content/uploads/useanyfont/7890century-gothic.woff2"
+						}
+					],
+					"isUAF": true
+				}
+			]
+		}
+	}
+}

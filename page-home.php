@@ -94,7 +94,7 @@ if ($featured_posts) :
         echo '<div class="featured-post-meta-wrapper">';
         
         if ($post_title) {
-            echo '<h2 class="front-page-heading"><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h2>';
+            echo '<h2 class=""><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h2>';
         }
         if ($post_subtitle) {
             echo '<p>' . esc_html($post_subtitle) . '</p>';

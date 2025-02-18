@@ -7,6 +7,7 @@ function astra_child_enqueue_styles() {
     // Enqueue front-page-specific CSS
     if ( is_front_page() ) {
         wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/front-page.css', array('astra-child-style'));
+         wp_enqueue_script('scroll-script', get_stylesheet_directory_uri() . '/assets/js/scroll.js', array(), null, true);
     }
     if (is_page('education')) {
         wp_enqueue_style('education-page-style', get_stylesheet_directory_uri() . '/assets/css/education-page.css', array('astra-child-style'));
@@ -54,6 +55,7 @@ function enqueue_toggle_grid_script() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_toggle_grid_script' );
+
 
 function register_custom_post_type($singular, $plural, $slug, $menu_position = 5) {
     $labels = array(
@@ -253,3 +255,9 @@ function add_front_label_tag_to_news() {
     );
 }
 add_action( 'init', 'add_front_label_tag_to_news' );
+
+function your_prefix_change_header_breakpoint() {
+	return 3000; // Forces mobile header on almost all screen sizes
+}
+add_filter( 'astra_header_break_point', 'your_prefix_change_header_breakpoint' );
+
