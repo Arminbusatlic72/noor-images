@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
       heroSlider.style.top = scrollY > 50 ? "0px" : "135px";
     } else {
       // For desktop screens
-      heroSlider.style.top = scrollY > 100 ? "0px" : "80px";
+      heroSlider.style.top = scrollY > 100 ? "0px" : "93px";
     }
   }
 

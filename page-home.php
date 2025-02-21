@@ -85,7 +85,7 @@ if ($featured_posts) :
 
             // Display the specific community label if the post type is "bios"
             if ($post_type === 'bios' && $community_label) {
-                echo '<span class="community-label">' . esc_html($community_label,'hello') . '</span>';
+                echo '<span class="community-label">' . esc_html($community_label,) . '</span>';
             }
 
             echo '</a>';
@@ -94,10 +94,10 @@ if ($featured_posts) :
         echo '<div class="featured-post-meta-wrapper">';
         
         if ($post_title) {
-            echo '<h2 class=""><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h2>';
+            echo '<h2 class="featured-post-title"><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h2>';
         }
         if ($post_subtitle) {
-            echo '<p>' . esc_html($post_subtitle) . '</p>';
+            echo '<p class="featured-post-subtitle subtitle">' . esc_html($post_subtitle) . '</p>';
         }
         
         echo '</div>'; // .featured-post-meta-wrapper
@@ -135,6 +135,7 @@ endif;
             // Display the post
             echo '<article class="related-post">';
             if ($post_featured_image) {
+                echo '<div class="related-post-image-wrapper">';
                 echo '<a href="' . esc_url($post_permalink) . '">';
                 echo '<img class="related-post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
                 
@@ -149,12 +150,13 @@ endif;
                     }
                 }
                 echo '</a>';
+                echo '</div>';
             }
             if ($post_title) {
                 echo '<h3 class="related-post-title"><a href="' . esc_url($post_permalink) . '">' . esc_html($post_title) . '</a></h3>';
             }
             if ($post_subtitle) {
-                echo '<p>' . esc_html($post_subtitle) . '</p>';
+                echo '<p class="subtitle">' . esc_html($post_subtitle) . '</p>';
             }
             echo '</article>'; // .related-post
         endforeach;
@@ -170,7 +172,10 @@ endif;
 </section>
 
 <section class="home-page-education-section">
-    <div class="front-page__header-block"></div>
+    <div class="front-page__header-block">
+        <h2 class="front-page__title">Education</h2>
+            <a href="<?php echo get_post_type_archive_link('news'); ?>" class="front-page__view-all-link">View Education page</a>
+    </div>
     <?php
     // Get ACF fields
     $education_title = get_field('education_section_title');
@@ -189,7 +194,7 @@ endif;
      echo '<div class="education-meta-wrapper">';
 
     if ($education_title) {
-        echo '<h2 class="education-title">' . esc_html($education_title) . '</h2>';
+        echo '<h2 class="education-post-title">' . esc_html($education_title) . '</h2>';
     }
 
     // Display the description
@@ -234,7 +239,7 @@ endif;
         get_field('production_item_third')
     ];
 
-    echo '<div class="shop-items-grid-wrapper">';
+    echo '<div class="production-items-grid-wrapper">';
     foreach ($production_items as $production_item) {
         if ($production_item) {
             // Extract fields from each production item group      
@@ -243,34 +248,37 @@ endif;
             $production_item_image = $production_item['production_item_image'];
             $production_item_link = $production_item['production_item_link'];
 
-            echo '<article class="shop-item">';            
+            echo '<article class="production-item">';            
             // Extract image ID
             $production_item_image_id = $production_item_image['ID']; // Ensure this is the correct key
             // Display image wrapped in a link (if available)
             if ($production_item_image_id && $production_item_link) {
                 $item_link_url = esc_url($production_item_link['url']);
                 $item_link_target = $production_item_link['target'] ? ' target="' . esc_attr($production_item_link['target']) . '"' : '';
-                echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-image-link">';
+                echo '<div class="production-item-image-wrapper">';
+                echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="production-item-image-link">';
                 echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
                 echo '</a>';
+                echo '</div>';
+
             } elseif ($production_item_image_id) {
-                echo '<div class="shop-item-image">';
+                echo '<div class="production-item-image">';
                 echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
                 echo '</div>';
             } else {
                 // Fallback for missing image
-                echo '<div class="shop-item-image">';
+                echo '<div class="production-item-image">';
                 echo '<img src="' . esc_url(get_template_directory_uri() . '/path/to/placeholder-image.jpg') . '" alt="Placeholder Image">';
                 echo '</div>';
             }
             // Display title (if available)
             if ($production_item_title) {
-                echo '<h3 class="shop-item-title">' . esc_html($production_item_title) . '</h3>';
+                echo '<h3 class="production-item-title">' . esc_html($production_item_title) . '</h3>';
             }
 
             // Display description (if available)
             if ($production_item_description) {
-                echo '<p class="shop-item-description">' . esc_html($production_item_description) . '</p>';
+                echo '<p class="production-item-description subtitle">' . esc_html($production_item_description) . '</p>';
             }
 
            
@@ -480,7 +488,7 @@ endif;
 
             // Display description (if available)
             if ($shop_item_description) {
-                echo '<p class="shop-item-description">' . esc_html($shop_item_description) . '</p>';
+                echo '<p class="shop-item-description subtitle">' . esc_html($shop_item_description) . '</p>';
             }
 
             // Display link as a button (if available)
