@@ -415,7 +415,7 @@ endif;
         $link_title = esc_html($archive_link['title']);
         $link_target = $archive_link['target'] ? ' target="' . esc_attr($archive_link['target']) . '"' : '';
 
-        echo '<a href="' . $link_url . '"' . $link_target . ' class="archive-link-button">' . $link_title . '</a>';
+        echo '<div class="archive-section-btn-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
     }
     ?>
 </section>
@@ -542,7 +542,7 @@ endif;
         $link_title = esc_html($support_link['title']);
         $link_target = $support_link['target'] ? ' target="' . esc_attr($support_link['target']) . '"' : '';
 
-        echo '<a href="' . $link_url . '"' . $link_target . ' class="support-link-button">' . $link_title . '</a>';
+        echo '<div class="support-section-btn-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white support-link-button">' . $link_title . '</a></div>';
     }
     ?>
 </section>

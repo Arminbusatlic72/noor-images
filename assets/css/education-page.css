@@ -8,6 +8,22 @@
   padding-inline: 1rem;
   padding-block: 4rem;
 }
+.front-page__header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #000;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+.front-page__title {
+  margin-top: 1.7rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 100%;
+}
 .workshops-items-grid-wrapper,
 .other-workshops-items-grid-wrapper {
   display: grid;

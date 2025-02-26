@@ -25,8 +25,10 @@ get_header(); ?>
 <section class="stories-archive__section">
 	 <div class="stories-archive__header-block">
             <h2 class="stories-archive__title">See News</h2>
+            <div class="toggle-wrapper">
             <a id="toggle-large" class="toggle-view active">Large</a>
     		<a id="toggle-small" class="toggle-view">Small</a>
+            </div>
 
      </div>
 

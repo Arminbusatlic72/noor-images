@@ -17,8 +17,10 @@ get_header(); // Include the header
                 ?>
             </div>
         </div>
-        <section class="education-page-header-section">
-             <h2 class="education-page-heading"><?php the_field('education_page_headline'); ?></h2>
+        <section class="education-page-header-section"> 
+            <div class="front-page__header-block">
+             <h2 class="front-page__title"><?php the_field('education_page_headline'); ?></h2>
+               </div>
              <?php 
             // Display the subtext field if it exists
             $subtext = get_field('education_page_header_subtext');
@@ -206,13 +208,14 @@ get_header(); // Include the header
 
 <section class="education-page-fellowships-grants-section">
     <?php
+  
     // Get ACF fields for the section heading and content
     $fellowships_and_grants_section_heading = get_field('fellowships_and_grants_section_heading');
     $fellowships_and_grants_section_content = get_field('fellowships_and_grants_section_content');
 
     // Display the section heading
     if ($fellowships_and_grants_section_heading) {
-        echo '<h2 class="fellowships-and-grants-section-heading">' . esc_html($fellowships_and_grants_section_heading) . '</h2>';
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($fellowships_and_grants_section_heading) . '</h2></div>';
     }
 
     // Display the section content
@@ -283,7 +286,7 @@ get_header(); // Include the header
 
     // Display the section heading
     if ($visual_media_literacy_section_headline) {
-        echo '<h2 class="visual-media-literacy-section-headline">' . esc_html($visual_media_literacy_section_headline) . '</h2>';
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($visual_media_literacy_section_headline) . '</h2></div>';
     }
 
     // Display the section content
@@ -329,7 +332,7 @@ get_header(); // Include the header
 
     // Display the section heading and content
     if ($past_programmes_section_heading) {
-        echo '<div class="section-heading"><h2>' . esc_html($past_programmes_section_heading) . '</h2></div>';
+        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($past_programmes_section_heading) . '</h2></div>';
     }
 
     if ($past_programmes_section_content) {

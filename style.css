@@ -11,6 +11,28 @@ Version: 1.0.0
 /* Import the parent theme styles */
 @import url("../astra/style.css");
 
+.main-header-menu .menu-item {
+  text-align: center;
+}
+.main-header-menu .menu-item a {
+  font-size: 150%;
+}
+.front-page__header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #000;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+.front-page__title {
+  margin-top: 1.7rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-size: 4.8rem;
+  font-weight: 700;
+  line-height: 100%;
+}
 /* General styling for the social share buttons container */
 .social-share-buttons {
   display: flex;
@@ -387,45 +409,4 @@ Version: 1.0.0
   align-items: center;
   text-decoration: none;
   color: #333; /* Adjust text color */
-}
-
-.movie-thumbnail {
-  flex-shrink: 0; /* Prevent image from shrinking */
-  margin-right: 1rem; /* Space between image and title */
-}
-
-.movie-thumbnail img.custom-thumbnail {
-  display: block; /* Ensure image does not inherit unwanted inline styles */
-  max-width: 100px; /* Adjust size as needed */
-
-  object-fit: cover; /* Ensure image fits nicely */
-}
-
-.movie-title {
-  font-size: 1rem;
-  font-weight: 600; /* Make the title stand out */
-  line-height: 1.5;
-  text-decoration: none;
-  color: #000;
-}
-
-.stories-archive__header-block {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border-bottom: 0.7px dotted #000;
-  margin-bottom: 2rem;
-}
-.stories-archive__title {
-  text-transform: uppercase;
-  letter-spacing: 0.0175rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.225rem;
-  margin-right: 1rem;
-  letter-spacing: 0.0175rem;
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.4;
-  color: rgb(150, 150, 150);
 }
