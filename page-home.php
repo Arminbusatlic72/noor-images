@@ -27,7 +27,7 @@ get_header(); // Include the header
 
                 // Display the subheading
                 if ($subheading) {
-                    echo '<h3 class="front-page-subtitle">' . esc_html($subheading) . '</h3>';
+                    echo '<h3 class="front-page-subtitle gray">' . esc_html($subheading) . '</h3>';
                 }
 
                 // Display the content
@@ -199,7 +199,7 @@ endif;
 
     // Display the description
     if ($education_description) {
-        echo '<div class="education-description">' . wp_kses_post($education_description) . '</div>';
+        echo '<div class="education-description gray">' . wp_kses_post($education_description) . '</div>';
     }
      // Display the link as a button
     if ($education_link) {
@@ -217,7 +217,7 @@ endif;
     ?>
 </section>
 
-   <section class="home-page-production-section">
+<section class="home-page-production-section">
     <?php
     // Get ACF fields
     $production_title = get_field('production_section_title');
@@ -232,7 +232,52 @@ endif;
     if ($production_description) {
         echo '<div class="production-description"><p>' . wp_kses_post($production_description) . '</p></div>';
     }
-     // Display the shop items
+
+    // Get the top production item
+    $top_production_item = get_field('top_production_item');
+
+    if ($top_production_item) {
+        $top_item_title = $top_production_item['production_item_title'];
+        $top_item_description = $top_production_item['production_item_description'];
+        $top_item_image = $top_production_item['production_item_image'];
+        $top_item_link = $top_production_item['production_item_link'];
+
+        echo '<div class="top-production-item-grid-wrapper">';
+        echo '<article class="top-production-item-grid">';
+
+        // Image Handling
+        if ($top_item_image && isset($top_item_image['ID'])) {
+            $top_item_image_id = $top_item_image['ID'];
+            echo '<div class="production-item-image-wrapper">';
+            if ($top_item_link) {
+                $top_item_link_url = esc_url($top_item_link['url']);
+                $top_item_link_target = $top_item_link['target'] ? ' target="' . esc_attr($top_item_link['target']) . '"' : '';
+                echo '<a href="' . $top_item_link_url . '"' . $top_item_link_target . ' class="production-item-image-link">';
+                echo wp_get_attachment_image($top_item_image_id, 'large', false, ['alt' => esc_attr($top_item_title)]);
+                echo '</a>';
+            } else {
+                echo wp_get_attachment_image($top_item_image_id, 'large', false, ['alt' => esc_attr($top_item_title)]);
+            }
+            echo '</div>';
+        }
+        echo '<div class="top-production-item-post-meta-wrapper">';
+           
+        
+        // Title
+        if ($top_item_title) {
+            echo '<h2 class="top-production-item-title"><a href="' . esc_url($top_item_link_url) . '">'. esc_html($top_item_title) . '</a></h2>';
+        }
+
+        // Description
+        if ($top_item_description) {
+            echo '<p class="top-production-item-description gray">' . esc_html($top_item_description) . '</p>';
+        }
+        echo '</div>';
+        echo '</article>';
+        echo '</div>'; // Close top-production-item-grid
+    }
+
+    // Display other production items
     $production_items = [
         get_field('production_item'), 
         get_field('production_item_second'), 
@@ -242,56 +287,48 @@ endif;
     echo '<div class="production-items-grid-wrapper">';
     foreach ($production_items as $production_item) {
         if ($production_item) {
-            // Extract fields from each production item group      
+            // Extract fields
             $production_item_title = $production_item['production_item_title'];
             $production_item_description = $production_item['production_item_description'];
             $production_item_image = $production_item['production_item_image'];
             $production_item_link = $production_item['production_item_link'];
 
-            echo '<article class="production-item">';            
-            // Extract image ID
-            $production_item_image_id = $production_item_image['ID']; // Ensure this is the correct key
-            // Display image wrapped in a link (if available)
-            if ($production_item_image_id && $production_item_link) {
-                $item_link_url = esc_url($production_item_link['url']);
-                $item_link_target = $production_item_link['target'] ? ' target="' . esc_attr($production_item_link['target']) . '"' : '';
+            echo '<article class="production-item">';
+
+            // Image Handling
+            if ($production_item_image && isset($production_item_image['ID'])) {
+                $production_item_image_id = $production_item_image['ID'];
                 echo '<div class="production-item-image-wrapper">';
-                echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="production-item-image-link">';
-                echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
-                echo '</a>';
-                echo '</div>';
-
-            } elseif ($production_item_image_id) {
-                echo '<div class="production-item-image">';
-                echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
-                echo '</div>';
-            } else {
-                // Fallback for missing image
-                echo '<div class="production-item-image">';
-                echo '<img src="' . esc_url(get_template_directory_uri() . '/path/to/placeholder-image.jpg') . '" alt="Placeholder Image">';
+                if ($production_item_link) {
+                    $item_link_url = esc_url($production_item_link['url']);
+                    $item_link_target = $production_item_link['target'] ? ' target="' . esc_attr($production_item_link['target']) . '"' : '';
+                    echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="production-item-image-link">';
+                    echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
+                    echo '</a>';
+                } else {
+                    echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
+                }
                 echo '</div>';
             }
-            // Display title (if available)
+            // echo '<h3 class="top-production-item-title"><a href="' . esc_url($top_item_link_url) . '">'. esc_html($top_item_title) . '</a></h3>';
+
+            // Title
             if ($production_item_title) {
-                echo '<h3 class="production-item-title">' . esc_html($production_item_title) . '</h3>';
+                echo '<h3 class="production-item-title"><a href=" ' . esc_url($item_link_url) . '">'. esc_html($production_item_title) . '</a></h3>';
             }
 
-            // Display description (if available)
+            // Description
             if ($production_item_description) {
-                echo '<p class="production-item-description subtitle">' . esc_html($production_item_description) . '</p>';
+                echo '<p class="production-item-description gray">' . esc_html($production_item_description) . '</p>';
             }
-
-           
 
             echo '</article>';
         }
     }
-    echo '</div>';
-
+    echo '</div>'; // Close production-items-grid-wrapper
     ?>
-
-   
 </section>
+
 <div class="production-section-menu-wrapper">
      <!-- Production Section Menu -->
     <div class="production-section-menu">
@@ -360,7 +397,7 @@ endif;
         echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($community_title) . '</h2></div>';
     }
     if ($community_description) {
-        echo '<div class="community-description">' . wp_kses_post($community_description) . '</div>';
+        echo '<div class="community-description gray">' . wp_kses_post($community_description) . '</div>';
     }
     // Display the link as a button
     if ($community_link) {
@@ -394,10 +431,7 @@ endif;
         echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($archive_title) . '</h2></div>';
     }
 
-    // Display the description
-    if ($archive_description) {
-        echo '<div class="archive-description">' . wp_kses_post($archive_description) . '</div>';
-    }
+    echo '<div class="archive-grid-container">';
 
     // Display the slider using the shortcode
     if ($archive_slider_shortcode) {
@@ -405,18 +439,29 @@ endif;
         echo do_shortcode($archive_slider_shortcode); // Render the shortcode
         echo '</div>';
     }
-    
-       
-    
 
-    // Display the link as a button
-    if ($archive_link) {
-        $link_url = esc_url($archive_link['url']);
-        $link_title = esc_html($archive_link['title']);
-        $link_target = $archive_link['target'] ? ' target="' . esc_attr($archive_link['target']) . '"' : '';
+    // Wrap the description and link in a single div
+    if ($archive_description || $archive_link) {
+        echo '<div class="archive-description-wrapper">';
 
-        echo '<div class="archive-section-btn-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
+        // Display the description
+        if ($archive_description) {
+            echo '<div class="archive-description">' . wp_kses_post($archive_description) . '</div>';
+        }
+
+        // Display the link as a button
+        if ($archive_link) {
+            $link_url = esc_url($archive_link['url']);
+            $link_title = esc_html($archive_link['title']);
+            $link_target = $archive_link['target'] ? ' target="' . esc_attr($archive_link['target']) . '"' : '';
+
+            echo '<a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a>';
+        }
+
+        echo '</div>'; // Close archive-description-wrapper
     }
+
+    echo '</div>'; // Close archive-grid-container
     ?>
 </section>
 
@@ -467,9 +512,9 @@ endif;
                 $item_link_url = esc_url($shop_item_link['url']);
                 $item_link_target = $shop_item_link['target'] ? ' target="' . esc_attr($shop_item_link['target']) . '"' : '';
 
-                echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-image-link">';
+                echo '<div class="shop-item-image"><a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-image-link">';
                 echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title)]);
-                echo '</a>';
+                echo '</a></div>';
             } elseif ($shop_item_image_id) {
                 echo '<div class="shop-item-image">';
                 echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title)]);
@@ -480,15 +525,16 @@ endif;
                 echo '<img src="' . esc_url(get_template_directory_uri() . '/path/to/placeholder-image.jpg') . '" alt="Placeholder Image">';
                 echo '</div>';
             }
+                
 
             // Display title (if available)
             if ($shop_item_title) {
-                echo '<h3 class="shop-item-title">' . esc_html($shop_item_title) . '</h3>';
+                echo '<h3 class="shop-item-title"><a href="' . esc_url($item_link_target) . '">'. esc_html($shop_item_title) . '</a></h3>';
             }
 
             // Display description (if available)
             if ($shop_item_description) {
-                echo '<p class="shop-item-description subtitle">' . esc_html($shop_item_description) . '</p>';
+                echo '<p class="shop-item-description gray">' . esc_html($shop_item_description) . '</p>';
             }
 
             // Display link as a button (if available)
@@ -511,7 +557,7 @@ endif;
         $link_title = esc_html($shop_link['title']);
         $link_target = $shop_link['target'] ? ' target="' . esc_attr($shop_link['target']) . '"' : '';
 
-        echo '<a href="' . $link_url . '"' . $link_target . ' class="shop-link-button">' . $link_title . '</a>';
+        echo '<div class="shop-btn-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
     }
     ?>
 </section>
@@ -532,7 +578,7 @@ endif;
 
     // Display the description
     if ($support_description) {
-        echo '<div class="support-description">' . wp_kses_post($support_description) . '</div>';
+        echo '<div class="support-description gray">' . wp_kses_post($support_description) . '</div>';
     }
 
     

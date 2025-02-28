@@ -399,14 +399,28 @@ Version: 1.0.0
   margin-bottom: 3rem;
   padding: 0;
 }
-.announcement-related-item {
-  margin-top: 1rem;
-  border-bottom: 0.5px solid black;
-  padding-block: 0.5rem;
-}
-.movie-link {
+.front-page__header-block {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  text-decoration: none;
-  color: #333; /* Adjust text color */
+  border-top: 1px solid #000;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+.front-page__title {
+  margin-top: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  line-height: 100%;
+  font-size: 1.8rem;
+}
+@media (min-width: 769px) {
+  .front-page__title {
+    margin-top: 1.7rem;
+    font-size: 4.8rem;
+  }
+}
+.gray {
+  color: gray;
 }

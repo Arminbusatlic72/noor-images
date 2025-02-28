@@ -25,7 +25,7 @@ get_header(); // Include the header
             // Display the subtext field if it exists
             $subtext = get_field('education_page_header_subtext');
             if ($subtext) : ?>
-                <p class="education-page-subtext"><?php echo esc_html($subtext); ?></p>
+                <p class="education-page-subtext gray"><?php echo esc_html($subtext); ?></p>
             <?php endif; ?>
 
             <?php 
@@ -51,7 +51,7 @@ get_header(); // Include the header
 
     // Display description
     if ($workshops_description) {
-        echo '<div class="workshops-description"><p>' . wp_kses_post($workshops_description) . '</p></div>';
+        echo '<div class="workshops-description gray"><p>' . wp_kses_post($workshops_description) . '</p></div>';
     }
 
     // Thematic workshops items
@@ -108,7 +108,7 @@ get_header(); // Include the header
 
             // Display description
             if ($workshop_description) {
-                echo '<p class="workshop-item-description">' . esc_html($workshop_description) . '</p>';
+                echo '<p class="workshop-item-description gray">' . esc_html($workshop_description) . '</p>';
             }
 
             // Display time & location
@@ -170,9 +170,9 @@ get_header(); // Include the header
             if ($workshop_image_id && $workshop_link) {
                 $workshop_link_url = esc_url($workshop_link['url']);
                 $workshop_link_target = $workshop_link['target'] ? ' target="' . esc_attr($workshop_link['target']) . '"' : '';
-                echo '<a href="' . $workshop_link_url . '"' . $workshop_link_target . ' class="other-workshop-item-image-link">';
+                echo '<div class="other-workshop-item-image-wrapper"><a href="' . $workshop_link_url . '"' . $workshop_link_target . ' class="other-workshop-item-image-link">';
                 echo wp_get_attachment_image($workshop_image_id, 'large', false, ['alt' => esc_attr($workshop_title)]);
-                echo '</a>';
+                echo '</a></div>';
             } elseif ($workshop_image_id) {
                 echo '<div class="other-workshop-item-image">';
                 echo wp_get_attachment_image($workshop_image_id, 'large', false, ['alt' => esc_attr($workshop_title)]);
@@ -196,7 +196,7 @@ get_header(); // Include the header
 
             // Display description
             if ($workshop_description) {
-                echo '<p class="other-workshop-item-description">' . esc_html($workshop_description) . '</p>';
+                echo '<p class="other-workshop-item-description gray">' . esc_html($workshop_description) . '</p>';
             }
 
             echo '</article>';
@@ -249,7 +249,7 @@ get_header(); // Include the header
                 $image_title = isset($fellowship_grant_item_image['title']) ? esc_html($fellowship_grant_item_image['title']) : '';
                 
                 if ($image_url) {
-                    echo '<img src="' . $image_url . '" alt="' . $image_alt . '" title="' . $image_title . '" class="fellowship-grant-item-image">';
+                    echo '<div class="fellowship-grant-item-image-wrapper"><img src="' . $image_url . '" alt="' . $image_alt . '" title="' . $image_title . '" class="fellowship-grant-item-image"></div>';
                 }
             }
 
@@ -260,7 +260,7 @@ get_header(); // Include the header
 
             // Display the description (if available)
             if ($fellowship_grant_item_description) {
-                echo '<p class="fellowship-grant-item-description">' . esc_html($fellowship_grant_item_description) . '</p>';
+                echo '<p class="fellowship-grant-item-description gray">' . esc_html($fellowship_grant_item_description) . '</p>';
             }
 
             // Display the link (if available)
@@ -371,7 +371,7 @@ get_header(); // Include the header
                 }
 
                 if ($past_programmes_item_image_id) {
-                    echo '<div class="past-programmes-item-image">';
+                    echo '<div class="past-programmes-item-image-wrapper">';
                     echo wp_get_attachment_image($past_programmes_item_image_id, 'large', false, ['alt' => esc_attr($past_programmes_item_title)]);
                     echo '</div>';
                 } else {
@@ -392,7 +392,7 @@ get_header(); // Include the header
 
             // Display description
             if ($past_programmes_item_description) {
-                echo '<p class="past-programmes-item-description">' . esc_html($past_programmes_item_description) . '</p>';
+                echo '<p class="past-programmes-item-description gray">' . esc_html($past_programmes_item_description) . '</p>';
             }
 
             echo '</div>';

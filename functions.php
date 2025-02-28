@@ -118,7 +118,7 @@ add_action('init', function() {
     register_custom_post_type('Exhibition', 'Exhibitions', 'exhibitions', 6);
     register_custom_post_type('News', 'News', 'news', 7);
     // register_custom_post_type('Story', 'Stories', 'stories', 8);
-    // register_custom_post_type('Announcement', 'Announcements', 'announcements', 9);
+    // register_custom_post_type('Announcement', 'Announcements', 'announcements', 8);
 
 
 });

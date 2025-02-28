@@ -6,47 +6,76 @@
 .education-page-past-programmes-section,
 .education-page-support-section {
   padding-inline: 1rem;
-  padding-block: 4rem;
-}
-.front-page__header-block {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid #000;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
-}
-.front-page__title {
-  margin-top: 1.7rem;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  font-size: 4.8rem;
-  font-weight: 700;
-  line-height: 100%;
+  padding-block: 3rem;
 }
 .workshops-items-grid-wrapper,
-.other-workshops-items-grid-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Single column for mobile */
-  gap: 10px;
-}
+.other-workshops-items-grid-wrapper,
 .fellowships-and-grants-grid-wrapper,
 .past-programmes-grid-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 30px;
 }
 .visual-media-literacy-container {
   display: grid;
   grid-template-columns: 1fr;
 }
+.workshop-item-tag,
+.other-workshop-item-tag {
+  display: inline-block;
+  padding-inline: 20px;
+  border-radius: 55px;
+  margin-top: 5px;
+  backdrop-filter: blur(30px);
+  background-color: rgb(225, 225, 225);
+}
+.other-workshop-item-image-wrapper {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.other-workshop-item-image-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.fellowship-grant-item-image-wrapper,
+.past-programmes-item-image-wrapper {
+  margin-bottom: 1rem;
+}
+
+.workshop-item-description {
+  margin-bottom: 1.75rem;
+}
+.workshop-item-time,
+.workshop-item-location {
+  margin: 0;
+}
+.related-post-title {
+}
 @media (min-width: 769px) {
   .fellowships-and-grants-grid-wrapper {
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 30px;
   }
   .visual-media-literacy-container {
     grid-template-columns: 2fr 1fr;
-    gap: 10px;
+    gap: 18px;
+    align-items: center;
+  }
+  .education-page-content,
+  .workshops-description {
+    columns: 2;
+    column-gap: 40px;
+    margin-bottom: 2rem;
+  }
+  .visual-media-section-subheading {
+    font-size: 3rem;
+    line-height: 1.2;
+    letter-spacing: -4px;
+    margin-bottom: 2rem;
+  }
+  .visual-media-section-right {
+    padding: 30px;
   }
 }
