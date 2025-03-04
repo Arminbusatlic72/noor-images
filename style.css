@@ -405,7 +405,7 @@ Version: 1.0.0
   align-items: center;
   border-top: 1px solid #000;
   margin-top: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 .front-page__title {
   margin-top: 0.7rem;
@@ -416,6 +416,9 @@ Version: 1.0.0
   font-size: 1.8rem;
 }
 @media (min-width: 769px) {
+  .front-page__header-block {
+    margin-bottom: 3rem;
+  }
   .front-page__title {
     margin-top: 1.7rem;
     font-size: 4.8rem;
@@ -423,4 +426,9 @@ Version: 1.0.0
 }
 .gray {
   color: gray;
+}
+@media (max-width: 769px) {
+  .subtitle {
+    font-size: 14px;
+  }
 }

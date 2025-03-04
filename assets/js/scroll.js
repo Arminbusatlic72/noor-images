@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (window.innerWidth <= 768) {
       // For mobile screens
-      heroSlider.style.top = scrollY > 50 ? "0px" : "135px";
+      heroSlider.style.top = scrollY > 50 ? "0px" : "139px";
     } else {
       // For desktop screens
       heroSlider.style.top = scrollY > 100 ? "0px" : "93px";

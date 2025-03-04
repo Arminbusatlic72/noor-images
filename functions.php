@@ -163,7 +163,7 @@ function add_social_share_buttons($content) {
 
     return $content;
 }
-// add_filter('the_content', 'add_social_share_buttons');
+add_filter('the_content', 'add_social_share_buttons');
 
 
 function add_slider_before_header() {

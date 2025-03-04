@@ -19,8 +19,8 @@ get_header(); // Include the header
         </div>
         <section class="education-page-header-section"> 
             <div class="front-page__header-block">
-             <h2 class="front-page__title"><?php the_field('education_page_headline'); ?></h2>
-               </div>
+                <h2 class="front-page__title"><?php the_field('education_page_headline'); ?></h2>
+            </div>
              <?php 
             // Display the subtext field if it exists
             $subtext = get_field('education_page_header_subtext');
@@ -77,7 +77,7 @@ get_header(); // Include the header
             echo '<article class="workshop-item">';
 
             // Image with link (if available)
-           
+            echo '<div class="workshop-item-image-wrapper">';
             $workshop_image_id = $workshop_image ? $workshop_image['ID'] : null;
             if ($workshop_image_id && $workshop_link) {
                 $workshop_link_url = esc_url($workshop_link['url']);
@@ -100,15 +100,16 @@ get_header(); // Include the header
             if ($workshop_tag) {
                 echo '<span class="workshop-item-tag">' . esc_html($workshop_tag) . '</span>';
             }
+             echo '</div>';
 
             // Display title
             if ($workshop_title) {
-                echo '<h3 class="workshop-item-title">' . esc_html($workshop_title) . '</h3>';
+                echo '<h3 class="workshop-item-title"><a href="' . esc_url($workshop_link_url) . '">'. esc_html($workshop_title) . '</a></h3>';
             }
 
             // Display description
             if ($workshop_description) {
-                echo '<p class="workshop-item-description gray">' . esc_html($workshop_description) . '</p>';
+                echo '<p class="workshop-item-description gray subtitle">' . esc_html($workshop_description) . '</p>';
             }
 
             // Display time & location
@@ -191,12 +192,13 @@ get_header(); // Include the header
 
             // Display title
             if ($workshop_title) {
-                echo '<h3 class="other-workshop-item-title">' . esc_html($workshop_title) . '</h3>';
+               
+                echo '<h3 class="other-workshop-item-title"><a href="' . esc_url($workshop_link_url) . '">'. esc_html($workshop_title) . '</a></h3>';
             }
 
             // Display description
             if ($workshop_description) {
-                echo '<p class="other-workshop-item-description gray">' . esc_html($workshop_description) . '</p>';
+                echo '<p class="other-workshop-item-description gray subtitle">' . esc_html($workshop_description) . '</p>';
             }
 
             echo '</article>';
@@ -239,35 +241,42 @@ get_header(); // Include the header
             $fellowship_grant_item_link = isset($fellowship_grant_item['fellowships_and_grants_item_link']) ? $fellowship_grant_item['fellowships_and_grants_item_link'] : '';
             $fellowship_grant_item_image = isset($fellowship_grant_item['fellowships_and_grants_image']) ? $fellowship_grant_item['fellowships_and_grants_image'] : '';
 
-            echo '<div class="fellowship-grant-item">';
-            
-            // Display the image if available
-            if ($fellowship_grant_item_image) {
-                // If the image is an array (usually returned by ACF), get the URL
-                $image_url = isset($fellowship_grant_item_image['url']) ? esc_url($fellowship_grant_item_image['url']) : '';
-                $image_alt = isset($fellowship_grant_item_image['alt']) ? esc_attr($fellowship_grant_item_image['alt']) : 'Fellowship Grant Image';
-                $image_title = isset($fellowship_grant_item_image['title']) ? esc_html($fellowship_grant_item_image['title']) : '';
-                
-                if ($image_url) {
-                    echo '<div class="fellowship-grant-item-image-wrapper"><img src="' . $image_url . '" alt="' . $image_alt . '" title="' . $image_title . '" class="fellowship-grant-item-image"></div>';
-                }
-            }
-
-            // Display the title (if available)
-            if ($fellowship_grant_item_title) {
-                echo '<h3 class="fellowship-grant-item-title">' . esc_html($fellowship_grant_item_title) . '</h3>';
-            }
-
-            // Display the description (if available)
-            if ($fellowship_grant_item_description) {
-                echo '<p class="fellowship-grant-item-description gray">' . esc_html($fellowship_grant_item_description) . '</p>';
-            }
-
-            // Display the link (if available)
             if ($fellowship_grant_item_link) {
                 $item_link_url = esc_url($fellowship_grant_item_link['url']);
                 $item_link_target = $fellowship_grant_item_link['target'] ? ' target="' . esc_attr($fellowship_grant_item_link['target']) . '"' : '';
-                echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="fellowship-grant-item-link">Learn More</a>';
+            } else {
+                $item_link_url = '#'; // Default URL if no link is provided
+                $item_link_target = '';
+            }
+
+            echo '<div class="fellowship-grant-item">';
+
+            // Wrap image and title inside the <a> tag
+            echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="fellowship-grant-item-link">';
+
+            // Display the image if available
+            if ($fellowship_grant_item_image) {
+                $image_url = isset($fellowship_grant_item_image['url']) ? esc_url($fellowship_grant_item_image['url']) : '';
+                $image_alt = isset($fellowship_grant_item_image['alt']) ? esc_attr($fellowship_grant_item_image['alt']) : 'Fellowship Grant Image';
+                $image_title = isset($fellowship_grant_item_image['title']) ? esc_html($fellowship_grant_item_image['title']) : '';
+
+                if ($image_url) {
+                    echo '<div class="fellowship-grant-item-image-wrapper"><img src="' . $image_url . '" alt="' . $image_alt . '" title="' . $image_title . '" class="fellowship-grant-item-image"></div>';
+                }
+            } 
+             echo '</a>'; // Close the <a> tag
+
+           
+
+            if ($fellowship_grant_item_title) {
+                echo '<h3 class="fellowship-grant-item-title"><a href="' . esc_url($item_link_url) . '">'. esc_html($fellowship_grant_item_title) . '</a></h3>';
+            }
+
+           
+
+            // Display the description (if available)
+            if ($fellowship_grant_item_description) {
+                echo '<p class="fellowship-grant-item-description gray subtitle">' . esc_html($fellowship_grant_item_description) . '</p>';
             }
 
             echo '</div>'; // Close individual fellowship/grant item
@@ -277,6 +286,7 @@ get_header(); // Include the header
 
     ?>
 </section>
+
 
 <section class="education-page-visual-media-literacy-section">
     <?php
@@ -311,7 +321,7 @@ get_header(); // Include the header
     // Subheading: visual_media_section_subheading
     $visual_media_section_subheading = get_field('visual_media_section_subheading');
     if ($visual_media_section_subheading) {
-        echo '<h3 class="visual-media-section-subheading">' . esc_html($visual_media_section_subheading) . '</h3>';
+        echo '<h2 class="visual-media-section-subheading">' . esc_html($visual_media_section_subheading) . '</h2>';
     }
 
     // Subcontent: visual_&_media_literacy_section_subcontent
@@ -371,9 +381,11 @@ get_header(); // Include the header
                 }
 
                 if ($past_programmes_item_image_id) {
+                    echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="item-link">';
                     echo '<div class="past-programmes-item-image-wrapper">';
                     echo wp_get_attachment_image($past_programmes_item_image_id, 'large', false, ['alt' => esc_attr($past_programmes_item_title)]);
                     echo '</div>';
+                     echo '</a>';
                 } else {
                     echo '<div class="past-programmes-item-image">null</div>';
                 }
@@ -381,9 +393,9 @@ get_header(); // Include the header
                 if ($item_link_url) {
                     echo '</a>';
                 }
-
+              
                 if ($past_programmes_item_title) {
-                    echo '<h3 class="past-programmes-item-title">' . esc_html($past_programmes_item_title) . '</h3>';
+                    echo '<h3 class="past-programmes-item-title"><a href="' . esc_url($item_link_url) . '">' . esc_html($past_programmes_item_title) . '</a></h3>';
                 }
             } else {
                 // If no image, display null
@@ -392,7 +404,7 @@ get_header(); // Include the header
 
             // Display description
             if ($past_programmes_item_description) {
-                echo '<p class="past-programmes-item-description gray">' . esc_html($past_programmes_item_description) . '</p>';
+                echo '<p class="past-programmes-item-description gray subtitle">' . esc_html($past_programmes_item_description) . '</p>';
             }
 
             echo '</div>';
@@ -432,15 +444,42 @@ get_header(); // Include the header
     }
     ?>
 </section>
+<section class="education-page-press-links-section">
+    <div class="front-page__header-block">
+        <h2 class="front-page__title">On the press:</h2>
+    </div>
+       
 
+        <?php
+// Get the Text Area field value
+$links = get_field('press_links');
 
+if ($links) : 
+    // Split the text area content into an array of links
+    $links_array = explode("\n", $links);
 
+    echo '<ul class="press-links-list">';
+    foreach ($links_array as $link) :
+        $link = trim($link); // Trim whitespace
+        if (!empty($link)) :
+            // Split the line into title and URL
+            list($title, $url) = explode('|', $link, 2);
+            $title = trim($title); // Clean up title
+            $url = trim($url); // Clean up URL
+?>
+            <li>
+                <a href="<?php echo esc_url($url); ?>" target="_blank"><?php echo esc_html($title); ?></a>
+            </li>
+<?php
+        endif;
+    endforeach;
+    echo '</ul>';
+else :
+    echo '<p>No publication links available.</p>';
+endif;
+?>
 
-
-
-
-
-
+    </section>
 
     </main>
 </div>
