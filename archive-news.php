@@ -22,9 +22,9 @@ get_header(); ?>
 
 <div id="primary" <?php astra_primary_class(); ?>>
 
-<section class="stories-archive__section">
-	 <div class="stories-archive__header-block">
-            <h2 class="stories-archive__title">See News</h2>
+<section class="news-archive__section">
+	 <div class="front-page__header-block">
+            <h2 class="front-page__title">See News</h2>
             <div class="toggle-wrapper">
             <a id="toggle-large" class="toggle-view active">Large</a>
     		<a id="toggle-small" class="toggle-view">Small</a>
@@ -35,15 +35,15 @@ get_header(); ?>
 
 
 	
-<div id="stories-archive-grid" class="stories-archive-grid large-view">
+<div id="news-archive-grid" class="news-archive-grid large-view">
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : the_post(); ?>
-			<div class="stories-archive-item">
-				<div class="story-post__name-category-wrapper">
-    <span class="shared-story-title story-post__name">
+			<div class="news-archive-item">
+				<div class="news-post__name-category-wrapper">
+    <span class="shared-news-title news-post__name">
         <?php echo esc_html( get_post_type_object( get_post_type() )->labels->name ); ?>
     </span>/
-    <span class="shared-story-title story-post__category">
+    <span class="shared-news-title news-post__category">
         <?php 
         $categories = get_the_category();
         if ( ! empty( $categories ) ) {
@@ -61,8 +61,8 @@ get_header(); ?>
     </span>
 </div>
 
-				<a href="<?php the_permalink(); ?>" class="story-link">
-    <div class="story-image">
+  <a href="<?php the_permalink(); ?>" class="news-link">
+    <div class="news-image">
         <?php if ( has_post_thumbnail() ) : ?>
             <?php the_post_thumbnail('large'); ?>
         <?php endif; ?>
@@ -75,25 +75,25 @@ get_header(); ?>
             $first_label = $front_labels[0];
             $label_link = get_term_link( $first_label, 'front-label' ); // Get the term archive link
             if ( ! is_wp_error( $label_link ) ) {
-                echo '<a href="' . esc_url( $label_link ) . '" class="story-label">' . esc_html( $first_label->name ) . '</a>';
+                echo '<a href="' . esc_url( $label_link ) . '" class="news-label">' . esc_html( $first_label->name ) . '</a>';
             }
         } else {
             // Fallback to the post type label if no 'front-label' terms are found
-            echo '<span class="story-label">' . esc_html( get_post_type_object( get_post_type() )->labels->singular_name ) . '</span>';
+            echo '<span class="news-label">' . esc_html( get_post_type_object( get_post_type() )->labels->singular_name ) . '</span>';
         }
         ?>
     </div>
-    <h2 class="story-title"><?php the_title(); ?></h2>
+    <h2 class="news-title"><?php the_title(); ?></h2>
 </a>
                 <!-- Display Tags -->
-					<div class="story-tags">
+					<div class="news-tags">
 						<?php the_tags( '<span class="tag">', '</span><span class="tag">', '</span>' ); ?>
 					</div>
 			</div>
 		<?php endwhile; ?>
 		<?php astra_pagination(); ?>
 	<?php else : ?>
-		<p><?php esc_html_e( 'No stories found.', 'text_domain' ); ?></p>
+		<p><?php esc_html_e( 'No news found.', 'text_domain' ); ?></p>
 	<?php endif; ?>
 </div>
 

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const gridContainer = document.getElementById("stories-archive-grid");
+  const gridContainer = document.getElementById("news-archive-grid");
   const largeButton = document.getElementById("toggle-large");
   const smallButton = document.getElementById("toggle-small");
   const toggleLinks = document.querySelectorAll(".toggle-view");
