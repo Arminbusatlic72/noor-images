@@ -45,10 +45,11 @@ if ( have_posts() ) :
 </div>
 </section>
 
-<section class="bio-slider-section">
-    <div class="bio-slider-section-wrapper">
+<section class="top-related-item-section">
+   
+    <div class="top-related-item-grid">
         <!-- Slider or Featured Image -->
-        <div class="bio-slider-section-slider-wrapper">
+        <div class="top-related-item-wrapper">
             <?php 
             // Get the related post types
             $related_posts_type = get_field('related_post_types'); 
@@ -60,7 +61,7 @@ if ( have_posts() ) :
                 
                 // Display the featured image of the latest post with a link
                 $latest_post_permalink = get_permalink( $latest_post->ID );
-                $latest_post_thumbnail = get_the_post_thumbnail( $latest_post->ID, 'full', array( 'class' => 'custom-thumbnail' ) );
+                $latest_post_thumbnail = get_the_post_thumbnail( $latest_post->ID, 'large', array( 'class' => 'custom-thumbnail' ) );
                 
                 echo '<a href="' . esc_url( $latest_post_permalink ) . '" class="bio-latest-post-link">';
                 echo $latest_post_thumbnail;
@@ -68,11 +69,11 @@ if ( have_posts() ) :
             endif;
             ?>
         </div>
-        <div class="bio-slider-section-text-wrapper">
+        <div class="top-related-item-meta-wrapper">
             <?php 
             if ( isset($latest_post) ):
                 // Display the title of the latest post
-                echo '<h3 class="bio-latest-title">' . esc_html( get_the_title( $latest_post->ID ) ) . '</h3>';
+                echo '<h2 class="bio-latest-title"><a href="'. esc_url($post_permalink) . '">' . esc_html( get_the_title( $latest_post->ID ) ) . '</a></h2>';
             endif;
             ?>
         </div>
@@ -82,13 +83,14 @@ if ( have_posts() ) :
 
 <!-- Related Post Types -->
 <div class="bio-related-section-wrapper">
+    <div class="front-page__header-block">
+                    <h2 class="front-page__title">Stories and more</h2>
+                </div>
     <section class="bio-related-section">
         <?php 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
-                <div class="bio-header-block">
-                    <h4 class="bio-header-title">Stories & more</h4>
-                </div>
+                
                 <ul class="bio-related-items-list">
                     <?php 
                     foreach( $related_posts_type as $index => $post_type ): 
@@ -136,8 +138,9 @@ if ( have_posts() ) :
         $related_posts_type = get_field('related_bios'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
-                <div class="bio-header-block">
-                <h4 class="bio-header-title">Visual Storytellers behind the Project</h4>
+               
+                <div class="front-page__header-block">
+                    <h2 class="front-page__title">Visual Storytellers behind the Project</h2>
                 </div>
                 <div class="">
                     <p><?php the_field('related_bios_description'); ?></p>
@@ -175,7 +178,9 @@ if ( have_posts() ) :
 
     <div class="press-links-section-wrapper">
     <section class="press-links-section">
-        <h4 class="bio-header-title">On the press:</h4>
+       <div class="front-page__header-block">
+            <h2 class="front-page__title">On the press:</h2>
+        </div>
 
         <?php
 // Get the Text Area field value

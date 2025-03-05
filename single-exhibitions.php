@@ -85,9 +85,10 @@ endif;
         $related_posts_type = get_field('related_post_types'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
-                <div class="bio-header-block">
-                <h4 class="bio-header-title">Stories & more</h4>
-                </div>
+                
+                <div class="front-page__header-block">
+                <h2 class="front-page__title">Stories & more</h2>
+            </div>
                 <ul class="bio-related-items-list">
                     <?php foreach( $related_posts_type as $post_type ): ?>
                         <li class="bio-related-item">
@@ -126,9 +127,10 @@ endif;
         $related_posts_type = get_field('related_bios'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
-                <div class="bio-header-block">
-                <h4 class="bio-header-title">Visual Storytellers behind the Project</h4>
-                </div>
+                
+            <div class="front-page__header-block">
+                <h2 class="front-page__title">Visual Storytellers behind the Project</h2>
+            </div>
                 <div class="">
                     <p><?php the_field('related_bios_description'); ?></p>
                 </div>
@@ -164,7 +166,9 @@ endif;
 </div>
     <div class="press-links-section-wrapper">
     <section class="press-links-section">
-        <h4 class="bio-header-title">On the press:</h4>
+       <div class="front-page__header-block">
+            <h2 class="front-page__title">On the press:</h2>
+        </div>
 
         <?php
 // Get the Text Area field value

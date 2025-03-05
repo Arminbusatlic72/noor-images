@@ -124,7 +124,7 @@ if ( have_posts() ) :
     
     </div>
     </div>
-     </section>
+</section>
 
 
 
@@ -161,7 +161,7 @@ if ( have_posts() ) :
         ?>
     </div>
     <div class="bio-slider-section-text-wrapper">
-    <h3 class="bio-headline"><?php the_field('headline'); ?></h3>
+    <h2 class="bio-headline"><?php the_field('headline'); ?></h2>
     
     <p class="bio-content"><?php the_field('content'); ?></p>
     
@@ -176,26 +176,17 @@ if ( have_posts() ) :
         $related_posts_type = get_field('related_post_types'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
-                <div class="bio-header-block">
-                <h4 class="bio-header-title">Stories & more</h4>
-                </div>
+                 <div class="front-page__header-block">
+                    <h2 class="front-page__title">Stories and more</h2>
+                 </div>
+       
                 <ul class="bio-related-items-list">
                     <?php foreach( $related_posts_type as $post_type ): ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
                                 <div class="bio-related-item-thumbnail">
                                     <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
-                                   <span class="bio-related-items-label">
-                                    <?php 
-                                    // Get the post type of the current related item
-                                    $current_post_type = get_post_type( $post_type->ID );
-                                    // Get the singular name of the post type
-                                    $post_type_object = get_post_type_object( $current_post_type );
-                                    if ( $post_type_object ) {
-                                        echo esc_html( $post_type_object->labels->singular_name );
-                                    }
-                                    ?>
-                                </span>
+                                  
                                 </div>
                                 <div class="movie-title">
                                     <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
@@ -211,9 +202,10 @@ if ( have_posts() ) :
 </div>
 <div class="press-links-section-wrapper">
     <section class="press-links-section">
-       <div class="bio-header-block">
-                <h4 class="bio-header-title">On the Press:</h4>
-                </div>
+        <div class="front-page__header-block">
+            <h2 class="front-page__title">On the press:</h2>
+        </div>
+       
         <?php
 // Get the Text Area field value
 $links = get_field('press_links');

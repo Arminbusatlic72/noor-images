@@ -1,18 +1,24 @@
 .bios-archive-section-wrapper {
-  background-color: #f5f6ef;
+  background-color: #fff;
 }
 .bios-archive-section {
   padding-inline: 1rem;
   padding-block: 10rem;
 }
+
 .bios-archive-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 100px 20px;
-  margin-bottom: 3rem;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 769px) {
+  .bios-archive-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
 }
 .bios-archive-item {
-  /* margin-bottom: 3rem; */
+  margin-bottom: 2rem;
 }
 
 .bio-social-media {
@@ -27,7 +33,7 @@
   width: 24px;
   height: 24px;
   vertical-align: middle;
-  fill: #fff;
+  fill: #000;
 }
 .social-icon {
   margin-right: 10px;
@@ -42,11 +48,23 @@
 .bios-details-wrapper {
   margin-block: 2rem;
   text-align: center;
-  border-bottom: 0.5px solid black;
+  border-bottom: 1px solid black;
   padding-bottom: 2rem;
+}
+.bio-image-wrapper {
+  display: flex;
+  justify-content: center; /* Center the images */
+  align-items: center;
+  overflow: hidden; /* Prevents any overflow */
+  width: 100%; /* Adjust based on container */
+  /* max-width: 100%; Adjust as needed */
+  height: auto; /* Fixed height to make all uniform */
 }
 .bio-image {
   position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .bio-label {
   position: absolute;

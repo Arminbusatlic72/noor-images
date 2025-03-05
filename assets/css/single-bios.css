@@ -1,5 +1,5 @@
 .bio-container {
-  margin-top: 10rem;
+  /* margin-top: 10rem; */
 }
 .bio-header-section,
 .bio-short-biography-section,
@@ -7,6 +7,7 @@
 .bio-related-section,
 .press-links-section {
   padding-inline: 1rem;
+  padding-top: 2rem;
 }
 
 .bio-content-wrapper {
@@ -16,13 +17,19 @@
 }
 @media (min-width: 769px) {
   .bio-short-biography {
-    max-width: 800px;
+    /* max-width: 800px; */
     width: 100%;
     margin: 2rem auto 0;
   }
   .bio-content-wrapper {
     grid-template-columns: 50% 50%;
     gap: 50px;
+    /* margin-bottom: 2rem; */
+  }
+  .bio-headline {
+    font-size: 3rem;
+    line-height: 1.2;
+    letter-spacing: -4px;
     margin-bottom: 2rem;
   }
 }
@@ -148,6 +155,7 @@
     width: 100%;
     height: 100%;
     min-height: 31rem;
+    padding: 30px;
   }
 }
 .bio-slider-section-slider-wrapper {
@@ -186,11 +194,7 @@
   transition: opacity 0.15s ease-in;
   display: flex;
 } */
-.bio-headline {
-  font-size: 3rem;
-  line-height: 1.2;
-  letter-spacing: -4px;
-}
+
 .bio-related-section-wrapper {
   background-color: #f6f6f6;
   padding-block: 2rem;

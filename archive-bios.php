@@ -23,23 +23,14 @@ get_header(); ?>
 <div id="primary" <?php astra_primary_class(); ?>>
 <div class="bios-archive-section-wrapper">
 <section class="bios-archive-section">
-	 <div class="stories-archive__header-block">
-            <h2 class="stories-archive__title">See Stories</h2>
-            <a id="toggle-large" class="toggle-view active">Large</a>
-    		<a id="toggle-small" class="toggle-view">Small</a>
-     </div>
-
+	  <div class="front-page__header-block">
+        <h2 class="front-page__title">Bios</h2>
+    </div>
+       
 <div class="bios-archive-grid">
 	<?php if ( have_posts() ) : ?>
 		<?php while ( have_posts() ) : the_post(); ?>
-			<div class="bios-archive-item">
-				<div class="story-post__name-category-wrapper"> 
-				<div class="bios-details-wrapper">
-                                <h3 class="bios-details-details-title"><?php the_field('name_and_surname'); ?></h3>
-                                <h6 class="bios-details-details-title"><?php the_field('subtitle'); ?></h6>
-                        </div>
-</div>
-
+			<div class="bios-archive-item">											
 				<a href="<?php the_permalink(); ?>" class="story-link">
 					<div class="bio-image-wrapper">
 						<div class="bio-image">
@@ -58,6 +49,10 @@ get_header(); ?>
 						
 					</div>
 				</a>
+				<div class="bios-details-wrapper">
+                                <h3 class="bios-details-details-title"><?php the_field('name_and_surname'); ?></h3>
+                                <h6 class="bios-details-details-title subtite gray"><?php the_field('subtitle'); ?></h6>
+                </div>
 			</div>
 		<?php endwhile; ?>
 		<?php astra_pagination(); ?>

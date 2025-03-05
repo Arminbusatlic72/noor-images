@@ -5,9 +5,10 @@
   width: 100%;
 }
 .exhibition-header-section,
-.bio-related-section,
+.top-related-item-section,
 .press-links-section {
   padding-inline: 1rem;
+  padding-top: 2rem;
 }
 .exhibition-header-wrapper {
   text-align: center;
@@ -53,7 +54,6 @@
 }
 
 .bio-related-section-wrapper {
-  background-color: #f6f6f6;
   padding-block: 2rem;
 }
 .bio-relation-wrapper {
@@ -68,7 +68,15 @@
   margin: 0;
   padding: 0;
 }
+.top-related-item-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
 @media (min-width: 769px) {
+  .top-related-item-grid {
+    grid-template-columns: 2fr 1fr;
+  }
   .bio-related-items-list {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
