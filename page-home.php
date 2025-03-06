@@ -533,7 +533,7 @@
 
                 // Display title (if available)
                 if ($shop_item_title) {
-                    echo '<h3 class="shop-item-title"><a href="' . esc_url($item_link_target) . '">'. esc_html($shop_item_title) . '</a></h3>';
+                    echo '<h3 class="shop-item-title"><a href="' . esc_url($item_link_url) . '">'. esc_html($shop_item_title) . '</a></h3>';
                 }
 
                 // Display description (if available)
