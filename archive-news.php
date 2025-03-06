@@ -23,8 +23,8 @@ get_header(); ?>
 <div id="primary" <?php astra_primary_class(); ?>>
 
 <section class="news-archive__section">
-	 <div class="front-page__header-block">
-            <h2 class="front-page__title">See News</h2>
+	 <div class="section-header-block">
+            <h2 class="section-title">See News</h2>
             <div class="toggle-wrapper">
             <a id="toggle-large" class="toggle-view active">Large</a>
     		<a id="toggle-small" class="toggle-view">Small</a>

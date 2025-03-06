@@ -176,8 +176,8 @@ if ( have_posts() ) :
         $related_posts_type = get_field('related_post_types'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
-                 <div class="front-page__header-block">
-                    <h2 class="front-page__title">Stories and more</h2>
+                 <div class="section-header-block">
+                    <h2 class="section-title">Stories and more</h2>
                  </div>
        
                 <ul class="bio-related-items-list">
@@ -202,8 +202,8 @@ if ( have_posts() ) :
 </div>
 <div class="press-links-section-wrapper">
     <section class="press-links-section">
-        <div class="front-page__header-block">
-            <h2 class="front-page__title">On the press:</h2>
+        <div class="section-header-block">
+            <h2 class="section-title">On the press:</h2>
         </div>
        
         <?php

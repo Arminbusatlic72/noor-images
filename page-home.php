@@ -51,8 +51,8 @@
 
 
             <section class="home-page-featured-post-section">
-                <div class="front-page__header-block">
-                    <h2 class="front-page__title">What's new</h2>
+                <div class="section-header-block">
+                    <h2 class="section-title">What's new</h2>
                 <a href="<?php echo get_post_type_archive_link('news'); ?>" class="front-page__view-all-link">View Our New's</a>
 
                 </div>
@@ -171,8 +171,8 @@
     </section>
 
     <section class="home-page-education-section">
-        <div class="front-page__header-block">
-            <h2 class="front-page__title">Education</h2>
+        <div class="section-header-block">
+            <h2 class="section-title">Education</h2>
                 <a href="<?php echo get_post_type_archive_link('news'); ?>" class="front-page__view-all-link">View Education page</a>
         </div>
         <?php
@@ -224,7 +224,7 @@
 
         // Display the title
         if ($production_title) {
-            echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($production_title) . '</h2></div>';
+            echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($production_title) . '</h2></div>';
         }
 
         // Display the description
@@ -328,9 +328,9 @@
         ?>
     </section>
 
-    <div class="production-section-menu-wrapper">
+    <div class="section-menu-wrapper">
         <!-- Production Section Menu -->
-        <div class="production-section-menu">
+        <div class="section-menu">
             <?php
             // Get the production section menu group field
             $production_menu = get_field('production_section_menu');
@@ -342,7 +342,7 @@
                     $join_community_title = esc_html($production_menu['join_community_link']['title']);
                     $join_community_target = $production_menu['join_community_link']['target'] ? ' target="' . esc_attr($production_menu['join_community_link']['target']) . '"' : '';
 
-                    echo '<a href="' . $join_community_url . '"' . $join_community_target . ' class="production-section-menu-link">' . $join_community_title . '</a>';
+                    echo '<a href="' . $join_community_url . '"' . $join_community_target . ' class="section-menu-link">' . $join_community_title . '</a>';
                 }
 
                 // Subscribe Link
@@ -351,15 +351,15 @@
                     $subscribe_title = esc_html($production_menu['subscribe_link']['title']);
                     $subscribe_target = $production_menu['subscribe_link']['target'] ? ' target="' . esc_attr($production_menu['subscribe_link']['target']) . '"' : '';
 
-                    echo '<a href="' . $subscribe_url . '"' . $subscribe_target . ' class="production-section-menu-link">' . $subscribe_title . '</a>';
+                    echo '<a href="' . $subscribe_url . '"' . $subscribe_target . ' class="section-menu-link">' . $subscribe_title . '</a>';
                 }
             endif;
             ?>
     
 
-        <div class="production-section-menu-social-media-wrapper">
+        <div class="section-menu-social-media-wrapper">
         <span>Follow us</span>
-        <div class="production-section-menu-social-media">
+        <div class="section-menu-social-media">
         
         <?php
         $social_icons = array(
@@ -398,7 +398,7 @@
         $community_description = get_field('community_section_description');
         $community_link = get_field('community_section_link');
         if ($community_title) {
-            echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($community_title) . '</h2></div>';
+            echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($community_title) . '</h2></div>';
         }
         if ($community_description) {
             echo '<div class="community-description gray">' . wp_kses_post($community_description) . '</div>';
@@ -432,7 +432,7 @@
 
         // Display the title
         if ($archive_title) {
-            echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($archive_title) . '</h2></div>';
+            echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($archive_title) . '</h2></div>';
         }
 
         echo '<div class="archive-grid-container">';
@@ -479,7 +479,7 @@
 
         // Display the title
         if ($shop_title) {
-            echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($shop_title) . '</h2></div>';
+            echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($shop_title) . '</h2></div>';
         }
 
         // Display the shop items
@@ -577,7 +577,7 @@
 
         // Display the title
         if ($support_title) {
-            echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($support_title) . '</h2></div>';
+            echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($support_title) . '</h2></div>';
         }
 
         // Display the description

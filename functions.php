@@ -1,61 +1,61 @@
 <?php
 // Enqueue parent theme styles
 function astra_child_enqueue_styles() {
-    wp_enqueue_style('astra-parent-style', get_template_directory_uri() . '/style.css');
-	
-    wp_enqueue_style('astra-child-style', get_stylesheet_directory_uri() . '/style.css', array('astra-parent-style'));
-    // Enqueue front-page-specific CSS
-    if ( is_front_page() ) {
-        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/front-page.css', array('astra-child-style'));
-         wp_enqueue_script('scroll-script', get_stylesheet_directory_uri() . '/assets/js/scroll.js', array(), null, true);
-    }
-    if (is_page('education')) {
-        wp_enqueue_style('education-page-style', get_stylesheet_directory_uri() . '/assets/css/education-page.css', array('astra-child-style'));
-    }
-    if ( is_post_type_archive( 'stories' ) || is_tax( 'stories_category' ) ) {
-        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/stories-archive.css', array('astra-child-style'));
-    }
-     if ( is_post_type_archive( 'announcements' ) || is_tax( 'announcements_category' ) ) {
-        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/announcements-archive.css', array('astra-child-style'));
-    }
-    if ( is_post_type_archive( 'bios' ) || is_tax( 'bios_category' ) ) {
-        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/bios-archive.css', array('astra-child-style'));
-    }
-    if ( is_post_type_archive( 'news' ) || is_tax( 'news_category' ) ) {
-        wp_enqueue_style('front-page-style', get_stylesheet_directory_uri() . '/assets/css/news-archive.css', array('astra-child-style'));
-    }
-    if ( is_singular( 'bios' ) ) {
-    wp_enqueue_style('single-bios-style', get_stylesheet_directory_uri() . '/assets/css/single-bios.css', array('astra-child-style'));
-    }
-    if ( is_singular( 'exhibitions' ) ) {
-    wp_enqueue_style('single-exhibition-style', get_stylesheet_directory_uri() . '/assets/css/single-exhibition.css', array('astra-child-style'));
-    }
-     if ( is_singular( 'stories' ) ) {
-    wp_enqueue_style('single-stories-style', get_stylesheet_directory_uri() . '/assets/css/single-story.css', array('astra-child-style'));
-    }
-    if ( is_singular( 'news' ) ) {
-    wp_enqueue_style('single-news-style', get_stylesheet_directory_uri() . '/assets/css/single-news.css', array('astra-child-style'));
+    // Enqueue parent theme styles first
+    wp_enqueue_style('astra-theme-css', get_template_directory_uri() . '/style.css', array(), ASTRA_THEME_VERSION);
+
+    // Enqueue child theme base styles
+    wp_enqueue_style('astra-child-theme-css', get_stylesheet_directory_uri() . '/style.css', array('astra-theme-css'), wp_get_theme()->get('Version'));
+
+    // Enqueue shared styles that apply across multiple pages
+    wp_enqueue_style('shared-styles', get_stylesheet_directory_uri() . '/assets/css/shared.css', array('astra-child-theme-css'), '1.0.0');
+
+    // Conditionally load page-specific styles
+    if (is_front_page()) {
+        wp_enqueue_style('front-page', get_stylesheet_directory_uri() . '/assets/css/front-page.css', array('astra-child-theme-css', 'shared-styles'), '1.0.0');
+        wp_enqueue_script('scroll-script', get_stylesheet_directory_uri() . '/assets/js/scroll.js', array(), '1.0.0', true);
     }
 
+    // Group similar page conditions together
+    $page_styles = array(
+        'education' => 'education-page.css',
+        'community' => 'community-page.css'
+    );
 
-	
-    wp_enqueue_script('theme.js', get_stylesheet_directory_uri() . '/theme.js', array('jquery'), null, true);
+    foreach ($page_styles as $page => $stylesheet) {
+        if (is_page($page)) {
+            wp_enqueue_style($page . '-page', get_stylesheet_directory_uri() . '/assets/css/' . $stylesheet, array('astra-child-theme-css', 'shared-styles'), '1.0.0');
+        }
+    }
+
+    // Group archive pages together
+    $archive_types = array('news', 'bios');
+    foreach ($archive_types as $type) {
+        if (is_post_type_archive($type) || is_tax($type . '_category')) {
+            wp_enqueue_style($type . '-archive', get_stylesheet_directory_uri() . '/assets/css/' . $type . '-archive.css', array('astra-child-theme-css', 'shared-styles'), '1.0.0');
+        }
+    }
+
+    // Group single post types together  
+    $single_types = array('bios', 'exhibitions', 'news');
+    foreach ($single_types as $type) {
+        if (is_singular($type)) {
+            wp_enqueue_style('single-' . $type, get_stylesheet_directory_uri() . '/assets/css/single-' . $type . '.css', array('astra-child-theme-css', 'shared-styles'), '1.0.0');
+        }
+    }
+
+    // Enqueue main theme JS
+    wp_enqueue_script('theme-js', get_stylesheet_directory_uri() . '/theme.js', array('jquery'), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'astra_child_enqueue_styles');
+
+// Separate function for grid toggle script
 function enqueue_toggle_grid_script() {
-   
-    if ( is_post_type_archive( 'stories' ) || is_post_type_archive( 'news' ) ) {
-        wp_enqueue_script(
-            'toggle-grid-view',
-            get_stylesheet_directory_uri() . '/assets/js/toggle-grid.js',
-            array(),
-            '1.0',
-            true // Load in the footer
-        );
+    if (is_post_type_archive(array('stories', 'news'))) {
+        wp_enqueue_script('toggle-grid-view', get_stylesheet_directory_uri() . '/assets/js/toggle-grid.js', array(), '1.0.0', true);
     }
 }
-add_action( 'wp_enqueue_scripts', 'enqueue_toggle_grid_script' );
-
+add_action('wp_enqueue_scripts', 'enqueue_toggle_grid_script');
 
 function register_custom_post_type($singular, $plural, $slug, $menu_position = 5) {
     $labels = array(

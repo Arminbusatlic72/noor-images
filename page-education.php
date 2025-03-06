@@ -17,9 +17,9 @@ get_header(); // Include the header
                 ?>
             </div>
         </div>
-        <section class="education-page-header-section"> 
-            <div class="front-page__header-block">
-                <h2 class="front-page__title"><?php the_field('education_page_headline'); ?></h2>
+        <section class="section"> 
+            <div class="section-header-block">
+                <h2 class="section-title"><?php the_field('education_page_headline'); ?></h2>
             </div>
              <?php 
             // Display the subtext field if it exists
@@ -46,7 +46,7 @@ get_header(); // Include the header
 
     // Display title
     if ($workshops_title) {
-        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($workshops_title) . '</h2></div>';
+        echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($workshops_title) . '</h2></div>';
     }
 
     // Display description
@@ -217,7 +217,7 @@ get_header(); // Include the header
 
     // Display the section heading
     if ($fellowships_and_grants_section_heading) {
-        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($fellowships_and_grants_section_heading) . '</h2></div>';
+        echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($fellowships_and_grants_section_heading) . '</h2></div>';
     }
 
     // Display the section content
@@ -296,7 +296,7 @@ get_header(); // Include the header
 
     // Display the section heading
     if ($visual_media_literacy_section_headline) {
-        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($visual_media_literacy_section_headline) . '</h2></div>';
+        echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($visual_media_literacy_section_headline) . '</h2></div>';
     }
 
     // Display the section content
@@ -342,7 +342,7 @@ get_header(); // Include the header
 
     // Display the section heading and content
     if ($past_programmes_section_heading) {
-        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($past_programmes_section_heading) . '</h2></div>';
+        echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($past_programmes_section_heading) . '</h2></div>';
     }
 
     if ($past_programmes_section_content) {
@@ -425,7 +425,7 @@ get_header(); // Include the header
 
     // Display the title
     if ($support_title) {
-        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($support_title) . '</h2></div>';
+        echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($support_title) . '</h2></div>';
     }
 
     // Display the description
@@ -445,8 +445,8 @@ get_header(); // Include the header
     ?>
 </section>
 <section class="education-page-press-links-section">
-    <div class="front-page__header-block">
-        <h2 class="front-page__title">On the press:</h2>
+    <div class="section-header-block">
+        <h2 class="section-title">On the press:</h2>
     </div>
        
 
@@ -485,6 +485,5 @@ endif;
 </div>
 
 <?php
-
 get_footer(); // Include the footer
 ?>

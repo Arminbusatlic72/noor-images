@@ -83,8 +83,8 @@ if ( have_posts() ) :
 
 <!-- Related Post Types -->
 <div class="bio-related-section-wrapper">
-    <div class="front-page__header-block">
-                    <h2 class="front-page__title">Stories and more</h2>
+    <div class="section-header-block">
+                    <h2 class="section-title">Stories and more</h2>
                 </div>
     <section class="bio-related-section">
         <?php 
@@ -139,8 +139,8 @@ if ( have_posts() ) :
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
                
-                <div class="front-page__header-block">
-                    <h2 class="front-page__title">Visual Storytellers behind the Project</h2>
+                <div class="section-header-block">
+                    <h2 class="section-title">Visual Storytellers behind the Project</h2>
                 </div>
                 <div class="">
                     <p><?php the_field('related_bios_description'); ?></p>
@@ -178,8 +178,8 @@ if ( have_posts() ) :
 
     <div class="press-links-section-wrapper">
     <section class="press-links-section">
-       <div class="front-page__header-block">
-            <h2 class="front-page__title">On the press:</h2>
+       <div class="section-header-block">
+            <h2 class="section-title">On the press:</h2>
         </div>
 
         <?php
