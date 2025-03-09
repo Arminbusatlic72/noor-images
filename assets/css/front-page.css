@@ -250,14 +250,6 @@
   text-align: center;
 }
 
-.front-page-heading {
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-}
-.front-page-subtitle {
-  margin-bottom: 2rem;
-  color: gray;
-}
 .related-post-title,
 .shop-item-title,
 .production-item-title {
@@ -279,12 +271,6 @@
   }
 }
 @media (min-width: 769px) {
-  .front-page-heading {
-    font-size: 6rem;
-    letter-spacing: -7px;
-    margin-bottom: 2rem;
-  }
-
   .home-page-about-section-container {
     padding-inline: 8rem;
   }
@@ -292,6 +278,7 @@
 
 .featured-post-grid,
 .top-production-item-grid,
+.community-grid-container,
 .archive-grid-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -300,17 +287,21 @@
 .featured-post-image-wrapper {
   position: relative;
 }
-.archive-description {
+.archive-description,
+.education-description,
+.community-description {
   margin-bottom: 30px;
 }
-.archive-button-wrapper {
+.archive-button-wrapper,
+.community-btn-wrapper {
   text-align: center;
 }
 
 @media (min-width: 769px) {
   .featured-post-grid,
   .top-production-item-grid,
-  .archive-grid-container {
+  .archive-grid-container,
+  .community-grid-container {
     grid-template-columns: 2fr 1fr;
     align-items: center;
     gap: 18px;
@@ -337,14 +328,16 @@
     letter-spacing: -4px;
     margin-bottom: 2rem;
   }
-  .education-meta-wrapper {
+  .education-meta-wrapper,
+  .community-description-wrapper {
     padding: 30px;
   }
   .featured-post-subtitle,
   .top-production-item-description {
     font-size: 18px;
   }
-  .archive-button-wrapper {
+  .archive-button-wrapper,
+  .community-btn-wrapper {
     text-align: left;
   }
 }
@@ -422,21 +415,6 @@
 .shop-item {
   position: relative;
 }
-.front-page-label {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  background: rgba(0, 0, 0, 0.7);
-  color: #000;
-  padding: 5px 10px;
-  font-size: 10px;
-  font-weight: 300;
-  text-transform: uppercase;
-  backdrop-filter: blur(30px);
-  background-color: rgba(255, 255, 255, 0.5);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 12px 25.33px 0px;
-  opacity: 1;
-}
 
 @media (min-width: 769px) {
   .related-posts-grid,
@@ -455,9 +433,7 @@
     column-gap: 2rem;
     margin: 0 auto 4rem;
   }
-  .front-page-label {
-    font-size: 15px;
-  }
+
   .top-production-item-image-wrapper {
     margin-bottom: 2rem;
   }

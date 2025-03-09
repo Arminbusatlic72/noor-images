@@ -4,6 +4,14 @@
 .main-header-menu .menu-item a {
   font-size: 150%;
 }
+.page-heading {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+.page-subtitle {
+  margin-bottom: 2rem;
+  color: gray;
+}
 /* General styling for the social share buttons container */
 .social-share-buttons {
   display: flex;
@@ -54,7 +62,21 @@
     text-align: center;
   }
 }
-
+.label {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #000;
+  padding: 5px 10px;
+  font-size: 10px;
+  font-weight: 300;
+  text-transform: uppercase;
+  backdrop-filter: blur(30px);
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 12px 25.33px 0px;
+  opacity: 1;
+}
 .story-container {
   max-width: 800px;
   margin: 80px auto 0;
@@ -66,7 +88,6 @@
 }
 
 .tag {
-  /* background-color: #eee; */
   padding: 5px 10px;
   margin-right: 5px;
   border: 1px solid #969696;
@@ -88,10 +109,18 @@
 
 /* Adjust grid for tablet screens */
 @media (min-width: 600px) {
+  .label {
+    font-size: 15px;
+  }
 }
 
 /* Adjust grid for desktop screens */
 @media (min-width: 1024px) {
+  .page-heading {
+    font-size: 6rem;
+    letter-spacing: -7px;
+    margin-bottom: 2rem;
+  }
 }
 
 @media only screen and (max-width: 420px) {
@@ -166,7 +195,6 @@
   font-size: 16px;
   margin-right: 2px;
   color: #fff;
-  margin-bottom: 1rem;
 }
 .section-menu-social-media {
   display: flex;

@@ -22,12 +22,12 @@
 
                     // Display the heading
                     if ($heading) {
-                        echo '<h2 class="front-page-heading">' . esc_html($heading) . '</h2>';
+                        echo '<h2 class="page-heading">' . esc_html($heading) . '</h2>';
                     }
 
                     // Display the subheading
                     if ($subheading) {
-                        echo '<h3 class="front-page-subtitle gray">' . esc_html($subheading) . '</h3>';
+                        echo '<h3 class="page-subtitle">' . esc_html($subheading) . '</h3>';
                     }
 
                     // Display the content
@@ -144,7 +144,7 @@
                         $label_link = get_term_link($first_label, 'front-label'); // Get the term archive link
                         if (!is_wp_error($label_link)) {
                         
-                            echo '<a href="' . esc_url($label_link) . '"><span class="front-page-label">' . esc_html($first_label->name) . '</span></a>';
+                            echo '<a href="' . esc_url($label_link) . '"><span class="label">' . esc_html($first_label->name) . '</span></a>';
                         
                         }
                     }
@@ -205,8 +205,9 @@
             $link_url = esc_url($education_link['url']);
             $link_title = esc_html($education_link['title']);
             $link_target = $education_link['target'] ? ' target="' . esc_attr($education_link['target']) . '"' : '';
+        
 
-            echo '<a href="' . $link_url . '"' . $link_target . ' class="education-link-button">' . $link_title . '</a>';
+            echo '<div class="archive-button-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
         }
         echo '</div>'; // .featured-posts-grid
         
@@ -400,25 +401,40 @@
         if ($community_title) {
             echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($community_title) . '</h2></div>';
         }
+       
+        
+        // Check if the Google Map shortcode is available
+        echo '<div class="community-grid-container">';
+        
+        $community_image = get_field('community_section_image');
+        if ($community_image) {
+            $image_url = esc_url($community_image['url']);
+            $image_alt = $community_image['alt'] ? esc_attr($community_image['alt']) : esc_attr('Community section image');
+            
+            echo '<div class="community-image-container">';
+            echo '<img src="' . $image_url . '" alt="' . $image_alt . '">';
+            echo '</div>';
+        } else {
+            echo '<p class="no-image-message">Community image is not available at the moment.</p>';
+        }
+
+        echo '<div class="community-content-container">';
         if ($community_description) {
+            echo '<div class="community-description-wrapper">';
             echo '<div class="community-description gray">' . wp_kses_post($community_description) . '</div>';
         }
+        
         // Display the link as a button
         if ($community_link) {
             $link_url = esc_url($community_link['url']);
             $link_title = esc_html($community_link['title']);
             $link_target = $community_link['target'] ? ' target="' . esc_attr($community_link['target']) . '"' : '';
-
-            echo '<a href="' . $link_url . '"' . $link_target . ' class="community-link-button">' . $link_title . '</a>';
-        }
-        // Check if the Google Map shortcode is available
-        if ($google_map_shortcode) {
-            echo '<div class="google-map-container">';
-            echo do_shortcode($google_map_shortcode); // Render the Google Map shortcode
+            
+            echo '<div class="community-btn-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
             echo '</div>';
-        } else {
-            echo '<p class="no-map-message">Google Map is not available at the moment.</p>';
         }
+        echo '</div>'; // Close community-content-container
+        echo '</div>'; // Close community-grid-container
         ?>
     </section>
 
@@ -503,7 +519,7 @@
                 
                 // Display tag (if available)
                 if ($shop_item_tag) {
-                    echo '<span class="front-page-label">' . esc_html($shop_item_tag) . '</span>';
+                    echo '<span class="label">' . esc_html($shop_item_tag) . '</span>';
                 }
 
                 // Extract image ID

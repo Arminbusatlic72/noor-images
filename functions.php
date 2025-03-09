@@ -19,7 +19,8 @@ function astra_child_enqueue_styles() {
     // Group similar page conditions together
     $page_styles = array(
         'education' => 'education-page.css',
-        'community' => 'community-page.css'
+        'community' => 'community-page.css',
+        'join-the-community' => 'join-the-community-page.css'
     );
 
     foreach ($page_styles as $page => $stylesheet) {

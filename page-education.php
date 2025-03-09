@@ -17,7 +17,7 @@ get_header(); // Include the header
                 ?>
             </div>
         </div>
-        <section class="section"> 
+        <section class="education-page-header-section"> 
             <div class="section-header-block">
                 <h2 class="section-title"><?php the_field('education_page_headline'); ?></h2>
             </div>
@@ -98,7 +98,7 @@ get_header(); // Include the header
 
             // Display tag
             if ($workshop_tag) {
-                echo '<span class="workshop-item-tag">' . esc_html($workshop_tag) . '</span>';
+                echo '<span class="label">' . esc_html($workshop_tag) . '</span>';
             }
              echo '</div>';
 
@@ -187,7 +187,7 @@ get_header(); // Include the header
 
             // Display tag
             if ($workshop_tag) {
-                echo '<span class="other-workshop-item-tag">' . esc_html($workshop_tag) . '</span>';
+                echo '<span class="label">' . esc_html($workshop_tag) . '</span>';
             }
 
             // Display title
