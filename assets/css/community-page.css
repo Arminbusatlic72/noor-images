@@ -10,7 +10,7 @@
 }
 
 .community-page-bios-grid {
-  margin-top: 1rem;
+  margin-bottom: 3rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -41,7 +41,24 @@
   height: 20px;
   fill: currentColor;
 }
-
+.filter-button {
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 0.3rem;
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-bottom: 1rem;
+}
+.filter-button.active {
+  background-color: #000;
+  color: #fff;
+}
+.community-label-filters {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+}
 @media (min-width: 769px) {
   .community-bios-content,
   .community-bios-filter {
@@ -53,5 +70,8 @@
   }
   .community-page-content-container {
     padding-inline: 8rem;
+  }
+  .filter-button {
+    font-size: 16px;
   }
 }
