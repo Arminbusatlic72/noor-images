@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
       this.classList.add("active");
 
       const filter = this.getAttribute("data-filter");
-      console.log(filter);
       bioItems.forEach((item) => {
         if (filter === "all") {
           item.style.display = "block";
