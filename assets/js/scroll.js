@@ -1,14 +1,3 @@
-// document.addEventListener("scroll", () => {
-//   const slider = document.querySelector(".home .hero-slider");
-//   const scrollPosition = window.scrollY;
-
-//   if (scrollPosition > 100) {
-//     slider.style.top = "0";
-//   } else {
-//     slider.style.top = "80px";
-//   }
-// });
-
 document.addEventListener("DOMContentLoaded", function () {
   const heroSlider = document.querySelector(".hero-slider");
 

@@ -283,6 +283,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
+  margin-bottom: 3rem;
 }
 .featured-post-image-wrapper {
   position: relative;
@@ -341,13 +342,16 @@
     text-align: left;
   }
 }
-.related-posts-grid {
+.related-posts-grid,
+.education-items-grid,
+.community-items-grid,
+.archive-items-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 .related-posts-wrapper {
-  padding-block: 2rem;
+  /* padding-block: 2rem; */
 }
 .related-post {
   position: relative;
@@ -357,16 +361,6 @@
 .shop-item-image-wrapper {
   margin-bottom: 0.5rem;
 }
-.related-post-image-wrapper {
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  position: relative;
-}
-.related-post-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 .white {
   background-color: #fff;
@@ -374,12 +368,27 @@
   border-color: #000;
   border-style: solid;
   border-width: 1px;
+  display: inline-block;
 }
-.production-item-image-wrapper {
-  aspect-ratio: 16 / 9;
+.featured-post-image-wrapper,
+.related-post-image-wrapper,
+.production-item-image-wrapper,
+.education-item-image-wrapper,
+.top-production-item-image-wrapper,
+.community-image-wrapper,
+.archive-item-image-wrapper,
+.shop-item-image-wrapper {
+  aspect-ratio: 3 / 2;
   overflow: hidden;
 }
-.production-item-image-wrapper img {
+.featured-post-image,
+.related-post-image,
+.education-item-image-wrapper img,
+.production-item-image-wrapper img,
+.top-production-item-image-wrapper img,
+.community-image-wrapper img,
+.archive-item-image-wrapper img,
+.shop-item-image-wrapper img {
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -398,10 +407,14 @@
 }
 
 .shop-items-grid-wrapper,
-.production-items-grid-wrapper {
+.production-items-grid-wrapper,
+.education-items-grid,
+.community-items-grid,
+.archive-items-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  margin-bottom: 3rem;
 }
 .shop-btn-wrapper,
 .support-section-btn-wrapper {
@@ -418,7 +431,10 @@
 
 @media (min-width: 769px) {
   .related-posts-grid,
+  .education-items-grid,
+  .community-items-grid,
   .production-items-grid-wrapper,
+  .archive-items-grid,
   .shop-items-grid-wrapper {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;

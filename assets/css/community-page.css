@@ -1,9 +1,28 @@
 .community-page-top-content-section,
-.community-page-bios-section {
+.community-page-bios-section,
+.support-us-section,
+.press-section {
   padding-inline: 1rem;
   padding-top: 2rem;
 }
-
+.join-community-section,
+.subscribe-section {
+  padding-top: 2rem;
+}
+.join-community-container,
+.subscribe-container {
+  padding-inline: 2rem;
+}
+.join-community-content,
+.subscribe-content,
+.support-us-description {
+  margin-bottom: 3rem;
+}
+.subscribe-items-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
 .community-page-content-container {
   text-align: center;
   margin-bottom: 3rem;

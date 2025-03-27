@@ -29,7 +29,7 @@ get_header(); ?>
     ?>
     <main class="community-page-wrapper">
         <!-- Community Page Menu -->
-        <div class="section-menu-wrapper">
+        <div class="section-menu-wrapper-transparent">
             <div class="section-menu">
                 <?php
                 // Define social media icons
@@ -109,7 +109,182 @@ get_header(); ?>
         echo '</section>'; // .community-page-content
         // .community-page-content
         ?>
-    <section class="community-page-bios-section">
+        <?php
+// Get ACF fields
+$join_community_hero_image = get_field('join_community_hero_image');
+$join_community_section_title = get_field('join_community_section_title');
+$join_community_section_content = get_field('join_community_section_content');
+
+echo '<section class="join-community-section">';
+
+
+// Display hero image if available
+if ($join_community_hero_image) {
+    $image_url = esc_url($join_community_hero_image['url']);
+    $image_alt = esc_attr($join_community_hero_image['alt']);
+    echo '<div class="join-community-hero">';
+    echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="join-community-image">';
+    echo '</div>';
+}
+echo '<div class="join-community-container">';
+// Display the section title
+if ($join_community_section_title) {
+    echo '<div class="section-header-block">';
+    echo '<h2 class="section-title">' . esc_html($join_community_section_title) . '</h2>';
+    echo '</div>';
+}
+
+// Display the section content
+if ($join_community_section_content) {
+    echo '<div class="join-community-content">' . wp_kses_post($join_community_section_content) . '</div>';
+}
+
+echo '</div>'; 
+echo '</section>'; // .join-community-section
+?>
+<?php
+// Get ACF fields
+$subscribe_hero_image = get_field('subscribe_hero_image');
+$subscribe_section_title = get_field('subscribe_section_title');
+$subscribe_section_subtitle = get_field('subscribe_section_subtitle');
+$subscribe_section_content = get_field('subscribe_section_content');
+
+$subscribe_section_item = get_field('subscribe_section_item');
+$subscribe_section_item_second = get_field('subscribe_section_item_second');
+$subscribe_section_button = get_field('subscribe_section_button'); // Get button field
+
+echo '<section class="subscribe-section">';
+
+
+// Display hero image if available
+if ($subscribe_hero_image) {
+    $image_url = esc_url($subscribe_hero_image['url']);
+    $image_alt = esc_attr($subscribe_hero_image['alt']);
+    echo '<div class="subscribe-hero">';
+    echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="subscribe-image">';
+    echo '</div>';
+}
+echo '<div class="subscribe-container">';
+// Display the section title
+if ($subscribe_section_title) {
+    echo '<div class="section-header-block">';
+    echo '<h2 class="section-title">' . esc_html($subscribe_section_title) . '</h2>';
+    echo '</div>';
+}
+
+// Display the section subtitle
+if ($subscribe_section_subtitle) {
+    echo '<h3 class="subscribe-subtitle subtitle">' . esc_html($subscribe_section_subtitle) . '</h3>';
+}
+
+// Display the section content
+if ($subscribe_section_content) {
+    echo '<div class="subscribe-content">' . wp_kses_post($subscribe_section_content) . '</div>';
+}
+
+// Wrapper for Subscribe Items
+echo '<div class="subscribe-items-wrapper">';
+
+// Array of items to loop through
+$subscribe_items = [$subscribe_section_item, $subscribe_section_item_second];
+
+foreach ($subscribe_items as $subscribe_item) {
+    if ($subscribe_item) {
+        $subscribe_item_image = isset($subscribe_item['subscribe_item_image']) ? $subscribe_item['subscribe_item_image'] : null;
+        $subscribe_item_link = isset($subscribe_item['subscribe_item_link']) ? $subscribe_item['subscribe_item_link'] : null;
+        $subscribe_item_tag = isset($subscribe_item['subscribe_item_tag']) ? $subscribe_item['subscribe_item_tag'] : null;
+        $subscribe_item_title = isset($subscribe_item['subscribe_item_title']) ? $subscribe_item['subscribe_item_title'] : null;
+        $subscribe_item_description = isset($subscribe_item['subscribe_item_description']) ? $subscribe_item['subscribe_item_description'] : null;
+
+        echo '<div class="subscribe-item">';
+
+        // Image wrapped in link
+        if ($subscribe_item_image && $subscribe_item_link) {
+            $item_link_url = isset($subscribe_item_link['url']) ? esc_url($subscribe_item_link['url']) : '';
+            $item_link_target = isset($subscribe_item_link['target']) ? ' target="' . esc_attr($subscribe_item_link['target']) . '"' : '';
+            $image_url = esc_url($subscribe_item_image['url']);
+            $image_alt = esc_attr($subscribe_item_image['alt']);
+
+            echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="subscribe-item-link">';
+            echo '<div class="subscribe-item-image-wrapper">';
+            echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="subscribe-item-image">';
+            echo '</div>';
+            echo '</a>';
+        }
+
+        // Tag
+        if ($subscribe_item_tag) {
+            echo '<span class="subscribe-item-tag tag">' . esc_html($subscribe_item_tag) . '</span>';
+        }
+
+        // Title
+        if ($subscribe_item_title) {
+            echo '<h3 class="subscribe-item-title">' . esc_html($subscribe_item_title) . '</h3>';
+        }
+
+        // Description
+        if ($subscribe_item_description) {
+            echo '<p class="subscribe-item-description">' . esc_html($subscribe_item_description) . '</p>';
+        }
+
+        echo '</div>'; // .subscribe-item
+    }
+}
+
+echo '</div>'; // .subscribe-items-wrapper
+
+// Display Subscribe Section Button
+if ($subscribe_section_button) {
+    $button_url = isset($subscribe_section_button['url']) ? esc_url($subscribe_section_button['url']) : '';
+    $button_target = isset($subscribe_section_button['target']) ? ' target="' . esc_attr($subscribe_section_button['target']) . '"' : '';
+    $button_label = isset($subscribe_section_button['title']) ? esc_html($subscribe_section_button['title']) : 'Subscribe'; // Default text
+
+    echo '<div class="subscribe-button-wrapper">';
+    echo '<a href="' . $button_url . '"' . $button_target . ' class="subscribe-button">' . $button_label . '</a>';
+    echo '</div>';
+}
+
+echo '</div>'; // .subscribe-container
+echo '</section>'; // .subscribe-section
+?>
+<?php
+// Get ACF fields
+$press_section_title = get_field('press_section_title');
+$press_section_description = get_field('press_section_description');
+$press_section_link = get_field('press_section_link');
+
+echo '<section class="press-section">';
+echo '<div class="press-container">';
+
+// Display the section title
+if ($press_section_title) {
+    echo '<div class="section-header-block">';
+    echo '<h2 class="section-title">' . esc_html($press_section_title) . '</h2>';
+    echo '</div>';
+}
+
+// Display the section description
+if ($press_section_description) {
+    echo '<div class="support-us-description">' . wp_kses_post($press_section_description) . '</div>';
+}
+
+// Display the support button
+if ($press_section_link) {
+    $button_url = isset($press_section_link['url']) ? esc_url($press_section_link['url']) : '';
+    $button_target = isset($press_section_link['target']) ? ' target="' . esc_attr($press_section_link['target']) . '"' : '';
+    $button_label = isset($press_section_link['title']) ? esc_html($press_section_link['title']) : 'Subscribe'; // Default text
+
+    echo '<div class="support-button-wrapper">';
+    echo '<a href="' . $button_url . '"' . $button_target . ' class="press-button">' . $button_label . '</a>';
+    echo '</div>';
+}
+
+echo '</div>'; // .press-container
+echo '</section>'; // .press-section
+?>
+
+
+<section class="community-page-bios-section">
         <div class="section-header-block">
             <h2 class="section-title">Bios</h2>
         </div>
@@ -228,6 +403,44 @@ get_header(); ?>
         endif;
         ?>
     </section>
+    <?php
+// Get ACF fields
+$support_section_title = get_field('support_section_title');
+$support_section_description = get_field('support_section_description');
+$support_section_link = get_field('support_section_link');
+
+echo '<section class="support-us-section">';
+echo '<div class="support-us-container">';
+
+// Display the section title
+if ($support_section_title) {
+    echo '<div class="section-header-block">';
+    echo '<h2 class="section-title">' . esc_html($support_section_title) . '</h2>';
+    echo '</div>';
+}
+
+// Display the section description
+if ($support_section_description) {
+    echo '<div class="support-us-description">' . wp_kses_post($support_section_description) . '</div>';
+}
+
+// Display the support button
+if ($support_section_link) {
+    $button_url = isset($support_section_link['url']) ? esc_url($support_section_link['url']) : '';
+    $button_target = isset($support_section_link['target']) ? ' target="' . esc_attr($support_section_link['target']) . '"' : '';
+    $button_label = isset($support_section_link['title']) ? esc_html($support_section_link['title']) : 'Support Us'; // Default text
+
+    echo '<div class="support-us-button-wrapper">';
+    echo '<a href="' . $button_url . '"' . $button_target . ' class="support-us-button">' . $button_label . '</a>';
+    echo '</div>';
+}
+
+echo '</div>'; // .support-us-container
+echo '</section>'; // .support-us-section
+?>
+
+
+    
     </main><!-- .community-page-main-wrapper -->
 
 <?php if ( astra_page_layout() == 'right-sidebar' ) : ?>
