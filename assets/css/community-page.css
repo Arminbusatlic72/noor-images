@@ -13,6 +13,17 @@
 .subscribe-container {
   padding-inline: 2rem;
 }
+.join-community-hero {
+  width: 100%;
+  height: 800px;
+  margin-bottom: 2rem; /* Ensures the image covers the container */
+}
+.join-community-image {
+  width: 100%; /* Make the image take full width */
+  height: 100%; /* Maintain aspect ratio */
+  aspect-ratio: 3 / 2; /* Set aspect ratio to 3:2 */
+  object-fit: cover;
+}
 .join-community-content,
 .subscribe-content,
 .support-us-description {
@@ -77,6 +88,12 @@
   margin-bottom: 3rem;
   display: flex;
   flex-wrap: wrap;
+}
+.subscribe-button-wrapper,
+.press-button-wrapper,
+.support-us-button-wrapper {
+  text-align: center;
+  margin-block: 2rem;
 }
 @media (min-width: 769px) {
   .community-bios-content,

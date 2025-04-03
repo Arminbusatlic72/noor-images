@@ -28,60 +28,7 @@ get_header(); ?>
     }
     ?>
     <main class="community-page-wrapper">
-        <!-- Community Page Menu -->
-        <div class="section-menu-wrapper-transparent">
-            <div class="section-menu">
-                <?php
-                // Define social media icons
-                $social_icons = array(
-                    'Facebook' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg>',
-                    'Twitter' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path></svg>',
-                    'Instagram' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>',
-                    'Linkedin' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>'
-                );
-
-                // Get the community page menu group field
-                $community_menu = get_field('community_page_submenu');
-
-                if ($community_menu) :
-                    // Join Community Link
-                    if ($community_menu['join_community_link']) {
-                        $join_community_url = esc_url($community_menu['join_community_link']['url']);
-                        $join_community_title = esc_html($community_menu['join_community_link']['title']);
-                        $join_community_target = $community_menu['join_community_link']['target'] ? ' target="' . esc_attr($community_menu['join_community_link']['target']) . '"' : '';
-
-                        echo '<a href="' . $join_community_url . '"' . $join_community_target . ' class="section-menu-link">' . $join_community_title . '</a>';
-                    }
-
-                    // Subscribe Link
-                    if ($community_menu['subscribe_link']) {
-                        $subscribe_url = esc_url($community_menu['subscribe_link']['url']);
-                        $subscribe_title = esc_html($community_menu['subscribe_link']['title']);
-                        $subscribe_target = $community_menu['subscribe_link']['target'] ? ' target="' . esc_attr($community_menu['subscribe_link']['target']) . '"' : '';
-
-                        echo '<a href="' . $subscribe_url . '"' . $subscribe_target . ' class="section-menu-link">' . $subscribe_title . '</a>';
-                    }
-
-                    // Social Media Menu
-                    if ($community_menu['social_media_menu']) :
-                        echo '<div class="section-menu-social-media-wrapper">';
-                        echo '<div class="section-menu-social-media">';
-                        echo '<span>Follow us</span>';
-                        foreach ($community_menu['social_media_menu'] as $platform => $details) :
-                            if (!empty($details['url'])) :
-                                $title = esc_html($details['title']);
-                                $url = esc_url($details['url']);
-                                $svg = isset($social_icons[$title]) ? $social_icons[$title] : '';
-                                echo '<a href="' . $url . '" target="_blank" class="social-icon">' . $svg . '</a>';
-                            endif;
-                        endforeach;
-                        echo '</div>';
-                        echo '</div>';
-                    endif;
-                endif;
-                ?>
-            </div>
-        </div>
+       
         <?php
         // Get ACF fields
         $community_title = get_field('community_page_title');
@@ -240,7 +187,7 @@ if ($subscribe_section_button) {
     $button_label = isset($subscribe_section_button['title']) ? esc_html($subscribe_section_button['title']) : 'Subscribe'; // Default text
 
     echo '<div class="subscribe-button-wrapper">';
-    echo '<a href="' . $button_url . '"' . $button_target . ' class="subscribe-button">' . $button_label . '</a>';
+    echo '<a href="' . $button_url . '"' . $button_target . ' class="subscribe-button ast-header-button-1 ast-custom-button white support-link-button">' . $button_label . '</a>';
     echo '</div>';
 }
 
@@ -265,7 +212,7 @@ if ($press_section_title) {
 
 // Display the section description
 if ($press_section_description) {
-    echo '<div class="support-us-description">' . wp_kses_post($press_section_description) . '</div>';
+    echo '<div class="press-description">' . wp_kses_post($press_section_description) . '</div>';
 }
 
 // Display the support button
@@ -274,8 +221,8 @@ if ($press_section_link) {
     $button_target = isset($press_section_link['target']) ? ' target="' . esc_attr($press_section_link['target']) . '"' : '';
     $button_label = isset($press_section_link['title']) ? esc_html($press_section_link['title']) : 'Subscribe'; // Default text
 
-    echo '<div class="support-button-wrapper">';
-    echo '<a href="' . $button_url . '"' . $button_target . ' class="press-button">' . $button_label . '</a>';
+    echo '<div class="press-button-wrapper">';
+    echo '<a href="' . $button_url . '"' . $button_target . ' class="ast-header-button-1 ast-custom-button white support-link-button">' . $button_label . '</a>';
     echo '</div>';
 }
 
@@ -431,7 +378,7 @@ if ($support_section_link) {
     $button_label = isset($support_section_link['title']) ? esc_html($support_section_link['title']) : 'Support Us'; // Default text
 
     echo '<div class="support-us-button-wrapper">';
-    echo '<a href="' . $button_url . '"' . $button_target . ' class="support-us-button">' . $button_label . '</a>';
+    echo '<a href="' . $button_url . '"' . $button_target . ' class="ast-header-button-1 ast-custom-button white support-link-button">' . $button_label . '</a>';
     echo '</div>';
 }
 
@@ -439,7 +386,60 @@ echo '</div>'; // .support-us-container
 echo '</section>'; // .support-us-section
 ?>
 
+ <!-- Community Page Menu -->
+        <div class="section-menu-wrapper-transparent">
+            <div class="section-menu">
+                <?php
+                // Define social media icons
+                $social_icons = array(
+                    'Facebook' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg>',
+                    'Twitter' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"></path></svg>',
+                    'Instagram' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path></svg>',
+                    'Linkedin' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path></svg>'
+                );
 
+                // Get the community page menu group field
+                $community_menu = get_field('community_page_submenu');
+
+                if ($community_menu) :
+                    // Join Community Link
+                    if ($community_menu['join_community_link']) {
+                        $join_community_url = esc_url($community_menu['join_community_link']['url']);
+                        $join_community_title = esc_html($community_menu['join_community_link']['title']);
+                        $join_community_target = $community_menu['join_community_link']['target'] ? ' target="' . esc_attr($community_menu['join_community_link']['target']) . '"' : '';
+
+                        echo '<a href="' . $join_community_url . '"' . $join_community_target . ' class="section-menu-link">' . $join_community_title . '</a>';
+                    }
+
+                    // Subscribe Link
+                    if ($community_menu['subscribe_link']) {
+                        $subscribe_url = esc_url($community_menu['subscribe_link']['url']);
+                        $subscribe_title = esc_html($community_menu['subscribe_link']['title']);
+                        $subscribe_target = $community_menu['subscribe_link']['target'] ? ' target="' . esc_attr($community_menu['subscribe_link']['target']) . '"' : '';
+
+                        echo '<a href="' . $subscribe_url . '"' . $subscribe_target . ' class="section-menu-link">' . $subscribe_title . '</a>';
+                    }
+
+                    // Social Media Menu
+                    if ($community_menu['social_media_menu']) :
+                        echo '<div class="section-menu-social-media-wrapper">';
+                        echo '<div class="section-menu-social-media">';
+                        echo '<span>Follow us</span>';
+                        foreach ($community_menu['social_media_menu'] as $platform => $details) :
+                            if (!empty($details['url'])) :
+                                $title = esc_html($details['title']);
+                                $url = esc_url($details['url']);
+                                $svg = isset($social_icons[$title]) ? $social_icons[$title] : '';
+                                echo '<a href="' . $url . '" target="_blank" class="social-icon">' . $svg . '</a>';
+                            endif;
+                        endforeach;
+                        echo '</div>';
+                        echo '</div>';
+                    endif;
+                endif;
+                ?>
+            </div>
+        </div>
     
     </main><!-- .community-page-main-wrapper -->
 

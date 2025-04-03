@@ -362,14 +362,6 @@
   margin-bottom: 0.5rem;
 }
 
-.white {
-  background-color: #fff;
-  color: #000;
-  border-color: #000;
-  border-style: solid;
-  border-width: 1px;
-  display: inline-block;
-}
 .featured-post-image-wrapper,
 .related-post-image-wrapper,
 .production-item-image-wrapper,
@@ -379,7 +371,7 @@
 .archive-item-image-wrapper,
 .shop-item-image-wrapper {
   aspect-ratio: 3 / 2;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .featured-post-image,
 .related-post-image,
