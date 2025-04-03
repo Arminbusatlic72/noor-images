@@ -132,7 +132,7 @@ add_action('init', function() {
 
 
 function add_social_share_buttons($content) {
-    if (is_singular() && in_the_loop() && is_main_query()) { // Apply to any singular post type
+    if (is_singular('post') && in_the_loop() && is_main_query()) { // Changed to only apply to posts
         $url = esc_url(get_permalink());
         $title = urlencode(html_entity_decode(get_the_title(), ENT_COMPAT, 'UTF-8'));
 
