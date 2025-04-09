@@ -241,7 +241,7 @@
 .home-page-shop-section,
 .home-page-support-section {
   padding-inline: 1rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 .home-page-support-section {
   margin-bottom: 6rem;
@@ -283,7 +283,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 .featured-post-image-wrapper {
   position: relative;
@@ -419,6 +419,7 @@
 
 .shop-item {
   position: relative;
+  margin-bottom: 3rem;
 }
 
 @media (min-width: 769px) {
@@ -439,10 +440,6 @@
   .production-description {
     columns: 3;
     column-gap: 2rem;
-    margin: 0 auto 4rem;
-  }
-
-  .top-production-item-image-wrapper {
-    margin-bottom: 2rem;
+    margin: 0 auto 1rem;
   }
 }

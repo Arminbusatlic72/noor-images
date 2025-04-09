@@ -138,7 +138,7 @@ get_header(); // Include the header
 
     // Display the section title
     if ($other_workshops_title) {
-        echo '<div class="front-page__header-block"><h2 class="front-page__title">' . esc_html($other_workshops_title) . '</h2></div>';
+        echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($other_workshops_title) . '</h2></div>';
     }
 
     // Display the section description

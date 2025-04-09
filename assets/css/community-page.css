@@ -15,7 +15,7 @@
 }
 .join-community-hero {
   width: 100%;
-  height: 800px;
+  height: auto;
   margin-bottom: 2rem; /* Ensures the image covers the container */
 }
 .join-community-image {
@@ -33,6 +33,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+.subscribe-item {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid black;
 }
 .community-page-content-container {
   text-align: center;
@@ -100,6 +104,9 @@
   .community-bios-filter {
     max-width: 800px;
     margin-bottom: 2rem;
+  }
+  .join-community-hero {
+    height: 800px;
   }
   .community-page-bios-grid {
     grid-template-columns: repeat(4, 1fr);

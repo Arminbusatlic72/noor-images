@@ -267,3 +267,33 @@ function your_prefix_change_header_breakpoint() {
 }
 add_filter( 'astra_header_break_point', 'your_prefix_change_header_breakpoint' );
 
+function get_astra_svg_icon( $icon_name ) {
+	// Load icons only once using static
+	static $icons = null;
+
+	if ( is_null( $icons ) ) {
+		$icon_file = get_template_directory() . '/assets/svg/logo-svg-icons/icons-v6-0.php';
+		if ( file_exists( $icon_file ) ) {
+			$icons = require $icon_file;
+		} else {
+			return ''; // File not found
+		}
+	}
+
+	if ( isset( $icons[ $icon_name ]['svg']['solid'] ) ) {
+		$icon_data = $icons[ $icon_name ]['svg']['solid'];
+		$width = esc_attr( $icon_data['width'] );
+		$height = esc_attr( $icon_data['height'] );
+		$path = esc_attr( $icon_data['path'] );
+
+		return sprintf(
+			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %1$s %2$s" width="%1$s" height="%2$s" fill="currentColor" aria-hidden="true"><path d="%3$s" /></svg>',
+			$width,
+			$height,
+			$path
+		);
+	}
+
+	return ''; // Icon not found
+}
+

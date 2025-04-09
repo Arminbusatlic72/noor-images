@@ -9,7 +9,8 @@
         <main id="main" class="site-main">
             <section class="home-page-about-section">
                 <div class="home-page-about-section-container">
-                
+               
+
             <?php
             // Check if the page is being displayed
             if (have_posts()) :
@@ -53,8 +54,8 @@
             <section class="home-page-featured-post-section">
                 <div class="section-header-block">
                     <h2 class="section-title">What's new</h2>
-                <a href="<?php echo get_post_type_archive_link('news'); ?>" class="front-page__view-all-link">View Our New's</a>
-
+                    
+                   
                 </div>
                 
 
@@ -169,12 +170,20 @@
         endif;
         ?>
     </div>
+    <div class="read-all-button-wrapper">
+        <div class="read-all-button">
+            <a href="<?php echo get_post_type_archive_link('news'); ?>">View Our New's</a>
+            <div class="icon-wrapper">
+                <?php echo get_astra_svg_icon( 'arrow-right' ); ?>
+            </div>
+        </div>
+    </div>
     </section>
 
     <section class="home-page-education-section">
         <div class="section-header-block">
             <h2 class="section-title">Education</h2>
-                <a href="<?php echo get_post_type_archive_link('news'); ?>" class="front-page__view-all-link">View Education page</a>
+                
         </div>
         <?php
         // Get ACF fields
@@ -270,6 +279,14 @@
         
         
         ?>
+        <div class="read-all-button-wrapper">
+        <div class="read-all-button">
+            <a href="<?php echo get_post_type_archive_link('news'); ?>">View Education Page</a>
+            <div class="icon-wrapper">
+                <?php echo get_astra_svg_icon( 'arrow-right' ); ?>
+            </div>
+        </div>
+    </div>
     </section>
 
     <section class="home-page-production-section">

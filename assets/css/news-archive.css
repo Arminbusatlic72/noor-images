@@ -60,6 +60,7 @@
 }
 .news-archive-grid.large-view {
   grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1.5rem;
 }
 @media (max-width: 1024px) {
   .news-archive-grid.large-view {
@@ -91,7 +92,6 @@
 }
 .news-archive-item {
   grid-column-gap: 0.5rem;
-  grid-row-gap: 0.5rem;
   display: flex;
   flex-flow: column;
 }
@@ -168,13 +168,13 @@
 
 .news-post__name {
   color: black;
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1;
 }
 
 .news-post__category {
   color: gray;
   margin-left: 5px; /* Add space after / */
-  font-size: 10px;
+  font-size: 14px;
   line-height: 1;
 }

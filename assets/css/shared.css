@@ -2,7 +2,7 @@
   text-align: center;
 }
 .main-header-menu .menu-item a {
-  font-size: 150%;
+  font-size: 160%;
 }
 .page-heading {
   font-size: 1.8rem;
@@ -11,6 +11,40 @@
 .page-subtitle {
   margin-bottom: 2rem;
   color: gray;
+}
+.entry-title {
+  text-align: center;
+}
+@media (min-width: 1200px) {
+  .ast-plain-container.ast-no-sidebar #primary {
+    margin-top: 0px;
+  }
+  .featured {
+    height: 600px;
+    margin-bottom: 10rem;
+  }
+  .entry-title {
+    font-size: 4rem !important;
+  }
+}
+
+.read-all-button {
+  display: flex;
+}
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 4px;
+}
+.icon-wrapper svg {
+  width: 20px;
+  height: 20px;
+  color: #000; /* or use currentColor to inherit */
+}
+.read-all-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
 }
 /* General styling for the social share buttons container */
 .social-share-buttons {
@@ -99,6 +133,7 @@
   font-weight: 400;
   line-height: 1;
   transition: opacity 0.15s ease-in-out;
+  margin-bottom: 1rem;
 }
 
 .story-image-caption {
@@ -156,7 +191,7 @@
   align-items: center;
   border-top: 1px solid #000;
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 .section-title {
   margin-top: 0.7rem;
@@ -167,11 +202,8 @@
   font-size: 1.8rem;
 }
 @media (min-width: 769px) {
-  .section-header-block {
-    margin-bottom: 3rem;
-  }
   .section-title {
-    margin-top: 0.7rem;
+    margin-top: 1.7rem;
     font-size: 3.8rem;
   }
 }
@@ -190,8 +222,6 @@
 .boxed-content-container {
   width: 100%;
   background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   padding: 30px;
   margin: 40px 0;
 }
