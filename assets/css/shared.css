@@ -36,6 +36,7 @@
   justify-content: center;
   align-items: center;
   margin-left: 4px;
+  transition: transform 0.3s ease;
 }
 .icon-wrapper svg {
   width: 20px;
@@ -45,6 +46,17 @@
 .read-all-button-wrapper {
   display: flex;
   justify-content: flex-end;
+}
+.read-all-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.read-all-link:hover .icon-wrapper {
+  transform: translateX(5px);
 }
 /* General styling for the social share buttons container */
 .social-share-buttons {
@@ -133,7 +145,7 @@
   font-weight: 400;
   line-height: 1;
   transition: opacity 0.15s ease-in-out;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .story-image-caption {
@@ -190,11 +202,10 @@
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #000;
-  margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 .section-title {
-  margin-top: 0.7rem;
+  margin-top: 0.4rem;
   text-transform: uppercase;
   letter-spacing: -0.03em;
   font-weight: 700;
@@ -203,7 +214,6 @@
 }
 @media (min-width: 769px) {
   .section-title {
-    margin-top: 1.7rem;
     font-size: 3.8rem;
   }
 }
@@ -211,12 +221,14 @@
   color: gray;
 }
 .white {
+  text-align: center;
   background-color: #fff;
   color: #000;
   border-color: #000;
   border-style: solid;
   border-width: 1px;
   display: inline-block;
+  margin-bottom: 2rem;
 }
 /* Boxed Content Styling */
 .boxed-content-container {
@@ -251,12 +263,9 @@
 }
 .section-menu-wrapper {
   background-color: #000;
-  margin-bottom: 3rem;
 }
 .section-menu-wrapper-transparent {
   background-color: transparent;
-  /* border-block: 1px solid #000; */
-  margin-bottom: 3rem;
 }
 .section-menu-wrapper-transparent .section-menu-social-media-wrapper span {
   color: #000;

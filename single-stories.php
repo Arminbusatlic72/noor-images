@@ -11,7 +11,7 @@ if ( have_posts() ) :
      <!-- Slider -->
     <div class="bio-slider-section-slider-wrapper">
         <?php
-        $slider_shortcode = get_field('slider_short_code');
+        $slider_shortcode = get_field('top_slider_short_code');
         if( $slider_shortcode ):
             echo do_shortcode( $slider_shortcode );
         endif;
@@ -21,46 +21,13 @@ if ( have_posts() ) :
 <section class="exhibition-header-section">
     <div class="exhibition-header-wrapper">
     <h2 class="bio-heading"><?php the_field('headline'); ?></h2>
-    <div class="exhibition-time-wrapper">
-        <?php
-// Check if the ACF group and fields exist
-if ( have_rows('announcement_time') ) :
-    while ( have_rows('announcement_time') ) : the_row();
-        // Get the field values
-        $start_date = get_sub_field('date_start'); // Replace with your actual field name
-        $start_time = get_sub_field('time_start');
-        $end_date = get_sub_field('date_end'); // Replace with your actual field name
-        $end_time = get_sub_field('time_end');
-        $location = get_sub_field('location'); // Get the location subfield
-        ?>
-        <div class="exhibition-time-wrapper">
-            <div class="time-details">
-                <span class="start-date"><?php echo esc_html($start_date); ?></span> - 
-                <span class="start-time"><?php echo esc_html($start_time); ?></span>
-                <span class="separator"> - </span>
-                <span class="end-date"><?php echo esc_html($end_date); ?></span> - 
-                <span class="end-time"><?php echo esc_html($end_time); ?></span>
-            </div>
-            <?php if ( $location ) : ?>
-                <div class="location">
-                    <strong>Location:</strong> <?php echo esc_html($location); ?>
-                </div>
-            <?php endif; ?>
-        </div>
-        <?php
-    endwhile;
-else :
-    echo '<p>No exhibition times found.</p>';
-endif;
-?>
-
-    </div>
+    <h3><?php the_field('subtitle'); ?></h3>
     <div class="exhibition-description-wrapper">
-    <p ><?php the_field('exhibition_description'); ?></p>
+    <p ><?php the_field('story_description'); ?></p>
 </div>
 
  <div class="bio-issues-of-focus">
-        <p>Issues of focuses :</p>
+        <p>Issue areas :</p>
          <!-- Country Labels -->
     <div>
         <?php
@@ -78,44 +45,89 @@ endif;
 </div>
 </section>
 
+<section class="bio-slider-section">
+    <div class="bio-slider-section-wrapper">
+        <!-- Slider or Featured Image -->
+        <div class="bio-slider-section-slider-wrapper">
+            <?php 
+            // Get the related post types
+            $related_posts_type = get_field('related_post_types'); 
+            
+            // Check if related posts exist
+            if( $related_posts_type && !empty($related_posts_type) ):
+                // Get the latest related post (first item in the array)
+                $latest_post = $related_posts_type[0];
+                
+                // Display the featured image of the latest post with a link
+                $latest_post_permalink = get_permalink( $latest_post->ID );
+                $latest_post_thumbnail = get_the_post_thumbnail( $latest_post->ID, 'full', array( 'class' => 'custom-thumbnail' ) );
+                
+                echo '<a href="' . esc_url( $latest_post_permalink ) . '" class="bio-latest-post-link">';
+                echo $latest_post_thumbnail;
+                echo '</a>';
+            endif;
+            ?>
+        </div>
+        <div class="bio-slider-section-text-wrapper">
+            <?php 
+            if ( isset($latest_post) ):
+                // Display the title of the latest post
+                echo '<h3 class="bio-latest-title">' . esc_html( get_the_title( $latest_post->ID ) ) . '</h3>';
+            endif;
+            ?>
+        </div>
+    </div>
+</section>
+
+
 <!-- Related Post Types -->
-    <div class="bio-related-section-wrapper">
+<div class="bio-related-section-wrapper">
     <section class="bio-related-section">
         <?php 
-        $related_posts_type = get_field('exhibtion_related_post_types'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
-            <div class="bio-relation-wrapper">      
-                <div class="section-header-block"></div>
-                <h2 class="exhibitions-section-title">Stories & more</h2>
-            
-               <ul class="bio-related-items-list">
-                    <?php foreach( $related_posts_type as $post_type ): 
-                        $subtitle = get_field('subtitle', $post_type->ID);?>
+            <div class="bio-relation-wrapper">
+                <div class="bio-header-block">
+                    <h4 class="bio-header-title">Stories & more</h4>
+                </div>
+                <ul class="bio-related-items-list">
+                    <?php 
+                    foreach( $related_posts_type as $index => $post_type ): 
+                        // Skip the first post since it's already displayed in the slider section
+                        if ( $index === 0 ) {
+                            continue;
+                        }
+                    ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
                                 <div class="bio-related-item-thumbnail">
+                                    
                                     <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
-                                  
+                                    <span class="bio-related-items-label">
+                                        <?php 
+                                        // Get the post type of the current related item
+                                        $current_post_type = get_post_type( $post_type->ID );
+                                        // Get the singular name of the post type
+                                        $post_type_object = get_post_type_object( $current_post_type );
+                                        if ( $post_type_object ) {
+                                            echo esc_html( $post_type_object->labels->singular_name );
+                                        }
+                                        ?>
+                                    </span>
                                 </div>
                                 <div class="movie-title">
-                                    <h3>
-										<?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
-									</h3>
-                                    <?php if ($subtitle): ?>
-                                	<p class="subtitle"><?php echo esc_html($subtitle); ?></p>
-                            		<?php endif; ?>
-                                   
-                                    <!-- $post_subtitle = get_field('subtitle', $post->ID);  -->
+                                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
                                 </div>
                             </a>
                         </li>
-                       
                     <?php endforeach; ?>
                 </ul>
             </div>
         <?php endif; ?>
     </section>
 </div>
+
+
+
 
 <!-- Related Post Types -->
     <div class="bio-related-section-wrapper">
@@ -124,10 +136,9 @@ endif;
         $related_posts_type = get_field('related_bios'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
-                
-            <div class="section-header-block"> </div>
-                <h2 class="exhibitions-section-title">Visual Storytellers behind the Project</h2>
-           
+                <div class="bio-header-block">
+                <h4 class="bio-header-title">Visual Storytellers behind the Project</h4>
+                </div>
                 <div class="">
                     <p><?php the_field('related_bios_description'); ?></p>
                 </div>
@@ -161,11 +172,10 @@ endif;
         <?php endif; ?>
     </section>
 </div>
+
     <div class="press-links-section-wrapper">
     <section class="press-links-section">
-       <div class="section-header-block"></div>
-            <h2 class="exhibitions-section-title">On the press:</h2>
-        
+        <h4 class="bio-header-title">On the press:</h4>
 
         <?php
 // Get the Text Area field value

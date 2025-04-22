@@ -253,18 +253,16 @@
 .related-post-title,
 .shop-item-title,
 .production-item-title {
-  /* font-size: 16px; */
   display: -webkit-box;
   -webkit-line-clamp: 2; /* Restrict to 3 lines */
   -webkit-box-orient: vertical;
-  overflow: hidden;
   text-overflow: ellipsis;
   max-height: calc(1.2em * 3); /* Adjust based on line height */
   line-height: 1.2em; /* Adjust for better readability */
   word-break: break-word;
+  overflow: hidden;
 }
 @media (max-width: 769px) {
-  .related-post-title,
   .shop-item-title,
   .production-item-title {
     font-size: 16px;
@@ -273,6 +271,11 @@
 @media (min-width: 769px) {
   .home-page-about-section-container {
     padding-inline: 8rem;
+  }
+  .related-post-title,
+  .shop-item-title,
+  .production-item-title {
+    overflow: initial;
   }
 }
 
