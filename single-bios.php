@@ -182,7 +182,7 @@ if ( have_posts() ) :
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
                  <div class="section-header-block">
-                    <h2 class="bios-section-title">Stories and more</h2>
+                    <h2 class="bios-section-title"><?php the_field('single_bio_relation_section_title'); ?></h2>
                  </div>
        
                 <ul class="bio-related-items-list">
