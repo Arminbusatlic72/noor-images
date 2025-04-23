@@ -392,10 +392,7 @@
 /* .production-description, */
 .community-description,
 .support-description {
-  margin-block: 2rem;
-}
-.support-description {
-  margin-inline: auto;
+  margin-bottom: 1rem;
 }
 
 .shop-items-grid-wrapper,
