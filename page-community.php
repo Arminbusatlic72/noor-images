@@ -314,7 +314,7 @@ echo '</section>'; // .press-section
                 // Subtitle
                 $subtitle = get_field('subtitle');
                 if ($subtitle) {
-                    echo '<p class="community-page-bio-subtitle subtitle">' . esc_html($subtitle) . '</p>';
+                    echo '<p class="community-page-bio-subtitle subtitle gray">' . esc_html($subtitle) . '</p>';
                 }
 
                 // Social Media Links

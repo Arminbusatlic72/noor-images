@@ -20,7 +20,7 @@ if ( have_posts() ) :
                 $caption = wp_get_attachment_caption( $thumbnail_id ); // Get the caption for the image
                 if ( $caption ) : 
             ?>
-                <figcaption class="story-image-caption"><?php echo esc_html( $caption ); ?></figcaption>
+                <figcaption class="bio-image-caption"><?php echo esc_html( $caption ); ?></figcaption>
             <?php 
                 endif;
             endif;
@@ -30,7 +30,7 @@ if ( have_posts() ) :
         <!-- Display Title and Subtitle -->
          <div class="bio-heading-wrapper">
         <h2 class="bio-heading"><?php the_field('name_and_surname'); ?></h2>
-        <h4 class="bio-subtitle"><?php the_field('subtitle'); ?></h4>
+        <h4 class="bio-subtitle gray"><?php the_field('subtitle'); ?></h4>
         </div>
          <!-- Community Labels -->
        <div class="bio-labels-wrapper">
@@ -190,7 +190,7 @@ if ( have_posts() ) :
                         $subtitle = get_field('subtitle', $post_type->ID);?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail">
+                                <div class="bio-related-item-thumbnail-wrapper">
                                     <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
                                   
                                 </div>
@@ -199,7 +199,7 @@ if ( have_posts() ) :
 										<?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
 									</h3>
                                     <?php if ($subtitle): ?>
-                                	<p class="subtitle"><?php echo esc_html($subtitle); ?></p>
+                                	<p class="subtitle gray"><?php echo esc_html($subtitle); ?></p>
                             		<?php endif; ?>
                                    
                                     <!-- $post_subtitle = get_field('subtitle', $post->ID);  -->
@@ -213,43 +213,43 @@ if ( have_posts() ) :
         <?php endif; ?>
     </section>
 </div>
-<div class="press-links-section-wrapper">
-    <section class="press-links-section">
-        <div class="section-header-block">
-            <h2 class="bios-section-title">On the press:</h2>
-        </div>
-       
-        <?php
+<?php
 // Get the Text Area field value
 $links = get_field('press_links');
 
 if ($links) : 
     // Split the text area content into an array of links
-    $links_array = explode("\n", $links);
+    $links_array = array_filter(array_map('trim', explode("\n", $links))); // Clean up each line and remove empties
 
-    echo '<ul class="press-links-list">';
-    foreach ($links_array as $link) :
-        $link = trim($link); // Trim whitespace
-        if (!empty($link)) :
-            // Split the line into title and URL
-            list($title, $url) = explode('|', $link, 2);
-            $title = trim($title); // Clean up title
-            $url = trim($url); // Clean up URL
+    if (!empty($links_array)) :
 ?>
-            <li>
-                <a href="<?php echo esc_url($url); ?>" target="_blank"><?php echo esc_html($title); ?></a>
-            </li>
+<div class="press-links-section-wrapper">
+    <section class="press-links-section">
+        <div class="section-header-block">
+            <h2 class="bios-section-title">On the press</h2>
+        </div>
+        <ul class="press-links-list">
+            <?php foreach ($links_array as $link) : 
+                if (strpos($link, '|') !== false) {
+                    list($title, $url) = array_map('trim', explode('|', $link, 2));
+                    if (!empty($title) && !empty($url)) :
+            ?>
+                <li>
+                    <a href="<?php echo esc_url($url); ?>" target="_blank"><?php echo esc_html($title); ?></a>
+                </li>
+            <?php 
+                    endif;
+                }
+            endforeach; 
+            ?>
+        </ul>
+    </section>
+</div>
 <?php
-        endif;
-    endforeach;
-    echo '</ul>';
-else :
-    echo '<p>No publication links available.</p>';
+    endif;
 endif;
 ?>
 
-    </section>
-</div>
 </div>
                     
 <?php 

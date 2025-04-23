@@ -353,9 +353,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
-.related-posts-wrapper {
-  /* padding-block: 2rem; */
-}
 .related-post {
   position: relative;
 }

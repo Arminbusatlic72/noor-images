@@ -213,6 +213,9 @@
   font-size: 1.8rem;
 }
 @media (min-width: 769px) {
+  .ast-single-post-featured-section + article {
+    margin-inline: 4rem;
+  }
   .section-title {
     font-size: 3.8rem;
   }
