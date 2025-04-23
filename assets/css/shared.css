@@ -329,7 +329,10 @@
 }
 
 .section-menu-link {
-  color: white;
+  color: #000;
+  padding-block: 0.5rem;
+  padding-inline: 0.7rem;
+  border: 1px solid #000;
 }
 @media (min-width: 768px) {
   .section-menu {

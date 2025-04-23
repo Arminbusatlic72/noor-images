@@ -387,7 +387,7 @@ echo '</section>'; // .support-us-section
 ?>
 
  <!-- Community Page Menu -->
-        <div class="section-menu-wrapper-transparent">
+        <!-- <div class="section-menu-wrapper-transparent">
             <div class="section-menu">
                 <?php
                 // Define social media icons
@@ -439,7 +439,7 @@ echo '</section>'; // .support-us-section
                 endif;
                 ?>
             </div>
-        </div>
+        </div> -->
     
     </main><!-- .community-page-main-wrapper -->
 
