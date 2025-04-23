@@ -180,17 +180,23 @@ foreach ($subscribe_items as $subscribe_item) {
 
 echo '</div>'; // .subscribe-items-wrapper
 
-// Display Subscribe Section Button
+
+// Display the subscribe link as a button
 if ($subscribe_section_button) {
     $button_url = isset($subscribe_section_button['url']) ? esc_url($subscribe_section_button['url']) : '';
     $button_target = isset($subscribe_section_button['target']) ? ' target="' . esc_attr($subscribe_section_button['target']) . '"' : '';
     $button_label = isset($subscribe_section_button['title']) ? esc_html($subscribe_section_button['title']) : 'Subscribe'; // Default text
 
-    echo '<div class="subscribe-button-wrapper">';
-    echo '<a href="' . $button_url . '"' . $button_target . ' class="subscribe-button ast-header-button-1 ast-custom-button white support-link-button">' . $button_label . '</a>';
-    echo '</div>';
-}
 
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $button_url . '"' . $button_target . ' class="read-all-link">
+                        ' . $button_label . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
 echo '</div>'; // .subscribe-container
 echo '</section>'; // .subscribe-section
 ?>
@@ -215,17 +221,22 @@ if ($press_section_description) {
     echo '<div class="press-description">' . wp_kses_post($press_section_description) . '</div>';
 }
 
-// Display the support button
+
+// Display the press link as a button
 if ($press_section_link) {
     $button_url = isset($press_section_link['url']) ? esc_url($press_section_link['url']) : '';
     $button_target = isset($press_section_link['target']) ? ' target="' . esc_attr($press_section_link['target']) . '"' : '';
     $button_label = isset($press_section_link['title']) ? esc_html($press_section_link['title']) : 'Subscribe'; // Default text
 
-    echo '<div class="press-button-wrapper">';
-    echo '<a href="' . $button_url . '"' . $button_target . ' class="ast-header-button-1 ast-custom-button white support-link-button">' . $button_label . '</a>';
-    echo '</div>';
-}
-
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $button_url . '"' . $button_target . ' class="read-all-link">
+                        ' . $button_label . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
 echo '</div>'; // .press-container
 echo '</section>'; // .press-section
 ?>
@@ -370,18 +381,21 @@ if ($support_section_title) {
 if ($support_section_description) {
     echo '<div class="support-us-description">' . wp_kses_post($support_section_description) . '</div>';
 }
+ // Display the support as a button
+        if ($support_section_link) {
+            $button_url = isset($support_section_link['url']) ? esc_url($support_section_link['url']) : '';
+            $button_target = isset($support_section_link['target']) ? ' target="' . esc_attr($support_section_link['target']) . '"' : '';
+            $button_label = isset($support_section_link['title']) ? esc_html($support_section_link['title']) : 'Support Us'; // Default text
 
-// Display the support button
-if ($support_section_link) {
-    $button_url = isset($support_section_link['url']) ? esc_url($support_section_link['url']) : '';
-    $button_target = isset($support_section_link['target']) ? ' target="' . esc_attr($support_section_link['target']) . '"' : '';
-    $button_label = isset($support_section_link['title']) ? esc_html($support_section_link['title']) : 'Support Us'; // Default text
-
-    echo '<div class="support-us-button-wrapper">';
-    echo '<a href="' . $button_url . '"' . $button_target . ' class="ast-header-button-1 ast-custom-button white support-link-button">' . $button_label . '</a>';
-    echo '</div>';
-}
-
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $button_url . '"' . $button_target . ' class="read-all-link">
+                        ' . $button_label . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
 echo '</div>'; // .support-us-container
 echo '</section>'; // .support-us-section
 ?>
