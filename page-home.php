@@ -175,16 +175,24 @@
         else :
             echo '<p>No related posts found.</p>';
         endif;
+        // Display the link as a button
+         $news_link = get_field('read_all_link'); 
+          if ($news_link) {
+            $link_url = esc_url($news_link['url']);
+            $link_title = esc_html($news_link['title']);
+            $link_target = $news_link['target'] ? ' target="' . esc_attr($news_link['target']) . '"' : '';
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $link_url . '"' . $link_target . ' class="read-all-link">
+                        ' . $link_title . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
         ?>
     </div>
-    <div class="read-all-button-wrapper">
-        <div class="read-all-button">
-            <a href="<?php echo get_post_type_archive_link('news'); ?>">View Our New's</a>
-            <div class="icon-wrapper">
-                <?php echo get_astra_svg_icon( 'arrow-right' ); ?>
-            </div>
-        </div>
-    </div>
+    
     </section>
 
     <section class="home-page-education-section">
@@ -221,14 +229,7 @@
         if ($education_description) {
             echo '<div class="education-description gray">' . wp_kses_post($education_description) . '</div>';
         }
-        // Display the link as a button
-        if ($education_link) {
-            $link_url = esc_url($education_link['url']);
-            $link_title = esc_html($education_link['title']);
-            $link_target = $education_link['target'] ? ' target="' . esc_attr($education_link['target']) . '"' : '';
-
-            echo '<div class="archive-button-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
-        }
+       
         echo '</div>';
 
         echo '</div>';
@@ -285,15 +286,23 @@
         echo '</div>'; // Close education-items-grid-wrapper
         
         
+        
+          // Display the link as a button
+          if ($education_link) {
+            $link_url = esc_url($education_link['url']);
+            $link_title = esc_html($education_link['title']);
+            $link_target = $education_link['target'] ? ' target="' . esc_attr($education_link['target']) . '"' : '';
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $link_url . '"' . $link_target . ' class="read-all-link">
+                        ' . $link_title . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
         ?>
-        <div class="read-all-button-wrapper">
-        <div class="read-all-button">
-            <a href="<?php echo get_post_type_archive_link('news'); ?>">View Education Page</a>
-            <div class="icon-wrapper">
-                <?php echo get_astra_svg_icon( 'arrow-right' ); ?>
-            </div>
-        </div>
-    </div>
+        
     </section>
 
     <section class="home-page-production-section">
@@ -412,15 +421,23 @@
             }
         }
         echo '</div>'; // Close production-items-grid-wrapper
+        // Display the link as a button
+         $production_link = get_field('production_section_read_all_link'); 
+          if ($production_link) {
+            $link_url = esc_url($production_link['url']);
+            $link_title = esc_html($production_link['title']);
+            $link_target = $production_link['target'] ? ' target="' . esc_attr($production_link['target']) . '"' : '';
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $link_url . '"' . $link_target . ' class="read-all-link">
+                        ' . $link_title . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
         ?>
-        <div class="read-all-button-wrapper">
-        <div class="read-all-button">
-            <a href="<?php echo get_post_type_archive_link('news'); ?>">View Production Page</a>
-            <div class="icon-wrapper">
-                <?php echo get_astra_svg_icon( 'arrow-right' ); ?>
-            </div>
-        </div>
-    </div>
+        
     </section>
 
    
@@ -465,14 +482,9 @@
         }
         
         // Display the link as a button
-        if ($community_link) {
-            $link_url = esc_url($community_link['url']);
-            $link_title = esc_html($community_link['title']);
-            $link_target = $community_link['target'] ? ' target="' . esc_attr($community_link['target']) . '"' : '';
-            
-            echo '<div class="community-btn-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
+        
             echo '</div>';
-        }
+        
         echo '</div>'; // Close community-content-container
         echo '</div>'; // Close community-grid-container
 
@@ -524,6 +536,22 @@
             }
         }
         echo '</div>'; // Close community-items-grid
+        
+          // Display the link as a button
+         if ($community_link) {
+            $link_url = esc_url($community_link['url']);
+            $link_title = esc_html($community_link['title']);
+            $link_target = $community_link['target'] ? ' target="' . esc_attr($community_link['target']) . '"' : '';
+            
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $link_url . '"' . $link_target . ' class="read-all-link">
+                        ' . $link_title . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
         ?>
     </section>
 
@@ -562,14 +590,7 @@
                 echo '<div class="archive-description">' . wp_kses_post($archive_description) . '</div>';
             }
 
-            // Display the link as a button
-            if ($archive_link) {
-                $link_url = esc_url($archive_link['url']);
-                $link_title = esc_html($archive_link['title']);
-                $link_target = $archive_link['target'] ? ' target="' . esc_attr($archive_link['target']) . '"' : '';
-
-                echo '<div class="archive-button-wrapper"><a href="' . $link_url . '"' . $link_target . ' class="ast-header-button-1 ast-custom-button white">' . $link_title . '</a></div>';
-            }
+            
 
             echo '</div>'; // Close archive-description-wrapper
         }
@@ -624,15 +645,25 @@
             }
         }
         echo '</div>'; // Close archive-items-grid
+
+    
+         // Display the link as a button
+        if ($archive_link) {
+                $link_url = esc_url($archive_link['url']);
+                $link_title = esc_html($archive_link['title']);
+                $link_target = $archive_link['target'] ? ' target="' . esc_attr($archive_link['target']) . '"' : '';
+
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $link_url . '"' . $link_target . ' class="read-all-link">
+                        ' . $link_title . '
+                            <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
         ?>
-        <div class="read-all-button-wrapper">
-        <div class="read-all-button">
-            <a href="<?php echo get_post_type_archive_link('news'); ?>">View Our Community Page</a>
-            <div class="icon-wrapper">
-                <?php echo get_astra_svg_icon( 'arrow-right' ); ?>
-            </div>
-        </div>
-    </div>
+       
     </section>
 
 
