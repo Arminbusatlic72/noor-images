@@ -43,7 +43,7 @@ function astra_child_enqueue_styles() {
     }
 
     // Group single post types together  
-    $single_types = array('bios', 'exhibitions', 'news');
+    $single_types = array('bios', 'exhibitions', 'news', 'educational-programs');
     foreach ($single_types as $type) {
         if (is_singular($type)) {
             wp_enqueue_style('single-' . $type, get_stylesheet_directory_uri() . '/assets/css/single-' . $type . '.css', array('astra-child-theme-css', 'shared-styles'), '1.0.0');
@@ -118,15 +118,11 @@ function register_custom_post_type($singular, $plural, $slug, $menu_position = 5
 
     register_post_type($slug, $args);
 }
-add_action('init', function() {
-    // register_custom_post_type('Article', 'Articles', 'articles', 5);
+add_action('init', function() {  
     register_custom_post_type('Bio', 'Bios', 'bios', 5);
     register_custom_post_type('Exhibition', 'Exhibitions', 'exhibitions', 6);
     register_custom_post_type('News', 'News', 'news', 7);
-    // register_custom_post_type('Story', 'Stories', 'stories', 8);
-    // register_custom_post_type('Announcement', 'Announcements', 'announcements', 8);
-
-
+    register_custom_post_type('Educational Program', 'Educational Programs', 'educational-programs', 8);
 });
 
 
@@ -238,7 +234,7 @@ add_action('init', function() {
     // Register Continents
     register_custom_taxonomy(
         'issues_of_focus',            // Taxonomy slug
-        ['bios','exhibitions','stories'],               // Associated post types
+        ['bios','exhibitions','stories','educational-programs'],               // Associated post types
         'Issues of focus',           // Taxonomy name
         'Issue of focus',            // Singular name
         'issue of focus',            // Rewrite slug

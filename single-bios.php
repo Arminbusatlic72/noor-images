@@ -153,11 +153,9 @@ if ( have_posts() ) :
     </div>
     </section>
    <section class="bio-slider-section">
-                <div class="section-header-block"></div>
-
-    <div class="bio-slider-section-wrapper">
-    <!-- Slider -->
-    <div class="bio-slider-section-slider-wrapper">
+        <div class="bio-slider-section-wrapper">
+        <!-- Slider -->
+        <div class="bio-slider-section-slider-wrapper">
         <?php
         $slider_shortcode = get_field('slider_shortcode');
         if( $slider_shortcode ):
@@ -173,7 +171,7 @@ if ( have_posts() ) :
     <a href="<?php echo get_post_type_archive_link('bios'); ?>" class="ast-header-button-1 ast-custom-button white">See all bios</a>
     </div>
     </div>
-     </section>
+    </section>
     <!-- Related Post Types -->
     <div class="bio-related-section-wrapper">
     <section class="bio-related-section">
