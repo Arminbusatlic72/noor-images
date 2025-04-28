@@ -8,7 +8,7 @@ if ( have_posts() ) :
 ?>
 
 <div class="bio-container">
-    <section class="bio-header-section">
+    <section class="section">
     <div class="bio-content-wrapper">
         <!-- Display Featured Image with Caption -->
         <div class="bio-featured-image-wrapper">
@@ -131,7 +131,7 @@ if ( have_posts() ) :
 
 
 
-  <section class="bio-short-biography-section">
+  <section class="section">
     <div class="bio-short-biography">
         <p class=""><?php the_field('short_biography'); ?></p>
     </div>
@@ -152,8 +152,8 @@ if ( have_posts() ) :
     </div>
     </div>
     </section>
-   <section class="bio-slider-section">
-        <div class="bio-slider-section-wrapper">
+   <section class="section">
+        <div class="content-sidebar-grid">
         <!-- Slider -->
         <div class="bio-slider-section-slider-wrapper">
         <?php
@@ -189,7 +189,7 @@ if ( have_posts() ) :
     </div>
     </section>
     <!-- Related Post Types -->
-    <div class="bio-related-section-wrapper">
+    <div class="section">
     <section class="bio-related-section">
         <?php 
         $related_posts_type = get_field('single_bio_relation'); 
@@ -204,21 +204,24 @@ if ( have_posts() ) :
                         $subtitle = get_field('subtitle', $post_type->ID);?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail-wrapper">
-                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                <div class="aspect-3-2">
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'medium_large', array( 'class' => 'img-cover' ) ); ?>
                                   
                                 </div>
-                                <div class="movie-title">
+                                 </a>
+                                <div class="bio-title-wrapper">
+                                    <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
                                     <h3>
 										<?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
 									</h3>
+                                    </a>
                                     <?php if ($subtitle): ?>
                                 	<p class="subtitle gray"><?php echo esc_html($subtitle); ?></p>
                             		<?php endif; ?>
                                    
                                     <!-- $post_subtitle = get_field('subtitle', $post->ID);  -->
                                 </div>
-                            </a>
+                           
                         </li>
                        
                     <?php endforeach; ?>
@@ -238,7 +241,7 @@ if ($links) :
     if (!empty($links_array)) :
 ?>
 <div class="press-links-section-wrapper">
-    <section class="press-links-section">
+    <section class="section section--last">
         <div class="section-header-block">
             <h2 class="bios-section-title">On the press</h2>
         </div>
