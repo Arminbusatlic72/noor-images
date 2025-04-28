@@ -7,7 +7,7 @@
 
     <div id="primary" class="content-area">
         <main id="main" class="site-main">
-            <section class="home-page-about-section">
+            <section class="section">
                 <div class="home-page-about-section-container">
                
 
@@ -51,11 +51,9 @@
             </section>
 
 
-            <section class="home-page-featured-post-section">
+            <section class="section">
                 <div class="section-header-block">
-                    <h2 class="section-title">What's new</h2>
-                    
-                   
+                    <h2 class="section-title">What's new</h2>                 
                 </div>
                 
 
@@ -85,9 +83,9 @@
     $thumbnail_id = get_post_thumbnail_id($post->ID);
     $image_caption = wp_get_attachment_caption($thumbnail_id);
 
-    echo '<figure class="featured-post-image-wrapper">';
+    echo '<figure class="aspect-3-2">';
     echo '<a href="' . esc_url($post_permalink) . '" class="featured-post-image-link">';
-    echo '<img class="featured-post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
+    echo '<img class="img-cover" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
     echo '</a>';
 
     // Properly placed figcaption
@@ -125,7 +123,7 @@
         $related_posts = get_field('related_post_types'); 
 
         if ($related_posts) :
-            echo '<div class="related-posts-grid">';
+            echo '<div class="responsive-grid-3col">';
             foreach ($related_posts as $post) :
                 // Setup post data
                 setup_postdata($post);
@@ -142,9 +140,9 @@
                 // Display the post
                 echo '<article class="related-post">';
                 if ($post_featured_image) {
-                    echo '<div class="related-post-image-wrapper">';
+                    echo '<div class="aspect-3-2">';
                     echo '<a href="' . esc_url($post_permalink) . '">';
-                    echo '<img class="related-post-image" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
+                    echo '<img class="img-cover" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
                     
                     // Display the first 'front-label' term if it exists
                    
@@ -195,7 +193,7 @@
     
     </section>
 
-    <section class="home-page-education-section">
+    <section class="section">
         <div class="section-header-block">
             <h2 class="section-title">Education</h2>
                 
@@ -208,7 +206,7 @@
         $education_slider_shortcode = get_field('education_section_slider');
         $education_slider_caption = get_field('education_section_slider_caption');
         
-        echo '<div class="featured-post-grid">';
+        echo '<div class="content-sidebar-grid">';
         // Display the slider using the shortcode
         if ($education_slider_shortcode) {
             echo '<div class="education-slider-wrapper">';
@@ -242,7 +240,7 @@
             get_field('education_item_third')
         ];
 
-        echo '<div class="education-items-grid">';
+        echo '<div class="responsive-grid-3col">';
         foreach ($education_items as $education_item) {
             if ($education_item) {
                 // Extract fields
@@ -256,19 +254,18 @@
                 // Image Handling
                 if ($education_item_image && isset($education_item_image['ID'])) {
                     $education_item_image_id = $education_item_image['ID'];
-                    echo '<div class="education-item-image-wrapper">';
+                    echo '<div class="aspect-3-2">';
                     if ($education_item_link) {
                         $item_link_url = esc_url($education_item_link['url']);
                         $item_link_target = $education_item_link['target'] ? ' target="' . esc_attr($education_item_link['target']) . '"' : '';
                         echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="education-item-image-link">';
-                        echo wp_get_attachment_image($education_item_image_id, 'large', false, ['alt' => esc_attr($education_item_title)]);
+                        echo wp_get_attachment_image($education_item_image_id, 'large', false, ['alt' => esc_attr($education_item_title),'class' => 'img-cover']);
                         echo '</a>';
                     } else {
                         echo wp_get_attachment_image($education_item_image_id, 'large', false, ['alt' => esc_attr($education_item_title)]);
                     }
                     echo '</div>';
                 }
-                // echo '<h3 class="top-production-item-title"><a href="' . esc_url($top_item_link_url) . '">'. esc_html($top_item_title) . '</a></h3>';
 
                 // Title
                 if ($education_item_title) {
@@ -305,7 +302,7 @@
         
     </section>
 
-    <section class="home-page-production-section">
+    <section class="section">
         <?php
         // Get ACF fields
         $production_title = get_field('production_section_title');
@@ -332,17 +329,17 @@
             $top_item_link = $top_production_item['production_item_link'];
 
             echo '<div class="top-production-item-grid-wrapper">';
-            echo '<article class="top-production-item-grid">';
+            echo '<article class="content-sidebar-grid">';
 
             // Image Handling
             if ($top_item_image && isset($top_item_image['ID'])) {
                 $top_item_image_id = $top_item_image['ID'];
-                echo '<div class="top-production-item-image-wrapper">';
+                echo '<div class="aspect-3-2">';
                 if ($top_item_link) {
                     $top_item_link_url = esc_url($top_item_link['url']);
                     $top_item_link_target = $top_item_link['target'] ? ' target="' . esc_attr($top_item_link['target']) . '"' : '';
                     echo '<a href="' . $top_item_link_url . '"' . $top_item_link_target . ' class="production-item-image-link">';
-                    echo wp_get_attachment_image($top_item_image_id, 'large', false, ['alt' => esc_attr($top_item_title)]);
+                    echo wp_get_attachment_image($top_item_image_id, 'large', false, ['alt' => esc_attr($top_item_title),'class' => 'img-cover']);
                     echo '</a>';
                     if ($top_item_image_caption) {
                     echo '<div class="image-caption">' . esc_html($top_item_image_caption) . '</div>';
@@ -379,7 +376,7 @@
             get_field('production_item_third')
         ];
 
-        echo '<div class="production-items-grid-wrapper">';
+        echo '<div class="responsive-grid-3col">';
         foreach ($production_items as $production_item) {
             if ($production_item) {
                 // Extract fields
@@ -393,20 +390,18 @@
                 // Image Handling
                 if ($production_item_image && isset($production_item_image['ID'])) {
                     $production_item_image_id = $production_item_image['ID'];
-                    echo '<div class="production-item-image-wrapper">';
+                    echo '<div class="aspect-3-2">';
                     if ($production_item_link) {
                         $item_link_url = esc_url($production_item_link['url']);
                         $item_link_target = $production_item_link['target'] ? ' target="' . esc_attr($production_item_link['target']) . '"' : '';
                         echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="production-item-image-link">';
-                        echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
+                        echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title),'class' => 'img-cover']);
                         echo '</a>';
                     } else {
                         echo wp_get_attachment_image($production_item_image_id, 'large', false, ['alt' => esc_attr($production_item_title)]);
                     }
                     echo '</div>';
                 }
-                // echo '<h3 class="top-production-item-title"><a href="' . esc_url($top_item_link_url) . '">'. esc_html($top_item_title) . '</a></h3>';
-
                 // Title
                 if ($production_item_title) {
                     echo '<h3 class="production-item-title"><a href=" ' . esc_url($item_link_url) . '">'. esc_html($production_item_title) . '</a></h3>';
@@ -444,28 +439,26 @@
 
 
 
-    <section class="home-page-community-section">
+    <section class="section">
         <?php
         // Get the ACF field for the Google Map shortcode
-        $google_map_shortcode = get_field('google_map_short_code'); // ACF field for the Google Map shortcode
         $community_title = get_field('community_section_title');
         $community_description = get_field('community_section_description');
         $community_link = get_field('community_section_link');
         if ($community_title) {
             echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($community_title) . '</h2></div>';
         }
-       
-        
+             
         // Check if the Google Map shortcode is available
-        echo '<div class="community-grid-container">';
+        echo '<div class="content-sidebar-grid">';
         
         $community_image = get_field('community_section_image');
         if ($community_image) {
             $image_url = esc_url($community_image['url']);
             $image_alt = $community_image['alt'] ? esc_attr($community_image['alt']) : esc_attr('Community section image');
             $image_caption = get_field('community_section_image_caption');
-            echo '<div class="community-image-wrapper">';
-            echo '<img src="' . $image_url . '" alt="' . $image_alt . '">';
+            echo '<div class="aspect-3-2">';
+            echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="img-cover">';
             if ($image_caption) {
         echo '<div class="image-caption">' . esc_html($image_caption) . '</div>';
     }
@@ -495,7 +488,7 @@
             get_field('community_section_item_third')
         ];
 
-        echo '<div class="community-items-grid">';
+        echo '<div class="responsive-grid-3col">';
         foreach ($community_items as $community_item) {
             if ($community_item) {
                 // Extract fields
@@ -509,12 +502,12 @@
                 // Image Handling
                 if ($community_item_image && isset($community_item_image['ID'])) {
                     $community_item_image_id = $community_item_image['ID'];
-                    echo '<div class="community-item-image-wrapper">';
+                    echo '<div class="aspect-3-2">';
                     if ($community_item_link) {
                         $item_link_url = esc_url($community_item_link['url']);
                         $item_link_target = $community_item_link['target'] ? ' target="' . esc_attr($community_item_link['target']) . '"' : '';
                         echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="community-item-image-link">';
-                        echo wp_get_attachment_image($community_item_image_id, 'large', false, ['alt' => esc_attr($community_item_title)]);
+                        echo wp_get_attachment_image($community_item_image_id, 'large', false, ['alt' => esc_attr($community_item_title),'class' => 'img-cover']);
                         echo '</a>';
                     } else {
                         echo wp_get_attachment_image($community_item_image_id, 'large', false, ['alt' => esc_attr($community_item_title)]);
@@ -555,7 +548,7 @@
         ?>
     </section>
 
-    <section class="home-page-archive-section">
+    <section class="section">
         <?php
         // Get ACF fields
         $archive_title = get_field('archive_section_title');
@@ -569,7 +562,7 @@
             echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($archive_title) . '</h2></div>';
         }
 
-        echo '<div class="archive-grid-container">';
+        echo '<div class="content-sidebar-grid">';
 
         // Display the slider using the shortcode
         if ($archive_slider_shortcode) {
@@ -604,7 +597,7 @@
             get_field('archive_item_third')
         ];
 
-        echo '<div class="archive-items-grid">';
+        echo '<div class="responsive-grid-3col">';
         foreach ($archive_items as $archive_item) {
             if ($archive_item) {
                 // Extract fields
@@ -618,12 +611,12 @@
                 // Image Handling
                 if ($archive_item_image && isset($archive_item_image['ID'])) {
                     $archive_item_image_id = $archive_item_image['ID'];
-                    echo '<div class="archive-item-image-wrapper">';
+                    echo '<div class="aspect-3-2">';
                     if ($archive_item_link) {
                         $item_link_url = esc_url($archive_item_link['url']);
                         $item_link_target = $archive_item_link['target'] ? ' target="' . esc_attr($archive_item_link['target']) . '"' : '';
                         echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="archive-item-image-link">';
-                        echo wp_get_attachment_image($archive_item_image_id, 'large', false, ['alt' => esc_attr($archive_item_title)]);
+                        echo wp_get_attachment_image($archive_item_image_id, 'large', false, ['alt' => esc_attr($archive_item_title),'class' => 'img-cover']);
                         echo '</a>';
                     } else {
                         echo wp_get_attachment_image($archive_item_image_id, 'large', false, ['alt' => esc_attr($archive_item_title)]);
@@ -668,7 +661,7 @@
 
 
 
-    <section class="home-page-shop-section">
+    <section class="section">
         <?php
         // Get ACF fields
         $shop_title = get_field('shop_section_title');
@@ -686,7 +679,7 @@
             get_field('shop_item_third')
         ];
 
-        echo '<div class="shop-items-grid-wrapper">';
+        echo '<div class="responsive-grid-3col">';
         foreach ($shop_items as $shop_item) {
             if ($shop_item) {
                 // Extract fields from each shop item group
@@ -709,13 +702,13 @@
                     $item_link_url = esc_url($shop_item_link['url']);
                     $item_link_target = $shop_item_link['target'] ? ' target="' . esc_attr($shop_item_link['target']) . '"' : '';
 
-                    echo '<div class="shop-item-image-wrapper"><a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-image-link">';
-                    echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title)]);
+                    echo '<div class="aspect-3-2"><a href="' . $item_link_url . '"' . $item_link_target . ' class="shop-item-image-link">';
+                    echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title),'class' => 'img-cover']);
                     echo '</a></div>';
                 } elseif ($shop_item_image_id) {
-                    echo '<div class="shop-item-image">';
-                    echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title)]);
-                    echo '</div>';
+                   
+                    echo wp_get_attachment_image($shop_item_image_id, 'large', false, ['alt' => esc_attr($shop_item_title),'class' => 'img-cover']);
+                   
                 } else {
                     // Fallback for missing image
                     echo '<div class="shop-item-image">';
@@ -770,7 +763,7 @@
     </section>
 
 
-    <section class="home-page-support-section">
+    <section class="section section--last">
         <?php
         // Get ACF fields
         $support_title = get_field('support_section_title');

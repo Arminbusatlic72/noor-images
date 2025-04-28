@@ -19,17 +19,17 @@ if ( have_posts() ) :
     </div>
 </div>
 <section class="exhibition-header-section">
-    <div class="exhibition-header-wrapper">
+    < class="exhibition-header-wrapper">
     <h2 class="bio-heading"><?php the_field('headline'); ?></h2>
     <h3><?php the_field('subtitle'); ?></h3>
     <div class="exhibition-description-wrapper">
     <p ><?php the_field('story_description'); ?></p>
-</div>
+    </div>
 
  <div class="bio-issues-of-focus">
-        <p>Issue areas :</p>
+        <span>Issue areas :</span>
          <!-- Country Labels -->
-    <div>
+    
         <?php
         $issues_of_focus = get_the_terms(get_the_ID(), 'issues_of_focus');
         if ($issues_of_focus && !is_wp_error($issues_of_focus)) {
@@ -40,14 +40,14 @@ if ( have_posts() ) :
             echo '</ul>';
         }
         ?>
+    
     </div>
-    </div>
-</div>
+
 </section>
 
 <section class="top-related-item-section">
    
-    <div class="top-related-item-grid">
+    <article class="content-sidebar-grid">
         <!-- Slider or Featured Image -->
         <div class="top-related-item-wrapper">
             <?php 
@@ -61,10 +61,12 @@ if ( have_posts() ) :
                 
                 // Display the featured image of the latest post with a link
                 $latest_post_permalink = get_permalink( $latest_post->ID );
-                $latest_post_thumbnail = get_the_post_thumbnail( $latest_post->ID, 'large', array( 'class' => 'custom-thumbnail' ) );
+                $latest_post_thumbnail = get_the_post_thumbnail( $latest_post->ID, 'large', array( 'class' => 'img-cover' ) );
                 
                 echo '<a href="' . esc_url( $latest_post_permalink ) . '" class="bio-latest-post-link">';
+                 echo '<div class="aspect-3-2">';
                 echo $latest_post_thumbnail;
+                echo '</div>';
                 echo '</a>';
             endif;
             ?>
@@ -77,7 +79,7 @@ if ( have_posts() ) :
             endif;
             ?>
         </div>
-    </div>
+    </article>
 </section>
 
 
@@ -86,7 +88,7 @@ if ( have_posts() ) :
     <div class="section-header-block">
                     <h2 class="section-title">Stories and more</h2>
                 </div>
-    <section class="bio-related-section">
+    <section class="section">
         <?php 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
             <div class="bio-relation-wrapper">
@@ -101,9 +103,9 @@ if ( have_posts() ) :
                     ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail">
+                                <div class="aspect-3-2">
                                     
-                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'img-cover' ) ); ?>
                                     <span class="bio-related-items-label">
                                         <?php 
                                         // Get the post type of the current related item
@@ -133,7 +135,7 @@ if ( have_posts() ) :
 
 <!-- Related Post Types -->
     <div class="bio-related-section-wrapper">
-    <section class="bio-related-section">
+    <section class="section">
         <?php 
         $related_posts_type = get_field('related_bios'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
@@ -149,8 +151,8 @@ if ( have_posts() ) :
                     <?php foreach( $related_posts_type as $post_type ): ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail">
-                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                <div class="square-image-wrapper bio-related-item-thumbnail">
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'medium_large', array( 'class' => 'img-cover' ) ); ?>
                                    <span class="bio-related-items-label">
                                     <?php 
                                     // Get the post type of the current related item

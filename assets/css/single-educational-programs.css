@@ -2,17 +2,6 @@
   width: 100%;
   height: 600px;
 }
-.bio-container {
-  /* margin-top: 10rem; */
-}
-.bio-header-section,
-.bio-short-biography-section,
-.bio-slider-section,
-.bio-related-section,
-.press-links-section {
-  padding-inline: 1rem;
-  padding-top: 1rem;
-}
 
 .bio-content-wrapper {
   display: grid;
@@ -161,7 +150,6 @@
     grid-template-columns: 70% 30%; /* Left: 70%, Right: 30% */
     gap: 20px; /* Optional: Add spacing between columns */
     width: 100%;
-    margin-block: 2rem;
   }
   .bio-slider-section-text-wrapper {
     padding-left: 1rem;

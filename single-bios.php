@@ -168,7 +168,23 @@ if ( have_posts() ) :
     
     <p class="bio-content"><?php the_field('content'); ?></p>
     
-    <a href="<?php echo get_post_type_archive_link('bios'); ?>" class="ast-header-button-1 ast-custom-button white">See all bios</a>
+    
+    <?php
+         $production_link = get_field('see_all_bios_link'); 
+          if ($production_link) {
+            $link_url = esc_url($production_link['url']);
+            $link_title = esc_html($production_link['title']);
+            $link_target = $production_link['target'] ? ' target="' . esc_attr($production_link['target']) . '"' : '';
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $link_url . '"' . $link_target . ' class="read-all-link">
+                        ' . $link_title . '
+                        <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
+        ?>
     </div>
     </div>
     </section>

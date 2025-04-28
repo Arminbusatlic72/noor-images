@@ -231,21 +231,7 @@
 }
 
 /* New Template css */
-.home-page-about-section,
-.home-page-featured-post-section,
-.home-page-related-posts-section,
-.home-page-education-section,
-.home-page-production-section,
-.home-page-archive-section,
-.home-page-community-section,
-.home-page-shop-section,
-.home-page-support-section {
-  padding-inline: 1rem;
-  padding-top: 1rem;
-}
-.home-page-support-section {
-  margin-bottom: 6rem;
-}
+
 .home-page-about-section-container {
   text-align: center;
 }
@@ -279,10 +265,7 @@
   }
 }
 
-.featured-post-grid,
-.top-production-item-grid,
-.community-grid-container,
-.archive-grid-container {
+.featured-post-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
@@ -302,10 +285,7 @@
 }
 
 @media (min-width: 769px) {
-  .featured-post-grid,
-  .top-production-item-grid,
-  .archive-grid-container,
-  .community-grid-container {
+  .featured-post-grid {
     grid-template-columns: 2fr 1fr;
     align-items: center;
     gap: 18px;
@@ -345,14 +325,7 @@
     text-align: left;
   }
 }
-.related-posts-grid,
-.education-items-grid,
-.community-items-grid,
-.archive-items-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
+
 .related-post {
   position: relative;
 }
@@ -389,22 +362,12 @@
 .home-page-about-section-description {
   margin-bottom: 3rem;
 }
-/* .production-description, */
+.production-description,
 .community-description,
 .support-description {
   margin-bottom: 1rem;
 }
 
-.shop-items-grid-wrapper,
-.production-items-grid-wrapper,
-.education-items-grid,
-.community-items-grid,
-.archive-items-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 3rem;
-}
 .shop-btn-wrapper,
 .support-section-btn-wrapper {
   text-align: center;
@@ -416,27 +379,4 @@
 
 .shop-item {
   position: relative;
-  margin-bottom: 3rem;
-}
-
-@media (min-width: 769px) {
-  .related-posts-grid,
-  .education-items-grid,
-  .community-items-grid,
-  .production-items-grid-wrapper,
-  .archive-items-grid,
-  .shop-items-grid-wrapper {
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-  }
-  .related-post-title,
-  .shop-item-title {
-    line-height: 100%;
-    margin-bottom: 10px;
-  }
-  .production-description {
-    columns: 3;
-    column-gap: 2rem;
-    margin: 0 auto 1rem;
-  }
 }

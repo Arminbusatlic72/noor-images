@@ -93,8 +93,8 @@ endif;
                         $subtitle = get_field('subtitle', $post_type->ID);?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail">
-                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                <div class="aspect-3-2 bio-related-item-thumbnail">
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'img-cover' ) ); ?>
                                   
                                 </div>
                                 <div class="movie-title">
@@ -135,8 +135,8 @@ endif;
                     <?php foreach( $related_posts_type as $post_type ): ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail">
-                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                <div class="square-image-wrapper bio-related-item-thumbnail">
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'img-cover' ) ); ?>
                                    <span class="bio-related-items-label">
                                     <?php 
                                     // Get the post type of the current related item

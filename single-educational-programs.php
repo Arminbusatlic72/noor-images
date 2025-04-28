@@ -22,11 +22,11 @@ if ( have_posts() ) :
             </div>
         <?php endif; ?>
 
-        <section class="educational-program-header-section">
-            <div class="educational-program-header-wrapper">
-                <h2 class="educational-program-heading"><?php the_field('headline'); ?></h2>
+        <section class="section">
+            <div class="bios-header-wrapper">
+                <h2 class="bio-heading"><?php the_field('headline'); ?></h2>
                 <h3><?php the_field('subtitle'); ?></h3>
-            <div class="educational-program-description-wrapper">
+            <div class="bio-description-wrapper">
                 <p ><?php the_field('description'); ?></p>
             </div>
             <div class="bio-issues-of-focus">
@@ -55,7 +55,7 @@ $content = get_field('content');
 // Only display section if at least one of the fields has content
 if ( $slider_shortcode || $headline || $content ) :
 ?>
-<section class="bio-slider-section">
+<section class="section">
     <div class="bio-slider-section-wrapper">
         
         <div class="bio-slider-section-slider-wrapper">
@@ -80,7 +80,7 @@ if ( $slider_shortcode || $headline || $content ) :
 
     </div>
 </section>
- <section class="bio-related-section">
+ <section class="section">
         <?php 
         $related_posts_type = get_field('related_post_types'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
@@ -117,7 +117,7 @@ if ( $slider_shortcode || $headline || $content ) :
         <?php endif; ?>
     </section>
 
-    <section class="bio-related-section">
+    <section class="section">
         <?php 
         $related_posts_type = get_field('related_bios'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
@@ -133,8 +133,8 @@ if ( $slider_shortcode || $headline || $content ) :
                     <?php foreach( $related_posts_type as $post_type ): ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="bio-related-item-thumbnail">
-                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'custom-thumbnail' ) ); ?>
+                                <div class="square-image-wrapper">
+                                    <?php echo get_the_post_thumbnail( $post_type->ID, 'full', array( 'class' => 'img-cover' ) ); ?>
                                    <span class="bio-related-items-label">
                                     <?php 
                                     // Get the post type of the current related item
@@ -171,7 +171,7 @@ if ($links) :
     if (!empty($links_array)) :
 ?>
 <div class="press-links-section-wrapper">
-    <section class="press-links-section">
+    <section class="section">
         <div class="section-header-block">
             <h2 class="bios-section-title">On the press</h2>
         </div>
