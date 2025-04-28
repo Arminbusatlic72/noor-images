@@ -23,9 +23,10 @@ if ( have_posts() ) :
         <?php endif; ?>
 
         <section class="section">
-            <div class="bios-header-wrapper">
-                <h2 class="bio-heading"><?php the_field('headline'); ?></h2>
-                <h3><?php the_field('subtitle'); ?></h3>
+            <div class="post-type-header-wrapper">
+                <h2 class="post-type-heading"><?php the_field('headline'); ?></h2>
+                <h3 class="post-type-subheading gray"><?php the_field('subtitle'); ?></h3>
+            </div>
             <div class="bio-description-wrapper">
                 <p ><?php the_field('description'); ?></p>
             </div>
@@ -45,7 +46,6 @@ if ( have_posts() ) :
         ?>
     </div>
     </div>
-</div>
         </section>
         <?php
 $slider_shortcode = get_field('educational_program_slider_short_code');
@@ -75,7 +75,22 @@ if ( $slider_shortcode || $headline || $content ) :
                 <p class="bio-content"><?php echo esc_html( $content ); ?></p>
             <?php endif; ?>
 
-            <a href="<?php echo esc_url( get_post_type_archive_link('bios') ); ?>" class="ast-header-button-1 ast-custom-button white">See all bios</a>
+            <?php
+         $educational_program_link = get_field('educational_program_see_more_link'); 
+          if ($educational_program_link) {
+            $link_url = esc_url($educational_program_link['url']);
+            $link_title = esc_html($educational_program_link['title']);
+            $link_target = $educational_program_link['target'] ? ' target="' . esc_attr($educational_program_link['target']) . '"' : '';
+            echo '<div class="read-all-button-wrapper">
+                    <div class="read-all-button">
+                        <a href="' . $link_url . '"' . $link_target . ' class="read-all-link">
+                        ' . $link_title . '
+                        <span class="icon-wrapper">' . get_astra_svg_icon('arrow-right') . '</span>
+                        </a>
+                    </div>
+                 </div>';
+        }
+        ?>
         </div>
 
     </div>
@@ -147,8 +162,10 @@ if ( $slider_shortcode || $headline || $content ) :
                                     ?>
                                 </span>
                                 </div>
+                            </a>
+                            <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">                           
                                 <div class="movie-title">
-                                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
+                                   <h3> <?php echo esc_html( get_the_title( $post_type->ID ) ); ?> </h3>
                                 </div>
                             </a>
                         </li>

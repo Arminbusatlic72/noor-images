@@ -359,6 +359,13 @@
     padding-inline: 0.7rem;
   }
 }
+.press-links-heading {
+  margin-top: 3rem;
+}
+.press-links-list {
+  margin-top: 2rem;
+  list-style: none;
+}
 /* Grid */
 .content-sidebar-grid {
   display: grid;
