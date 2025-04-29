@@ -18,12 +18,13 @@ if ( have_posts() ) :
         ?>
     </div>
 </div>
-<section class="exhibition-header-section">
-    < class="exhibition-header-wrapper">
-    <h2 class="bio-heading"><?php the_field('headline'); ?></h2>
-    <h3><?php the_field('subtitle'); ?></h3>
+<section class="section">
+    <div class="post-type-header-wrapper">
+    <h2 class="post-type-heading"><?php the_field('headline'); ?></h2>
+    <h3 class="post-type-subheading gray"><?php the_field('subtitle'); ?></h3>
     <div class="exhibition-description-wrapper">
     <p ><?php the_field('story_description'); ?></p>
+    </div>
     </div>
 
  <div class="bio-issues-of-focus">
@@ -45,11 +46,11 @@ if ( have_posts() ) :
 
 </section>
 
-<section class="top-related-item-section">
+<section class="section">
    
     <article class="content-sidebar-grid">
         <!-- Slider or Featured Image -->
-        <div class="top-related-item-wrapper">
+        <div class="content-sidebar-slider-wrapper">
             <?php 
             // Get the related post types
             $related_posts_type = get_field('related_post_types'); 
@@ -84,13 +85,14 @@ if ( have_posts() ) :
 
 
 <!-- Related Post Types -->
-<div class="bio-related-section-wrapper">
-    <div class="section-header-block">
-                    <h2 class="section-title">Stories and more</h2>
-                </div>
-    <section class="section">
+   
+    
         <?php 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
+        <section class="section">
+         <div class="section-header-block">
+                    <h2 class="">Stories and more</h2>
+                </div>
             <div class="bio-relation-wrapper">
                 
                 <ul class="bio-related-items-list">
@@ -119,30 +121,34 @@ if ( have_posts() ) :
                                     </span>
                                 </div>
                                 <div class="movie-title">
-                                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
+                                    <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
+                                    <h3><?php echo esc_html( get_the_title( $post_type->ID ) ); ?></h3>
+                                    </a>
                                 </div>
                             </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
-        <?php endif; ?>
     </section>
-</div>
+
+        <?php endif; ?>
+
 
 
 
 
 <!-- Related Post Types -->
-    <div class="bio-related-section-wrapper">
-    <section class="section">
+   
         <?php 
         $related_posts_type = get_field('related_bios'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
+    <section class="section">
+
             <div class="bio-relation-wrapper">
                
                 <div class="section-header-block">
-                    <h2 class="section-title">Visual Storytellers behind the Project</h2>
+                    <h2 class="">Visual Storytellers behind the Project</h2>
                 </div>
                 <div class="">
                     <p><?php the_field('related_bios_description'); ?></p>
@@ -151,7 +157,7 @@ if ( have_posts() ) :
                     <?php foreach( $related_posts_type as $post_type ): ?>
                         <li class="bio-related-item">
                             <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
-                                <div class="square-image-wrapper bio-related-item-thumbnail">
+                                <div class="square-image-wrapper">
                                     <?php echo get_the_post_thumbnail( $post_type->ID, 'medium_large', array( 'class' => 'img-cover' ) ); ?>
                                    <span class="bio-related-items-label">
                                     <?php 
@@ -166,7 +172,10 @@ if ( have_posts() ) :
                                 </span>
                                 </div>
                                 <div class="movie-title">
-                                    <?php echo esc_html( get_the_title( $post_type->ID ) ); ?>
+                                    <a href="<?php echo get_permalink( $post_type->ID ); ?>" class="bio-related-item-link">
+                                    
+                                    <h3><?php echo esc_html( get_the_title( $post_type->ID ) ); ?></h3>
+                                </a>
                                 </div>
                             </a>
                         </li>
@@ -174,14 +183,15 @@ if ( have_posts() ) :
                     <?php endforeach; ?>
                 </ul>
             </div>
-        <?php endif; ?>
     </section>
-</div>
+
+        <?php endif; ?>
+
 
     <div class="press-links-section-wrapper">
-    <section class="press-links-section">
+    <section class="section section--last">
        <div class="section-header-block">
-            <h2 class="section-title">On the press:</h2>
+            <h2 class="">On the press:</h2>
         </div>
 
         <?php

@@ -1,15 +1,3 @@
-.bio-container {
-  /* margin-top: 10rem; */
-}
-.bio-header-section,
-.bio-short-biography-section,
-.bio-slider-section,
-.bio-related-section,
-.press-links-section {
-  padding-inline: 1rem;
-  padding-top: 1rem;
-}
-
 .bio-content-wrapper {
   display: grid;
   width: 100%;
@@ -189,9 +177,6 @@
   line-height: 3.225rem;
 }
 
-.bio-relation-wrapper {
-  padding-bottom: 3rem;
-}
 .bio-related-items-list {
   display: grid;
   width: 100%;
