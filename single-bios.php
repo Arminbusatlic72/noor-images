@@ -8,7 +8,7 @@ if ( have_posts() ) :
 ?>
 
 <div class="bio-container">
-    <section class="section">
+  
     <div class="bio-content-wrapper">
         <!-- Display Featured Image with Caption -->
         <div class="bio-featured-image-wrapper">
@@ -29,8 +29,9 @@ if ( have_posts() ) :
 <div class="bio-meta-content-wrapper">
         <!-- Display Title and Subtitle -->
          <div class="bio-heading-wrapper">
-        <h2 class="bio-heading"><?php the_field('name_and_surname'); ?></h2>
         <h4 class="bio-subtitle gray"><?php the_field('subtitle'); ?></h4>
+
+        <h2 class="bio-heading"><?php the_field('name_and_surname'); ?></h2>
         </div>
          <!-- Community Labels -->
        <div class="bio-labels-wrapper">
@@ -127,7 +128,7 @@ if ( have_posts() ) :
   </div>  
     </div>
     </div>
-</section>
+
 
 
 
@@ -191,10 +192,11 @@ if ( have_posts() ) :
     </section>
     <!-- Related Post Types -->
     <div class="section-wrapper">
-    <section class="section">
+   
         <?php 
         $related_posts_type = get_field('single_bio_relation'); 
         if( $related_posts_type && !empty($related_posts_type) ): ?>
+         <section class="section">
             <div class="bio-relation-wrapper">
                  <div class="section-header-block">
                     <h2 class="bios-section-title"><?php the_field('single_bio_relation_section_title'); ?></h2>
@@ -228,8 +230,9 @@ if ( have_posts() ) :
                     <?php endforeach; ?>
                 </ul>
             </div>
-        <?php endif; ?>
     </section>
+
+        <?php endif; ?>
 </div>
 <?php
 // Get the Text Area field value
@@ -244,7 +247,7 @@ if ($links) :
 <div class="press-links-section-wrapper">
     <section class="section section--last">
         <div class="section-header-block">
-            <h2 class="bios-section-title">On the press</h2>
+            <h4 class="press-section-title">On the press</h4>
         </div>
         <ul class="press-links-list">
             <?php foreach ($links_array as $link) : 

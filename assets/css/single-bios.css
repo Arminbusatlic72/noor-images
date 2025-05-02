@@ -42,7 +42,7 @@
 }
 @media (min-width: 769px) {
   .bio-meta-content-wrapper {
-    padding-top: 6rem;
+    padding-top: 12rem;
   }
   .bio-heading {
     display: inline-block;

@@ -395,6 +395,11 @@
     padding-inline: 0.7rem;
   }
 }
+.press-section-title {
+  font-weight: bold;
+  margin-top: 1rem;
+  font-size: 16px;
+}
 .press-links-heading {
   margin-top: 3rem;
 }
@@ -466,4 +471,15 @@
 /* utility */
 .mt-2 {
   margin-top: 2rem;
+}
+.featured-image-full-width {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.featured-image-full-width img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
