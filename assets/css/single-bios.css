@@ -4,10 +4,6 @@
   grid-template-columns: 1fr;
 }
 @media (min-width: 769px) {
-  .bio-short-biography {
-    width: 100%;
-    margin: 2rem auto 0;
-  }
   .bio-content-wrapper {
     grid-template-columns: 1fr 1fr;
     gap: 30px;

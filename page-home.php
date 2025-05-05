@@ -479,7 +479,7 @@ echo '</figure>';
         echo '<div class="community-content-container">';
         if ($community_description) {
             echo '<div class="community-description-wrapper">';
-            echo '<div class="community-description gray">' . wp_kses_post($community_description) . '</div>';
+            echo '<div class="community-description">' . wp_kses_post($community_description) . '</div>';
         }
         
         // Display the link as a button
