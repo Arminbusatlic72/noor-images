@@ -16,7 +16,7 @@ get_header(); ?>
     <?php get_sidebar(); ?>
 <?php endif ?>
 
-<div id="primary" <?php astra_primary_class(); ?>>
+<main id="primary" <?php astra_primary_class(); ?>>
 
     <?php
     // Display the Google Map if shortcode exists
@@ -27,19 +27,19 @@ get_header(); ?>
         echo '</div>';
     }
     ?>
-    <main class="community-page-wrapper">
+    <div class="community-page-wrapper">
        
         <?php
         // Get ACF fields
         $community_title = get_field('community_page_title');
         $community_subtitle = get_field('community_page_subtitle'); 
         $community_description = get_field('community_page_description');
-        echo '<section class="community-page-top-content-section">';
+        echo '<header class="community-page-top-content-section">';
         echo '<div class="community-page-content-container">';
         
         // Display the title
         if ($community_title) {
-            echo '<h2 class="page-heading">' . esc_html($community_title) . '</h2>';
+            echo '<h1 class="page-heading">' . esc_html($community_title) . '</h1>';
         }
 
         // Display the subtitle
@@ -53,7 +53,7 @@ get_header(); ?>
         }
 
         echo '</div>'; 
-        echo '</section>'; // .community-page-content
+        echo '</header>'; // .community-page-content
         // .community-page-content
         ?>
         <?php
@@ -70,15 +70,15 @@ if ($join_community_hero_image) {
     $image_url = esc_url($join_community_hero_image['url']);
     $image_alt = esc_attr($join_community_hero_image['alt']);
     echo '<div class="join-community-hero">';
-    echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="join-community-image">';
+    echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="img-cover">';
     echo '</div>';
 }
 echo '<div class="join-community-container">';
 // Display the section title
 if ($join_community_section_title) {
-    echo '<div class="section-header-block">';
+    
     echo '<h2 class="section-title">' . esc_html($join_community_section_title) . '</h2>';
-    echo '</div>';
+   
 }
 
 // Display the section content
@@ -108,20 +108,20 @@ if ($subscribe_hero_image) {
     $image_url = esc_url($subscribe_hero_image['url']);
     $image_alt = esc_attr($subscribe_hero_image['alt']);
     echo '<div class="subscribe-hero">';
-    echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="subscribe-image">';
+    echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="img-cover">';
     echo '</div>';
 }
 echo '<div class="subscribe-container">';
 // Display the section title
 if ($subscribe_section_title) {
-    echo '<div class="section-header-block">';
+  
     echo '<h2 class="section-title">' . esc_html($subscribe_section_title) . '</h2>';
-    echo '</div>';
+
 }
 
 // Display the section subtitle
 if ($subscribe_section_subtitle) {
-    echo '<h3 class="subscribe-subtitle subtitle">' . esc_html($subscribe_section_subtitle) . '</h3>';
+    echo '<h3 class="subscribe-subtitle gray">' . esc_html($subscribe_section_subtitle) . '</h3>';
 }
 
 // Display the section content
@@ -143,7 +143,7 @@ foreach ($subscribe_items as $subscribe_item) {
         $subscribe_item_title = isset($subscribe_item['subscribe_item_title']) ? $subscribe_item['subscribe_item_title'] : null;
         $subscribe_item_description = isset($subscribe_item['subscribe_item_description']) ? $subscribe_item['subscribe_item_description'] : null;
 
-        echo '<div class="subscribe-item">';
+        echo '<article class="subscribe-item">';
 
         // Image wrapped in link
         if ($subscribe_item_image && $subscribe_item_link) {
@@ -152,11 +152,11 @@ foreach ($subscribe_items as $subscribe_item) {
             $image_url = esc_url($subscribe_item_image['url']);
             $image_alt = esc_attr($subscribe_item_image['alt']);
 
+            echo '<div class="aspect-3-2">';
             echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="subscribe-item-link">';
-            echo '<div class="subscribe-item-image-wrapper">';
-            echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="subscribe-item-image">';
-            echo '</div>';
+            echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="img-cover">';
             echo '</a>';
+            echo '</div>';
         }
 
         // Tag
@@ -174,7 +174,7 @@ foreach ($subscribe_items as $subscribe_item) {
             echo '<p class="subscribe-item-description">' . esc_html($subscribe_item_description) . '</p>';
         }
 
-        echo '</div>'; // .subscribe-item
+        echo '</article>'; // .subscribe-item
     }
 }
 
@@ -206,7 +206,7 @@ $press_section_title = get_field('press_section_title');
 $press_section_description = get_field('press_section_description');
 $press_section_link = get_field('press_section_link');
 
-echo '<section class="press-section">';
+echo '<section class="press-section section">';
 echo '<div class="press-container">';
 
 // Display the section title
@@ -242,7 +242,7 @@ echo '</section>'; // .press-section
 ?>
 
 
-<section class="community-page-bios-section">
+<section class="section">
         <div class="section-header-block">
             <h2 class="section-title">Bios</h2>
         </div>
@@ -268,13 +268,13 @@ echo '</section>'; // .press-section
         ]);
 
         if (!empty($community_labels) && !is_wp_error($community_labels)) {
-            echo '<div class="community-label-filters">';
+            echo '<nav class="community-label-filters">';
             echo '<a class="filter-button active" data-filter="all" href="#">All</a>';
             foreach ($community_labels as $label) {
                 echo '<a class="filter-button" data-filter="' . esc_attr($label->slug) . '" href="#">' 
                     . esc_html($label->name) . '</a>';
             }
-            echo '</div>';
+            echo '</nav>';
 
 
             ?>
@@ -300,9 +300,9 @@ echo '</section>'; // .press-section
                 
                 // Bio Image
                 if (has_post_thumbnail()) {
-                    echo '<div class="community-page-bio-image-wrapper">';
+                    echo '<div class="square-image-wrapper">';
                     echo '<a href="' . get_permalink() . '">';
-                    the_post_thumbnail('large');
+                    the_post_thumbnail('large',['class' => 'img-cover']);
                     
                     // Add community label
                     $community_labels = get_the_terms(get_the_ID(), 'community_label');
@@ -367,7 +367,7 @@ $support_section_title = get_field('support_section_title');
 $support_section_description = get_field('support_section_description');
 $support_section_link = get_field('support_section_link');
 
-echo '<section class="support-us-section">';
+echo '<section class="section section--last">';
 echo '<div class="support-us-container">';
 
 // Display the section title
@@ -455,7 +455,7 @@ echo '</section>'; // .support-us-section
             </div>
         </div> -->
     
-    </main><!-- .community-page-main-wrapper -->
+    </div><!-- .community-page-main-wrapper -->
 
 <?php if ( astra_page_layout() == 'right-sidebar' ) : ?>
     <?php get_sidebar(); ?>
