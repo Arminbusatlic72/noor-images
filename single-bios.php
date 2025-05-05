@@ -7,26 +7,27 @@ if ( have_posts() ) :
     while ( have_posts() ) : the_post(); 
 ?>
 
-<div class="bio-container">
+<article class="bio-container">
   
     <div class="bio-content-wrapper">
         <!-- Display Featured Image with Caption -->
-        <div class="bio-featured-image-wrapper">
-            <?php 
-            if ( has_post_thumbnail() ) : 
-                $thumbnail_id = get_post_thumbnail_id(); // Get the ID of the featured image
-                echo wp_get_attachment_image( $thumbnail_id, 'full' ); // Output the image only
+      <figure class="bio-featured-image-wrapper">
+    <?php 
+    if ( has_post_thumbnail() ) : 
+        $thumbnail_id = get_post_thumbnail_id(); // Get the ID of the featured image
+        echo wp_get_attachment_image( $thumbnail_id, 'full' ); // Output the image only
 
-                $caption = wp_get_attachment_caption( $thumbnail_id ); // Get the caption for the image
-                if ( $caption ) : 
-            ?>
-                <figcaption class="bio-image-caption"><?php echo esc_html( $caption ); ?></figcaption>
-            <?php 
-                endif;
-            endif;
-            ?>
-        </div>
-<div class="bio-meta-content-wrapper">
+        $caption = wp_get_attachment_caption( $thumbnail_id ); // Get the caption for the image
+        if ( $caption ) : 
+    ?>
+        <figcaption class="bio-image-caption"><?php echo esc_html( $caption ); ?></figcaption>
+    <?php 
+        endif;
+    endif;
+    ?>
+</figure>
+
+<header class="bio-meta-content-wrapper">
         <!-- Display Title and Subtitle -->
          <div class="bio-heading-wrapper">
         <h4 class="bio-subtitle gray"><?php the_field('subtitle'); ?></h4>
@@ -34,7 +35,7 @@ if ( have_posts() ) :
         <h2 class="bio-heading"><?php the_field('name_and_surname'); ?></h2>
         </div>
          <!-- Community Labels -->
-       <div class="bio-labels-wrapper">
+       <section class="bio-labels-wrapper">
        <?php
         $community_labels = get_the_terms(get_the_ID(), 'community_label');
         if ($community_labels && !is_wp_error($community_labels)) {
@@ -99,7 +100,7 @@ if ( have_posts() ) :
     <?php endif; ?>
 
 </div>
- <div class="bio-social-media">
+ <nav class="bio-social-media">
     <?php
     $social_icons = array(
                 'Facebook' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z"></path></svg>',
@@ -124,9 +125,9 @@ if ( have_posts() ) :
         endforeach;
     endif;
     ?>
-</div>
-  </div>  
-    </div>
+</nav>
+  </section>  
+    </header>
     </div>
 
 
@@ -271,7 +272,7 @@ if ($links) :
 endif;
 ?>
 
-</div>
+</article>
                     
 <?php 
     endwhile; 

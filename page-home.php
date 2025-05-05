@@ -83,17 +83,17 @@
     $thumbnail_id = get_post_thumbnail_id($post->ID);
     $image_caption = wp_get_attachment_caption($thumbnail_id);
 
-    echo '<figure class="aspect-3-2">';
+    echo '<figure class="featured-figure">';
+    echo '<div class="aspect-3-2">';
     echo '<a href="' . esc_url($post_permalink) . '" class="featured-post-image-link">';
-    echo '<img class="img-cover" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
+        echo '<img class="img-cover" src="' . esc_url($post_featured_image) . '" alt="' . esc_attr($post_title) . '">';
     echo '</a>';
-
-    // Properly placed figcaption
+    echo '</div>';
     if ($image_caption) {
         echo '<figcaption class="featured-post-image-caption">' . esc_html($image_caption) . '</figcaption>';
     }
+echo '</figure>';
 
-    echo '</figure>';
 }
             
             echo '<div class="featured-post-meta-wrapper">';
@@ -212,7 +212,7 @@
             echo '<div class="education-slider-wrapper">';
             echo do_shortcode($education_slider_shortcode); // Render the shortcode
             if ($education_slider_caption) {
-                echo '<div class="education-slider-caption">' . esc_html($education_slider_caption) . '</div>';
+                echo '<figcaption class="education-slider-caption">' . esc_html($education_slider_caption) . '</figcaption>';
             }
             echo '</div>';
         }
@@ -334,6 +334,7 @@
             // Image Handling
             if ($top_item_image && isset($top_item_image['ID'])) {
                 $top_item_image_id = $top_item_image['ID'];
+                echo '<figure class="featured-figure">';
                 echo '<div class="aspect-3-2">';
                 if ($top_item_link) {
                     $top_item_link_url = esc_url($top_item_link['url']);
@@ -341,10 +342,12 @@
                     echo '<a href="' . $top_item_link_url . '"' . $top_item_link_target . ' class="production-item-image-link">';
                     echo wp_get_attachment_image($top_item_image_id, 'large', false, ['alt' => esc_attr($top_item_title),'class' => 'img-cover']);
                     echo '</a>';
+                    echo '</div>';
                     if ($top_item_image_caption) {
-                    echo '<div class="image-caption">' . esc_html($top_item_image_caption) . '</div>';
+                    echo '<figcaption class="featured-post-image-caption"">' . esc_html($top_item_image_caption) . '</figcaption>';
                 }
-                echo '</div>';
+                echo '</figure>';
+
                
             }
                     
@@ -352,6 +355,8 @@
                     echo wp_get_attachment_image($top_item_image_id, 'large', false, ['alt' => esc_attr($top_item_title)]);
                 }
  
+
+
             echo '<div class="top-production-item-post-meta-wrapper">';
             
             
@@ -449,7 +454,7 @@
             echo '<div class="section-header-block"><h2 class="section-title">' . esc_html($community_title) . '</h2></div>';
         }
              
-        // Check if the Google Map shortcode is available
+       
         echo '<div class="content-sidebar-grid">';
         
         $community_image = get_field('community_section_image');
@@ -457,12 +462,15 @@
             $image_url = esc_url($community_image['url']);
             $image_alt = $community_image['alt'] ? esc_attr($community_image['alt']) : esc_attr('Community section image');
             $image_caption = get_field('community_section_image_caption');
+            echo '<figure class="featured-figure">';
             echo '<div class="aspect-3-2">';
             echo '<img src="' . $image_url . '" alt="' . $image_alt . '" class="img-cover">';
-            if ($image_caption) {
-        echo '<div class="image-caption">' . esc_html($image_caption) . '</div>';
-    }
             echo '</div>';
+            if ($image_caption) {
+        echo '<figcaption class="image-caption">' . esc_html($image_caption) . '</figcaption>';
+    }
+            
+            echo '</figure>';
            
         } else {
             echo '<p class="no-image-message">Community image is not available at the moment.</p>';
@@ -569,7 +577,7 @@
             echo '<div class="archive-slider">';
             echo do_shortcode($archive_slider_shortcode); // Render the shortcode
             if ($archive_slider_caption) {
-                echo '<div class="archive-slider-caption">' . esc_html($archive_slider_caption) . '</div>';
+                echo '<figcaption class="archive-slider-caption">' . esc_html($archive_slider_caption) . '</figcaption>';
             }
             echo '</div>';
         }

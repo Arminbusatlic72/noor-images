@@ -35,9 +35,12 @@
 
 .bio-meta-content-wrapper {
   padding-top: 3rem;
+  padding-inline: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.bio-labels-wrapper {
   border-bottom: 1px solid black;
 }
 @media (min-width: 769px) {

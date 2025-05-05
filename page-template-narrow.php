@@ -30,9 +30,17 @@ get_header(); ?>
         ?>
 
         <div class="ast-container ast-narrow-container">
+            
+                   
+              
             <?php
                 // Display the content (Block Editor compatible)
                 echo '<div class="entry-content">';
+                echo '<header class="entry-header">';
+                echo ' <h1 class="entry-title">';
+                the_title();
+                echo '</h1>';
+                echo '</header>';
                 the_content();
                 echo '</div>';
             ?>
