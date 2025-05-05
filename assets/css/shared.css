@@ -16,6 +16,12 @@
 .entry-title {
   text-align: center;
 }
+/* footer button alignment */
+@media (max-width: 769px) {
+  .ast-builder-html-element p:last-child {
+    text-align: center !important;
+  }
+}
 @media (min-width: 1200px) {
   .ast-plain-container.ast-no-sidebar #primary {
     margin-top: 0px;
