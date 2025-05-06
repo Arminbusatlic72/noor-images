@@ -4,8 +4,8 @@ Template Name: Home Page
 */
 get_header(); // Include the header
 ?>
-<div id="primary" class="content-area">
-    <main id="main" class="site-main">
+<main id="primary" class="content-area">
+    <div id="main" class="site-main">
         <div class="full-with-slider-container">
         <!-- Slider -->
             <div class="bio-slider-section-slider-wrapper">
@@ -17,15 +17,15 @@ get_header(); // Include the header
                 ?>
             </div>
         </div>
-        <section class="education-page-header-section"> 
-            <div class="section-header-block">
+        <section class="section"> 
+          
                 <h2 class="section-title"><?php the_field('education_page_headline'); ?></h2>
-            </div>
+            
              <?php 
             // Display the subtext field if it exists
             $subtext = get_field('education_page_header_subtext');
             if ($subtext) : ?>
-                <p class="education-page-subtext gray"><?php echo esc_html($subtext); ?></p>
+                <h3 class="education-page-subtext gray"><?php echo esc_html($subtext); ?></h3>
             <?php endif; ?>
 
             <?php 
@@ -38,7 +38,7 @@ get_header(); // Include the header
             <?php endif; ?>
 
         </section>
-        <section class="education-page-thematic-workshops-section">
+        <section class="section">
     <?php
     // Get section title and description
     $workshops_title = get_field('thematic_workshops_section_heading');
@@ -51,7 +51,7 @@ get_header(); // Include the header
 
     // Display description
     if ($workshops_description) {
-        echo '<div class="workshops-description gray"><p>' . wp_kses_post($workshops_description) . '</p></div>';
+        echo '<div class="workshops-description"><p>' . wp_kses_post($workshops_description) . '</p></div>';
     }
 
     // Thematic workshops items
@@ -77,13 +77,13 @@ get_header(); // Include the header
             echo '<article class="workshop-item">';
 
             // Image with link (if available)
-            echo '<div class="workshop-item-image-wrapper">';
+            echo '<div class="aspect-3-2">';
             $workshop_image_id = $workshop_image ? $workshop_image['ID'] : null;
             if ($workshop_image_id && $workshop_link) {
                 $workshop_link_url = esc_url($workshop_link['url']);
                 $workshop_link_target = $workshop_link['target'] ? ' target="' . esc_attr($workshop_link['target']) . '"' : '';
                 echo '<a href="' . $workshop_link_url . '"' . $workshop_link_target . ' class="workshop-item-image-link">';
-                echo wp_get_attachment_image($workshop_image_id, 'large', false, ['alt' => esc_attr($workshop_title)]);
+                echo wp_get_attachment_image($workshop_image_id, 'large', false, ['alt' => esc_attr($workshop_title),'class' => 'img-cover']);
                 echo '</a>';
             } elseif ($workshop_image_id) {
                 echo '<div class="workshop-item-image">';
@@ -130,7 +130,7 @@ get_header(); // Include the header
     echo '</div>';
     ?>
 </section>
-<section class="education-page-other-workshops-section">
+<section class="education-page-other-workshops-section section">
     <?php
     // Get section heading and content
     $other_workshops_title = get_field('other_workshops_section_heading');
@@ -171,8 +171,8 @@ get_header(); // Include the header
             if ($workshop_image_id && $workshop_link) {
                 $workshop_link_url = esc_url($workshop_link['url']);
                 $workshop_link_target = $workshop_link['target'] ? ' target="' . esc_attr($workshop_link['target']) . '"' : '';
-                echo '<div class="other-workshop-item-image-wrapper"><a href="' . $workshop_link_url . '"' . $workshop_link_target . ' class="other-workshop-item-image-link">';
-                echo wp_get_attachment_image($workshop_image_id, 'large', false, ['alt' => esc_attr($workshop_title)]);
+                echo '<div class="aspect-3-2"><a href="' . $workshop_link_url . '"' . $workshop_link_target . ' class="other-workshop-item-image-link">';
+                echo wp_get_attachment_image($workshop_image_id, 'large', false, ['alt' => esc_attr($workshop_title), 'class' => 'img-cover']);
                 echo '</a></div>';
             } elseif ($workshop_image_id) {
                 echo '<div class="other-workshop-item-image">';
@@ -208,7 +208,7 @@ get_header(); // Include the header
     ?>
 </section>
 
-<section class="education-page-fellowships-grants-section">
+<section class="education-page-fellowships-grants-section section">
     <?php
   
     // Get ACF fields for the section heading and content
@@ -249,7 +249,7 @@ get_header(); // Include the header
                 $item_link_target = '';
             }
 
-            echo '<div class="fellowship-grant-item">';
+            echo '<article class="fellowship-grant-item">';
 
             // Wrap image and title inside the <a> tag
             echo '<a href="' . $item_link_url . '"' . $item_link_target . ' class="fellowship-grant-item-link">';
@@ -264,7 +264,7 @@ get_header(); // Include the header
                     echo '<div class="fellowship-grant-item-image-wrapper"><img src="' . $image_url . '" alt="' . $image_alt . '" title="' . $image_title . '" class="fellowship-grant-item-image"></div>';
                 }
             } 
-             echo '</a>'; // Close the <a> tag
+             echo '</a>'; // Close the <article> tag
 
            
 
@@ -279,7 +279,7 @@ get_header(); // Include the header
                 echo '<p class="fellowship-grant-item-description gray subtitle">' . esc_html($fellowship_grant_item_description) . '</p>';
             }
 
-            echo '</div>'; // Close individual fellowship/grant item
+            echo '</article>'; // Close individual fellowship/grant item
         }
     }
     echo '</div>'; // Close the grid wrapper
@@ -288,7 +288,7 @@ get_header(); // Include the header
 </section>
 
 
-<section class="education-page-visual-media-literacy-section">
+<section class="education-page-visual-media-literacy-section section">
     <?php
     // Get ACF fields for the section heading and content
     $visual_media_literacy_section_headline = get_field('visual_&_media_literacy_section_headline');
@@ -334,7 +334,7 @@ get_header(); // Include the header
     echo '</div>'; // Close the main container
     ?>
 </section>
-<section class="education-page-past-programmes-section">
+<section class="education-page-past-programmes-section section">
     <?php
     // Get ACF fields for the section heading and content
     $past_programmes_section_heading = get_field('past_programmes_section_heading');
@@ -415,7 +415,7 @@ get_header(); // Include the header
 </section>
 
 
-<section class="education-page-support-section">
+<section class="education-page-support-section section">
     <?php
     // Get ACF fields
     $support_title = get_field('support_section_title');
@@ -444,9 +444,9 @@ get_header(); // Include the header
     }
     ?>
 </section>
-<section class="education-page-press-links-section">
+<section class="education-page-press-links-section section section--last">
     <div class="section-header-block">
-        <h2 class="section-title">On the press:</h2>
+        <h4 class="press-links-heading">On the press:</h4>
     </div>
        
 
@@ -481,8 +481,8 @@ endif;
 
     </section>
 
-    </main>
-</div>
+    </div>
+</main>
 
 <?php
 get_footer(); // Include the footer

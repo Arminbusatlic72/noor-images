@@ -62,7 +62,7 @@ $join_community_hero_image = get_field('join_community_hero_image');
 $join_community_section_title = get_field('join_community_section_title');
 $join_community_section_content = get_field('join_community_section_content');
 
-echo '<section class="join-community-section">';
+echo '<section class="join-community-section section">';
 
 
 // Display hero image if available
@@ -100,7 +100,7 @@ $subscribe_section_item = get_field('subscribe_section_item');
 $subscribe_section_item_second = get_field('subscribe_section_item_second');
 $subscribe_section_button = get_field('subscribe_section_button'); // Get button field
 
-echo '<section class="subscribe-section">';
+echo '<section class="subscribe-section section">';
 
 
 // Display hero image if available

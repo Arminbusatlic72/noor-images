@@ -1,4 +1,4 @@
-.education-page-header-section,
+/* .education-page-header-section,
 .education-page-thematic-workshops-section,
 .education-page-other-workshops-section,
 .education-page-fellowships-grants-section,
@@ -9,7 +9,7 @@
 .education-page-press-links-section {
   padding-inline: 1rem;
   padding-top: 2rem;
-}
+} */
 .education-page-press-links-section {
   margin-bottom: 6rem;
 }
@@ -113,9 +113,7 @@
   }
   .education-page-content,
   .workshops-description {
-    columns: 2;
-    column-gap: 40px;
-    margin-bottom: 2rem;
+    margin-block: 2rem;
   }
   .visual-media-section-subheading {
     font-size: 3rem;
